@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bv2n3ts68y23j"]
+
+[ext_resource type="Script" uid="uid://boldym0pf5lob" path="res://addons/dynamic_splitscreen/splitscreen_camera_2d/splitscreen_camera_2d.gd" id="1_wdc4u"]
+
+[node name="SplitscreenCamera2D" type="Camera2D" unique_id=907107042]
+script = ExtResource("1_wdc4u")

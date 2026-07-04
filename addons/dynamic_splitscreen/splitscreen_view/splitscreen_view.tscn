@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dfjfmbrddrwcw"]
+
+[ext_resource type="Script" uid="uid://owbdslq6jmh0" path="res://addons/dynamic_splitscreen/splitscreen_view/splitscreen_view.gd" id="1_eq0xe"]
+
+[node name="SplitscreenView" type="Control" unique_id=428169839]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_eq0xe")
+
+[node name="Polygons" type="Node2D" parent="." unique_id=1706267002]
+
+[node name="Debug" type="Node2D" parent="." unique_id=1016875973]
+z_index = 10

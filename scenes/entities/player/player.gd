@@ -12,10 +12,10 @@ extends Actor
 @export var hitbox: Hitbox
 
 @export_category("Vacuum")
-@export var vacuum_range = 16*12
-@export var vacuum_width = 20
-@export var vacuum_visual_range_offset = 8
-@export var vacuum_visual_width = 12
+@export var vacuum_range = 400
+@export var vacuum_width = 40
+@export var vacuum_visual_range_offset = 16
+@export var vacuum_visual_width = 24
 @export var vacuum_visual_particles_speed_min = 1000
 @export var vacuum_visual_particles_speed_max = 1200
 
@@ -58,6 +58,10 @@ func setup_vacuum_area():
 	vacuum_dust_particles.emitting = false
 
 func _process(delta: float) -> void:
+	if not InputManager.user_exists(user_index):
+		queue_free()
+		return 
+	
 	if has_captured_entity():
 		visuals.set_layer_visibility("FaceSprite", false)
 		visuals.set_layer_visibility("FaceSpriteMouthFull", true)

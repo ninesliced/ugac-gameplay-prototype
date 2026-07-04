@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://3y1jh2mtgcnc"]
+
+[ext_resource type="Shader" uid="uid://cmvcssrq7ulf2" path="res://addons/dynamic_splitscreen/splitscreen_polygon/splitscreen_polygon.gdshader" id="1_oqi3k"]
+[ext_resource type="Script" uid="uid://cmtpkfevjttwn" path="res://addons/dynamic_splitscreen/splitscreen_polygon/splitscreen_polygon.gd" id="1_rjnk1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x7ebg"]
+shader = ExtResource("1_oqi3k")
+shader_parameter/points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/widths = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/point_count = 0
+shader_parameter/stroke_color = Color(1, 1, 1, 1)
+
+[node name="SplitscreenPolygon" type="Polygon2D" unique_id=1041848656]
+clip_children = 2
+material = SubResource("ShaderMaterial_x7ebg")
+script = ExtResource("1_rjnk1")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=796829302]
+closed = true

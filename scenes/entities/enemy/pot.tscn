@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c1m6ynmftccab"]
+
+[ext_resource type="PackedScene" uid="uid://b1dkuou1ki3ra" path="res://scenes/entities/enemy/enemy.tscn" id="1_bht1d"]
+[ext_resource type="Texture2D" uid="uid://dxbw6ay3quqfr" path="res://assets/images/pot.png" id="2_0j3p5"]
+
+[node name="Pot" unique_id=722895607 instance=ExtResource("1_bht1d")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="9" unique_id=1045705162]
+position = Vector2(0, -1)
+texture = ExtResource("2_0j3p5")

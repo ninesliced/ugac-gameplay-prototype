@@ -1,8 +1,8 @@
 extends PlayerState
 
 @export var visuals: StackedAnimatedSprite
-@export var duration = 0.1
-@export var star_angle_rotation_speed = 16.0
+@export var duration = 0.8
+@export var star_angle_rotation_speed = 2.0
 @export var slow_mo = 0.1
 
 @export var damage_star: Star2D
@@ -28,8 +28,6 @@ func _on_enter_state(params: Dictionary = {}):
 	visuals.play("damaged")
 	visuals.shake(3.0)
 	
-	Engine.time_scale = slow_mo
-	
 	if damage_stars:
 		for star in [damage_star, damage_star_2]:
 			var tween = get_tree().create_tween()
@@ -45,7 +43,6 @@ func _on_enter_state(params: Dictionary = {}):
 
 func _on_exit_state():
 	super()
-	Engine.time_scale = 1
 	
 	if damage_stars:
 		for star in [damage_star, damage_star_2]:

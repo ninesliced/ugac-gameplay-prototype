@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://c54j2gq47nn5b"]
+
+[ext_resource type="Script" uid="uid://bchq2n0i5yute" path="res://addons/dynamic_splitscreen/splitscreen_sub_viewport/splitscreen_sub_viewport.gd" id="1_ur3ha"]
+[ext_resource type="Script" uid="uid://boldym0pf5lob" path="res://addons/dynamic_splitscreen/splitscreen_camera_2d/splitscreen_camera_2d.gd" id="2_ur3ha"]
+
+[node name="SplitscreenSubViewport" type="SubViewport" unique_id=937893410]
+script = ExtResource("1_ur3ha")
+
+[node name="SplitscreenCamera" type="Camera2D" parent="." unique_id=197610198]
+script = ExtResource("2_ur3ha")
+metadata/_custom_type_script = "uid://boldym0pf5lob"

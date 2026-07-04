@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://b1dkuou1ki3ra"]
 
 [ext_resource type="Texture2D" uid="uid://bmaipib8dmfy" path="res://assets/images/dust.png" id="2_h0e4h"]
-[ext_resource type="Texture2D" uid="uid://q6mykvntp4ni" path="res://icon.svg" id="2_qkj82"]
 [ext_resource type="Script" uid="uid://be2ig028o6gpa" path="res://scenes/entities/enemy/enemy.gd" id="2_x2urn"]
 [ext_resource type="PackedScene" uid="uid://cdkvkbstvh6ef" path="res://scenes/components/life_component.tscn" id="3_ei073"]
 [ext_resource type="PackedScene" uid="uid://b5pl5ca7s0ywp" path="res://scenes/components/entity_components/capturable_component.tscn" id="4_frkcr"]
@@ -16,7 +15,7 @@
 [ext_resource type="Script" uid="uid://gr7h44ctgg1j" path="res://scenes/components/state_machine/ejected_state.gd" id="12_frkcr"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cmbxo"]
-radius = 11.045361
+radius = 8.0
 
 [sub_resource type="Curve" id="Curve_jkr0c"]
 _data = [Vector2(0, 1), 0.0, -0.82866544, 0, 0, Vector2(1, 0), -0.88153005, 0.0, 0, 0]
@@ -26,10 +25,10 @@ point_count = 2
 colors = PackedColorArray(0.62160003, 0.6808, 0.74, 1, 1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sbss2"]
-radius = 16.0
+radius = 8.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h26p2"]
-radius = 16.0
+radius = 8.0
 
 [node name="Enemy" type="CharacterBody2D" unique_id=722895607 node_paths=PackedStringArray("hitbox")]
 collision_mask = 2
@@ -80,10 +79,6 @@ debug_color = Color(0.99215883, 0, 0.25709292, 0.41960785)
 shape = SubResource("CircleShape2D_h26p2")
 debug_color = Color(0.82714826, 0.39493513, 5.7756904e-07, 0.41960785)
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1797748547]
-scale = Vector2(0.20312499, 0.20312499)
-texture = ExtResource("2_qkj82")
-
 [node name="StateMachine" parent="." unique_id=583197379 node_paths=PackedStringArray("entity") instance=ExtResource("7_ddkys")]
 default_state = &"Idle"
 entity = NodePath("..")
@@ -94,7 +89,7 @@ metadata/_custom_type_script = "uid://bpqjpkhit0v31"
 
 [node name="Vacuumed" type="Node2D" parent="StateMachine" unique_id=1783313105 node_paths=PackedStringArray("sprite", "vacuumable_component")]
 script = ExtResource("9_ddkys")
-sprite = NodePath("../../Sprite2D")
+sprite = NodePath("")
 vacuumable_component = NodePath("../../VacuumableComponent")
 state_on_finished = &"Idle"
 state_on_captured = &"Captured"

@@ -1,6 +1,7 @@
+@tool
+@icon("AnimatedSprite2D")
 ## Acts like an AnimatedSprite2D, but may contain mutliple layers, represented
 ## by its children.
-@tool
 class_name StackedAnimatedSprite
 extends Node2D
 
@@ -32,7 +33,7 @@ extends Node2D
 		_run_for_all_nonref_children(func(spr: AnimatedSprite2D): spr.offset = reference_sprite.offset + value)
 var reference_offset: Vector2 = Vector2.ZERO
 
-@export var shake_decrease_speed = 5.0
+@export var shake_decrease_speed = 30.0
 var shake_amount = 0.0
 
 #-----------------------------------------

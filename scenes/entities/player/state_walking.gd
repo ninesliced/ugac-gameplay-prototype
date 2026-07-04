@@ -4,8 +4,8 @@ extends PlayerState
 @export var walk_particles: CPUParticles2D
 
 @export var idle_velocity_threshold = 4.0
-@export var acceleration = 1500.0
-@export var speed = 150.0
+@export var acceleration = 2500.0
+@export var speed = 300.0
 
 func _ready() -> void:
 	super()

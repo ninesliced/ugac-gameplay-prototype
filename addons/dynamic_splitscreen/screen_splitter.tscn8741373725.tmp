@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dfjfmbrddrwcw"]
+
+[ext_resource type="Script" uid="uid://owbdslq6jmh0" path="res://src/scenes/real/screen_splitter.gd" id="1_eq0xe"]
+
+[node name="ScreenSplitter" type="Node" unique_id=301435635]
+script = ExtResource("1_eq0xe")
+
+[node name="Polygons" type="Node2D" parent="." unique_id=1706267002]
