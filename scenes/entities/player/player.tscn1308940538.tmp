@@ -783,8 +783,6 @@ label_settings = SubResource("LabelSettings_go8vc")
 horizontal_alignment = 1
 
 [node name="Hurtbox" parent="." unique_id=1723729202 node_paths=PackedStringArray("life_component") instance=ExtResource("8_fg2wu")]
-collision_layer = 0
-collision_mask = 4
 life_component = NodePath("../LifeComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1035310011]
@@ -792,8 +790,6 @@ shape = SubResource("CircleShape2D_7dqom")
 debug_color = Color(0.8344506, 0.3897286, 0, 0.41960785)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=538144440]
-collision_layer = 0
-collision_mask = 0
 script = ExtResource("10_wghkl")
 enabled = false
 metadata/_custom_type_script = "uid://cyn16ubhn38rx"

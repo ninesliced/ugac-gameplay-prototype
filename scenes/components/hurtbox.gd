@@ -15,7 +15,7 @@ signal hitbox_entered(area: Hitbox)
 signal hitbox_exited(area: Hitbox)
 
 func _ready() -> void:
-	pass
+	set_collision_layer_value(5, true)
 
 func on_hitbox_entered(hitbox: Hitbox):
 	if not is_hittable(hitbox):

@@ -22,3 +22,10 @@ func get_component(component_name: StringName) -> EntityComponent:
 	assert(node is EntityComponent, "Node isn't an EntityComponent")
 	
 	return node
+
+func knockback_from_entity(entity: Entity, amount: float) -> void:
+	var dir = global_position.direction_to(entity.global_position)
+	apply_impulse(-dir * amount)
+
+func apply_impulse(vector: Vector2) -> void:
+	velocity += vector

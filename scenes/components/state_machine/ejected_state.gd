@@ -8,6 +8,9 @@ extends EntityState
 @export var enable_hitbox_distance: float = 64.0
 
 var _old_hitbox_state = false
+var _old_hitbox_layer = 0
+const thrown_hitbox_layer = 2**0 + 2**2
+
 var _throw_position: Vector2
 
 func _ready() -> void:
@@ -33,7 +36,9 @@ func _on_enter_state(params: Dictionary = {}):
 	
 	ejectable_component.activate(params["direction"])
 	_old_hitbox_state = hitbox.enabled
+	_old_hitbox_layer = hitbox.collision_layer
 	hitbox.enabled = false
+	hitbox.collision_layer = thrown_hitbox_layer
 	
 	_throw_position = entity.global_position
 	
@@ -48,6 +53,7 @@ func _on_exit_state():
 	entity.rotation = 0.0
 	
 	hitbox.enabled = _old_hitbox_state
+	hitbox.collision_layer = _old_hitbox_layer
 	
 	if particles:
 		particles.emitting = false

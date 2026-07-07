@@ -168,38 +168,59 @@ position = Vector2(952, 906)
 egg_count = 30
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=2051713295]
-position = Vector2(2018, 575)
+position = Vector2(1971, 554)
 script = ExtResource("8_85g3d")
 
 [node name="Sprite2D" type="Sprite2D" parent="EnemySpawner" unique_id=1781032609]
 texture = ExtResource("8_tipki")
 
 [node name="EnemySpawner2" type="Node2D" parent="." unique_id=1619249648]
-position = Vector2(-116, 610)
+position = Vector2(-38, 527)
 script = ExtResource("8_85g3d")
 
 [node name="Sprite2D" type="Sprite2D" parent="EnemySpawner2" unique_id=715114265]
 texture = ExtResource("8_tipki")
 
 [node name="EnemySpawner3" type="Node2D" parent="." unique_id=963897442]
-position = Vector2(1601, -91)
+position = Vector2(1584, -62)
 script = ExtResource("8_85g3d")
 
 [node name="Sprite2D3" type="Sprite2D" parent="EnemySpawner3" unique_id=1949382758]
 texture = ExtResource("8_tipki")
 
 [node name="EnemySpawner4" type="Node2D" parent="." unique_id=1723368851]
-position = Vector2(325, -82)
+position = Vector2(398, -54)
 script = ExtResource("8_85g3d")
 
 [node name="Sprite2D4" type="Sprite2D" parent="EnemySpawner4" unique_id=1238367509]
 texture = ExtResource("8_tipki")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=159607729]
-position = Vector2(57, 523)
+position = Vector2(-145, 518)
 script = ExtResource("8_choun")
 metadata/_custom_type_script = "uid://cyn16ubhn38rx"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1843791064]
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_g4v7s")
+
+[node name="Hurtbox2" type="Area2D" parent="." unique_id=2066343215]
+position = Vector2(961, -146)
+rotation = 1.5707964
+script = ExtResource("8_choun")
+metadata/_custom_type_script = "uid://cyn16ubhn38rx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox2" unique_id=2107072850]
+rotation = 1.5707964
+shape = SubResource("WorldBoundaryShape2D_g4v7s")
+
+[node name="Hurtbox3" type="Area2D" parent="." unique_id=1833727940]
+position = Vector2(2105, 546)
+rotation = 3.1415927
+scale = Vector2(0.61002016, 1.1191593)
+script = ExtResource("8_choun")
+metadata/_custom_type_script = "uid://cyn16ubhn38rx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox3" unique_id=75100939]
 rotation = 1.5707964
 shape = SubResource("WorldBoundaryShape2D_g4v7s")

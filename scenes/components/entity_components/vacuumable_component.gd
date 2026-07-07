@@ -18,7 +18,7 @@ signal finished_captured(capturer: Entity)
 var use_states: bool = false
 
 var target: Node2D = null
-var target_area: VacuumArea = null
+var vacuum_raycast: VacuumRaycast = null
 var vacuum_speed: float = 0.0
 
 func _ready() -> void:
@@ -26,9 +26,9 @@ func _ready() -> void:
 	
 	use_states = (state_machine and hurtbox and state_on_vacuum_area_entered and state_on_vacuum_area_exited)
 	
-	if use_states:
-		hurtbox.hitbox_entered.connect(_on_hurtbox_hitbox_entered)
-		hurtbox.hitbox_exited.connect(_on_hurtbox_hitbox_exited)
+	#if use_states:
+		#hurtbox.hitbox_entered.connect(_on_hurtbox_hitbox_entered)
+		#hurtbox.hitbox_exited.connect(_on_hurtbox_hitbox_exited)
 
 func _physics_process(delta: float) -> void:
 	if not active:
@@ -44,35 +44,34 @@ func _physics_process(delta: float) -> void:
 		finished_captured.emit(target)
 		deactivate()
 	
-	elif not target_area or not target_area.enabled:
+	elif not vacuum_raycast or not vacuum_raycast.enabled:
 		# Attract area gets disabled
 		finished_uncaptured.emit()
 		deactivate()
 	
 	entity.move_and_slide()
 
-func activate(new_target: Node2D, new_target_area: VacuumArea):
+func activate(new_target: Node2D, new_vacuum_raycast: VacuumRaycast):
 	active = true
 	target = new_target
-	target_area = new_target_area
+	vacuum_raycast = new_vacuum_raycast
 	vacuum_speed = 0.0
 
 func deactivate():
 	active = false
 	target = null
-	target_area = null
+	vacuum_raycast = null
 	vacuum_speed = 0.0
 	finished.emit()
 
 func has_target() -> bool:
 	return target != null
 
-func _on_hurtbox_hitbox_entered(area: Hitbox):
-	if area is VacuumArea:
-		state_machine.set_state(state_on_vacuum_area_entered, {
-			"vacuum_attract_target": area.entity,
-			"vacuum_attract_area": area as VacuumArea,
-		})
+func enter_vacuumed_state(vacuumer: Entity, raycast: VacuumRaycast):
+	state_machine.set_state(state_on_vacuum_area_entered, {
+		"vacuum_attract_target": vacuumer,
+		"vacuum_attract_area": raycast,
+	})
 
 func _on_hurtbox_hitbox_exited(area: Hitbox):
 	if area is VacuumArea:

@@ -10,7 +10,7 @@ var spawn_node: Node2D
 func _ready() -> void:
 	super()
 	
-	hitbox.enabled = false
+	hitbox.enabled = true
 
 
 func _process(delta: float) -> void:
