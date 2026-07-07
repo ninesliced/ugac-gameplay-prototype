@@ -52,3 +52,9 @@ func set_camera_target_position(pos: Vector2) -> void:
 	camera_target_position = pos
 	if camera is SplitscreenCamera2D:
 		camera.target_position = pos
+
+func get_mouse_pos() -> Vector2:
+	if viewport.get_tree() == null:
+		await viewport.tree_entered
+	var screen_mouse_pos = viewport.get_tree().root.get_mouse_position()
+	return viewport.get_canvas_transform().affine_inverse() * screen_mouse_pos

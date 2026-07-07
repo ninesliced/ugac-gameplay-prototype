@@ -1,11 +1,9 @@
 ## Area that can recieve damage from hitboxes.
+@icon("./hurtbox.svg")
 extends Area2D
 class_name Hurtbox
 
-## Whether to deal damage on collision with a hitbox.
-@export var deal_damage: bool = true
-
-## Life component to deal damage to, if deal_damage is enabled.
+## Life component to deal damage to, if possible.
 @export var life_component: LifeComponent
 
 ## Whether to ignore sibling hitboxes. 

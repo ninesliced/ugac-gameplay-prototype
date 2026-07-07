@@ -28,6 +28,9 @@ func _on_enter_state(params: Dictionary = {}):
 	visuals.play("damaged")
 	visuals.shake(3.0)
 	
+	if $"../../CapturerComponent".captured_entity:
+		$"../../CapturerComponent".uncapture(player.aim_direction)
+	
 	if damage_stars:
 		for star in [damage_star, damage_star_2]:
 			var tween = get_tree().create_tween()

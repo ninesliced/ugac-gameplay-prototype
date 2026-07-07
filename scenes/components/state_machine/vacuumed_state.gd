@@ -4,6 +4,7 @@ extends EntityState
 @export var vacuumable_component: VacuumableComponent
 @export var state_on_finished: StringName
 @export var state_on_captured: StringName
+@export var hitbox: Hitbox
 
 func _ready() -> void:
 	super()
@@ -24,6 +25,9 @@ func _on_enter_state(params: Dictionary = {}):
 	assert(params.has("vacuum_attract_area") and params["vacuum_attract_target"], "Entered VacuumedState without vacuum_attract_area param")
 	
 	vacuumable_component.activate(params["vacuum_attract_target"], params["vacuum_attract_area"])
+	
+	if hitbox:
+		hitbox.enabled = false
 
 func _on_exit_state():
 	if vacuumable_component.active:

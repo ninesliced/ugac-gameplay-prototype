@@ -6,6 +6,8 @@ extends EntityState
 @export var state_on_uncapture: StringName
 @export var hide_entity_when_captured := true
 
+@export var hitbox: Hitbox
+
 func _ready() -> void:
 	capturable_component.exited_capture.connect(_on_capturable_component_exited_capture)
 	super()
@@ -20,6 +22,9 @@ func _on_enter_state(params: Dictionary = {}):
 	params["capturer"].get_component("CapturerComponent").capture(entity)
 	if hide_entity_when_captured:
 		entity.hide()
+	
+	if hitbox:
+		hitbox.enabled = false
 
 func _on_exit_state():
 	super()

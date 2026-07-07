@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://ful76yvdlyh6"]
+
+[ext_resource type="Script" uid="uid://l3acwpl7yy4o" path="res://scenes/entities/egg/egg.gd" id="1_dtxs4"]
+[ext_resource type="Texture2D" uid="uid://bmaipib8dmfy" path="res://assets/images/dust.png" id="2_eyb8l"]
+[ext_resource type="PackedScene" uid="uid://dvube5c2o5lo3" path="res://scenes/components/entity_components/vacuumable_component.tscn" id="3_shwtd"]
+[ext_resource type="PackedScene" uid="uid://b5pl5ca7s0ywp" path="res://scenes/components/entity_components/capturable_component.tscn" id="4_ioro1"]
+[ext_resource type="PackedScene" uid="uid://du8bunvwp8ukg" path="res://scenes/components/entity_components/ejectable_component.tscn" id="5_vxua6"]
+[ext_resource type="PackedScene" uid="uid://dhkvjviu3e25u" path="res://scenes/components/hitbox.tscn" id="6_3gbkg"]
+[ext_resource type="PackedScene" uid="uid://bk2oqqxxglu2n" path="res://scenes/components/hurtbox.tscn" id="7_wnkol"]
+[ext_resource type="PackedScene" uid="uid://costhn0s2oix6" path="res://scenes/components/state_machine/state_machine.tscn" id="8_02xto"]
+[ext_resource type="Script" uid="uid://bpqjpkhit0v31" path="res://scenes/components/state_machine/state.gd" id="9_ni4ib"]
+[ext_resource type="Script" uid="uid://yk5j3l7455yv" path="res://scenes/entities/enemy/state_vacuumed.gd" id="10_82aao"]
+[ext_resource type="Script" uid="uid://u603175l0nxr" path="res://scenes/entities/egg/captured.gd" id="11_y7obs"]
+[ext_resource type="Script" uid="uid://dttu3aef5nwmi" path="res://scenes/entities/egg/ejected.gd" id="12_ncyu6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cmbxo"]
+radius = 8.0
+
+[sub_resource type="Curve" id="Curve_jkr0c"]
+_data = [Vector2(0, 1), 0.0, -0.82866544, 0, 0, Vector2(1, 0), -0.88153005, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_sbss2"]
+colors = PackedColorArray(0.62160003, 0.6808, 0.74, 1, 1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sbss2"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h26p2"]
+radius = 30.0
+
+[node name="Egg" type="CharacterBody2D" unique_id=722895607 node_paths=PackedStringArray("hitbox")]
+collision_mask = 2
+script = ExtResource("1_dtxs4")
+hitbox = NodePath("Hitbox")
+deceleration = 500.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=671228925]
+shape = SubResource("CircleShape2D_cmbxo")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=80993196]
+scale = Vector2(3.6614218, 3.6614218)
+texture = ExtResource("2_eyb8l")
+
+[node name="EjectedParticles" type="CPUParticles2D" parent="." unique_id=1184248200]
+emitting = false
+amount = 30
+texture = ExtResource("2_eyb8l")
+lifetime = 0.4
+emission_shape = 1
+emission_sphere_radius = 6.2
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_jkr0c")
+color_initial_ramp = SubResource("Gradient_sbss2")
+
+[node name="VacuumableComponent" parent="." unique_id=2108671917 node_paths=PackedStringArray("state_machine", "hurtbox") instance=ExtResource("3_shwtd")]
+state_machine = NodePath("../StateMachine")
+hurtbox = NodePath("../Hurtbox")
+state_on_vacuum_area_entered = &"Vacuumed"
+state_on_vacuum_area_exited = &"Idle"
+
+[node name="CapturableComponent" parent="." unique_id=182143796 instance=ExtResource("4_ioro1")]
+
+[node name="EjectableComponent" parent="." unique_id=776578125 node_paths=PackedStringArray("hitbox") instance=ExtResource("5_vxua6")]
+max_bounces = 1
+hitbox = NodePath("../Hitbox")
+
+[node name="Hitbox" parent="." unique_id=683540586 instance=ExtResource("6_3gbkg")]
+enabled = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1943845504]
+shape = SubResource("CircleShape2D_sbss2")
+debug_color = Color(0.99215883, 0, 0.25709292, 0.41960785)
+
+[node name="Hurtbox" parent="." unique_id=1391892694 instance=ExtResource("7_wnkol")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=503721195]
+shape = SubResource("CircleShape2D_h26p2")
+debug_color = Color(0.82714826, 0.39493513, 5.7756904e-07, 0.41960785)
+
+[node name="StateMachine" parent="." unique_id=583197379 node_paths=PackedStringArray("entity") instance=ExtResource("8_02xto")]
+default_state = &"Idle"
+entity = NodePath("..")
+
+[node name="Idle" type="Node2D" parent="StateMachine" unique_id=1243215863]
+script = ExtResource("9_ni4ib")
+metadata/_custom_type_script = "uid://bpqjpkhit0v31"
+
+[node name="Vacuumed" type="Node2D" parent="StateMachine" unique_id=1783313105 node_paths=PackedStringArray("vacuumable_component")]
+script = ExtResource("10_82aao")
+vacuumable_component = NodePath("../../VacuumableComponent")
+state_on_finished = &"Idle"
+state_on_captured = &"Captured"
+metadata/_custom_type_script = "uid://hq3hve0msv3h"
+
+[node name="Captured" type="Node2D" parent="StateMachine" unique_id=2003113997 node_paths=PackedStringArray("capturable_component")]
+script = ExtResource("11_y7obs")
+capturable_component = NodePath("../../CapturableComponent")
+state_on_uncapture = &"Ejected"
+metadata/_custom_type_script = "uid://dotb5rramnj33"
+
+[node name="Ejected" type="Node2D" parent="StateMachine" unique_id=1450873267 node_paths=PackedStringArray("ejectable_component", "particles", "hitbox")]
+script = ExtResource("12_ncyu6")
+ejectable_component = NodePath("../../EjectableComponent")
+state_on_finished = &"Idle"
+particles = NodePath("../../EjectedParticles")
+hitbox = NodePath("../../Hitbox")
+metadata/_custom_type_script = "uid://gr7h44ctgg1j"
+
+[connection signal="recieved_damage" from="Hurtbox" to="." method="_on_hurtbox_recieved_damage"]

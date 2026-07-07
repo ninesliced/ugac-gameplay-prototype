@@ -16,6 +16,9 @@ var _device_to_user_index_map: Dictionary = {}
 
 const MAX_USERS = 8
 
+func _ready() -> void:
+	Input.joy_connection_changed.connect(_on_joy_connection_changed)
+
 func add_user(device_index: int) -> int:
 	var user_index = get_next_free_user_index()
 	if user_index >= 0:
@@ -143,3 +146,9 @@ func is_action_just_released(player_index: int, action: StringName, exact_match:
 func is_action_pressed(player_index: int, action: StringName, exact_match: bool = false) -> bool:
 	var device = get_user_device_index(player_index)
 	return MultiplayerInput.is_action_pressed(device, action, exact_match)
+
+####
+
+func _on_joy_connection_changed(device: int, connected: bool):
+	var user = get_user_from_device_index(device)
+	remove_user(user)

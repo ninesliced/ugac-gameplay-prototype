@@ -9,6 +9,16 @@ extends Control
 # AI disclosure: No code that is the result of Generative AI is present in 
 # the source code of this add-on.
 
+# TODO: 
+# - Manage screen resizing 
+# - Variable outline width
+# Optional todo:
+# - Make it so that it's the user who defines the children nodes, not the parent 
+#   who spawns those
+# - Use a single shader instead of polygon nodes
+# - Assign colors to cells individually rather than relying on a palette
+# - Move some of the logic to SplitscreenCell 
+
 
 ## The nodes that the ScreenSplitter will try to follow. 
 @export var initial_targets: Array[Node2D]
@@ -104,7 +114,7 @@ func _process(delta: float) -> void:
 
 #region --- Public methods
 
-func add_cell(target: Node2D = null) -> void:
+func add_cell(target: Node2D = null) -> SplitscreenCell:
 	var index = cells.size()
 	var cell = SplitscreenCell.new(index, palette[index])
 	cell.target = target
@@ -112,18 +122,21 @@ func add_cell(target: Node2D = null) -> void:
 	
 	_create_viewport(index)
 	_init_polygon(index)
+	
+	return cell
 
 
-func remove_cell(index: int) -> void:
+func remove_cell(index: int) -> SplitscreenCell:
 	assert(0 <= index and index < cells.size(), "Cell doesn't exist")
-	cells.pop_at(index)
+	return cells.pop_at(index)
 
 
-func remove_cell_with_target(target: Node2D) -> void:
+func remove_cell_with_target(target: Node2D) -> SplitscreenCell:
 	for i in cells.size():
 		if cells[i].target == target:
-			remove_cell(i)
+			return remove_cell(i)
 	assert(false, "Given target doesn't exist")
+	return null
 
 
 func set_target(index: int, target: Node2D) -> void:

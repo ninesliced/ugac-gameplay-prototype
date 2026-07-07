@@ -1,4 +1,5 @@
 ## Area that can deal damage to Hurtboxes
+@icon("./hitbox.svg")
 extends Area2D
 class_name Hitbox
 

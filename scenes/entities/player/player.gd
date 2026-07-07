@@ -5,7 +5,7 @@ extends Actor
 
 @export_category("Imports")
 @export var visuals: StackedAnimatedSprite
-@export var vacuum_area: VacuumArea 
+@export var vacuum_raycast: VacuumRaycast
 @export var vacuum_particles: CPUParticles2D
 @export var vacuum_dust_particles: CPUParticles2D
 @export var capturer_component: CapturerComponent
@@ -31,20 +31,19 @@ var walk_direction := Vector2.RIGHT
 var aim_direction := Vector2.RIGHT
 var aim_angle := 0.0
 
+var splitscreen_cell: SplitscreenCell
+
 func _ready() -> void:
 	super()
-	setup_vacuum_area()
+	setup_vacuum_raycast()
+	
+	InputManager.user_removed.connect(_on_user_removed)
 	
 	hitbox.disable()
 
-func setup_vacuum_area():
-	vacuum_area.disable()
-	
-	var shape: CollisionShape2D = vacuum_area.get_node("CollisionShape2D")
-	var rect_shape: RectangleShape2D = shape.shape
-	rect_shape.size.x = vacuum_range
-	rect_shape.size.y = vacuum_width
-	shape.position.x = vacuum_range / 2.0
+func setup_vacuum_raycast():
+	vacuum_raycast.enabled = false
+	vacuum_raycast.length = vacuum_range
 	
 	var visual_range = vacuum_range - vacuum_visual_range_offset
 	vacuum_particles.position.x = visual_range
@@ -86,7 +85,11 @@ func _update_aim_direction():
 		return
 	
 	if InputManager.supports_mouse(user_index):
-		var mouse_pos = get_global_mouse_position()
+		var mouse_pos: Vector2
+		if splitscreen_cell:
+			mouse_pos = await splitscreen_cell.get_mouse_pos()
+		else:
+			mouse_pos = get_global_mouse_position()
 		var direction = (mouse_pos - global_position).normalized()
 		set_aim_direction(direction)
 	else:
@@ -135,3 +138,7 @@ func _on_hurtbox_recieved_damage(area: Hitbox) -> void:
 	if area.damage == 0:
 		return
 	state_machine.set_state("Damaged", {"damager": area})
+
+func _on_user_removed(_user_index: int):
+	if _user_index == user_index:
+		queue_free()

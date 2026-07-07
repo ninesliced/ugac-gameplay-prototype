@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://c0kheiqjm3el8"]
+
+[ext_resource type="PackedScene" uid="uid://0oyhaxu6arcd" path="res://scenes/entities/actor.tscn" id="1_b0c5k"]
+[ext_resource type="Script" uid="uid://0m54283yce4g" path="res://scenes/entities/nest/nest.gd" id="2_l0jt2"]
+[ext_resource type="Script" uid="uid://dr7h4c573avu2" path="res://scenes/components/hurtbox.gd" id="3_k3yr3"]
+[ext_resource type="Texture2D" uid="uid://dxbw6ay3quqfr" path="res://assets/images/pot.png" id="4_3tcgh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
+radius = 134.09325
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3tcgh"]
+radius = 129.46814
+
+[sub_resource type="LabelSettings" id="LabelSettings_3tcgh"]
+font_size = 38
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Nest" unique_id=722895607 groups=["nest"] instance=ExtResource("1_b0c5k")]
+script = ExtResource("2_l0jt2")
+egg_count = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0" unique_id=253220884]
+shape = SubResource("CircleShape2D_g4v7s")
+
+[node name="Hurtbox" type="Area2D" parent="." index="1" unique_id=367233305]
+script = ExtResource("3_k3yr3")
+metadata/_custom_type_script = "uid://dr7h4c573avu2"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0" unique_id=138726042]
+shape = SubResource("CircleShape2D_3tcgh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="2" unique_id=569872567]
+scale = Vector2(13.750001, 13.750002)
+texture = ExtResource("4_3tcgh")
+
+[node name="Label" type="Label" parent="." index="3" unique_id=1213924383]
+offset_left = -60.0
+offset_top = 79.0
+offset_right = 73.0
+offset_bottom = 132.0
+label_settings = SubResource("LabelSettings_3tcgh")
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="." index="4" unique_id=1292998405 groups=["nest"]]
+
+[connection signal="hitbox_entered" from="Hurtbox" to="." method="_on_hurtbox_hitbox_entered"]

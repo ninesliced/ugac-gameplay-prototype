@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var splitscreen_view: SplitscreenView
+#@export var splitscreen_view: SplitscreenView
 
 var player_tscn: PackedScene = load("res://scenes/entities/player/player.tscn")
 
@@ -37,11 +37,16 @@ func handle_join_leave_input():
 
 func _on_player_join(user_index: int):
 	var player = _spawn_player(user_index)
-	splitscreen_view.add_cell.call_deferred(player)
+	_add_splitscreen_cell.call_deferred(player)
+	
+
+func _add_splitscreen_cell(player: Player):
+	pass
+	#var cell = splitscreen_view.add_cell(player)
+	#player.splitscreen_cell = cell
 	#player.apply_invincibility(PLAYER_SPAWN_INVINCIBILITY)
 
 func _spawn_player(user_index, spawn_position: Vector2 = Vector2.INF) -> Player:
-	var player_positions = $PlayerSpawnPositions 
 	var player: Player = player_tscn.instantiate()
 	player.user_index = user_index
 	
@@ -58,6 +63,6 @@ func _spawn_player(user_index, spawn_position: Vector2 = Vector2.INF) -> Player:
 
 func _delete_player(user_index):
 	var player: Player = InputManager.get_player(user_index)
-	splitscreen_view.remove_cell_with_target(player)
+	#splitscreen_view.remove_cell_with_target(player)
 	
 	player.queue_free()
