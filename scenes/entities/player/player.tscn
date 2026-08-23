@@ -782,18 +782,13 @@ text = "3/4"
 label_settings = SubResource("LabelSettings_go8vc")
 horizontal_alignment = 1
 
-[node name="Hurtbox" parent="." unique_id=1723729202 node_paths=PackedStringArray("life_component") instance=ExtResource("8_fg2wu")]
-collision_layer = 0
-collision_mask = 4
-life_component = NodePath("../LifeComponent")
+[node name="Hurtbox" parent="." unique_id=1723729202 instance=ExtResource("8_fg2wu")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1035310011]
 shape = SubResource("CircleShape2D_7dqom")
 debug_color = Color(0.8344506, 0.3897286, 0, 0.41960785)
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=538144440]
-collision_layer = 0
-collision_mask = 0
 script = ExtResource("10_wghkl")
 enabled = false
 metadata/_custom_type_script = "uid://cyn16ubhn38rx"
@@ -804,7 +799,7 @@ debug_color = Color(0.99864286, 0, 0.13475752, 0.41960785)
 
 [node name="VacuumRaycast" type="RayCast2D" parent="." unique_id=1749462847]
 target_position = Vector2(64, 0)
-collision_mask = 16
+collision_mask = 7
 collide_with_areas = true
 collide_with_bodies = false
 script = ExtResource("11_vs62q")
@@ -969,4 +964,4 @@ metadata/_custom_type_script = "uid://bpqjpkhit0v31"
 
 [connection signal="captured" from="CapturerComponent" to="." method="_on_capturer_component_captured"]
 [connection signal="damaged" from="LifeComponent" to="." method="_on_life_component_damaged"]
-[connection signal="recieved_damage" from="Hurtbox" to="." method="_on_hurtbox_recieved_damage"]
+[connection signal="hitbox_entered" from="Hurtbox" to="." method="_on_hurtbox_hitbox_entered"]

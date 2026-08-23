@@ -10,6 +10,7 @@ extends Actor
 @export var vacuum_dust_particles: CPUParticles2D
 @export var capturer_component: CapturerComponent
 @export var hitbox: Hitbox
+@onready var life_component: LifeComponent = $LifeComponent
 
 @export_category("Vacuum")
 @export var vacuum_range = 400
@@ -134,10 +135,13 @@ func is_action_just_released(action: StringName, exact_match: bool = false) -> b
 		return false
 	return InputManager.is_action_just_released(user_index, action, exact_match)
 
-func _on_hurtbox_recieved_damage(area: Hitbox) -> void:
+func _on_hurtbox_hitbox_entered(area: Hitbox) -> void:
 	if area.damage == 0:
 		return
-	state_machine.set_state("Damaged", {"damager": area})
+	if not area.damages_players:
+		return
+	life_component.damage(area.damage)
+	state_machine.set_state("Damaged", {"damager": area, "damage": area.damage})
 
 func _on_user_removed(_user_index: int):
 	if _user_index == user_index:

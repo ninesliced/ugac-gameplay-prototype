@@ -42,6 +42,6 @@ offset_bottom = 132.0
 label_settings = SubResource("LabelSettings_3tcgh")
 horizontal_alignment = 1
 
-[node name="Timer" type="Timer" parent="." index="4" unique_id=1292998405 groups=["nest"]]
+[node name="Timer" type="Timer" parent="." index="4" unique_id=1292998405]
 
 [connection signal="hitbox_entered" from="Hurtbox" to="." method="_on_hurtbox_hitbox_entered"]
