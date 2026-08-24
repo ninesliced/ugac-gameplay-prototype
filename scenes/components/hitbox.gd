@@ -15,11 +15,13 @@ class_name Hitbox
 signal sent_damage(hurtbox: Hurtbox)
 signal on_hurt_box_hit(hurtbox: Hurtbox)
 
+@export var damages_enemies: bool = false
+@export var damages_players: bool = false
+
 func _ready() -> void:
 	area_entered.connect(_on_area_entered)
 	area_exited.connect(_on_area_exited)
-	
-	set_collision_layer_value(4, true)
+
 
 func _disable() -> void:
 	monitoring = false

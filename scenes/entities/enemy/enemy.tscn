@@ -61,7 +61,7 @@ scale_amount_curve = SubResource("Curve_jkr0c")
 color_initial_ramp = SubResource("Gradient_sbss2")
 
 [node name="LifeComponent" parent="." unique_id=167689404 instance=ExtResource("3_ei073")]
-max_life = 2.0
+max_life = 1.0
 
 [node name="VacuumableComponent" parent="." unique_id=2108671917 node_paths=PackedStringArray("state_machine", "hurtbox") instance=ExtResource("5_ilesx")]
 state_machine = NodePath("../StateMachine")
@@ -84,27 +84,33 @@ offset_bottom = -36.0
 label_settings = SubResource("LabelSettings_g4v7s")
 horizontal_alignment = 1
 
+[node name="Label2" type="Label" parent="." unique_id=161265603]
+custom_minimum_size = Vector2(100, 0)
+offset_left = -50.0
+offset_top = 51.0
+offset_right = 50.0
+offset_bottom = 96.0
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+
 [node name="Hitbox" parent="." unique_id=683540586 instance=ExtResource("7_jkr0c")]
-collision_mask = 0
+damages_players = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1943845504]
 shape = SubResource("CircleShape2D_sbss2")
 debug_color = Color(0.99215883, 0, 0.25709292, 0.41960785)
 
-[node name="Hurtbox" parent="." unique_id=1391892694 node_paths=PackedStringArray("life_component") instance=ExtResource("6_ddkys")]
-collision_layer = 0
-collision_mask = 4
-life_component = NodePath("../LifeComponent")
+[node name="Hurtbox" parent="." unique_id=1391892694 instance=ExtResource("6_ddkys")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=503721195]
 shape = SubResource("CircleShape2D_h26p2")
 debug_color = Color(0.82714826, 0.39493513, 5.7756904e-07, 0.41960785)
 
 [node name="StateMachine" parent="." unique_id=583197379 node_paths=PackedStringArray("entity") instance=ExtResource("7_ddkys")]
-default_state = &"Idle"
+default_state = &"Chase"
 entity = NodePath("..")
 
-[node name="Idle" type="Node2D" parent="StateMachine" unique_id=1243215863 node_paths=PackedStringArray("hitbox")]
+[node name="Chase" type="Node2D" parent="StateMachine" unique_id=1243215863 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("5_cmbxo")
 hitbox = NodePath("../../Hitbox")
 follow_speed = 150.0
@@ -114,7 +120,7 @@ metadata/_custom_type_script = "uid://bpqjpkhit0v31"
 [node name="Vacuumed" type="Node2D" parent="StateMachine" unique_id=1783313105 node_paths=PackedStringArray("vacuumable_component", "hitbox")]
 script = ExtResource("9_ddkys")
 vacuumable_component = NodePath("../../VacuumableComponent")
-state_on_finished = &"Idle"
+state_on_finished = &"Chase"
 state_on_captured = &"Captured"
 hitbox = NodePath("../../Hitbox")
 metadata/_custom_type_script = "uid://hq3hve0msv3h"
@@ -129,10 +135,10 @@ metadata/_custom_type_script = "uid://dotb5rramnj33"
 [node name="Ejected" type="Node2D" parent="StateMachine" unique_id=1450873267 node_paths=PackedStringArray("ejectable_component", "particles", "hitbox")]
 script = ExtResource("12_frkcr")
 ejectable_component = NodePath("../../EjectableComponent")
-state_on_finished = &"Idle"
+state_on_finished = &"Chase"
 particles = NodePath("../../EjectedParticles")
 hitbox = NodePath("../../Hitbox")
 metadata/_custom_type_script = "uid://gr7h44ctgg1j"
 
 [connection signal="died" from="LifeComponent" to="." method="_on_life_component_died"]
-[connection signal="recieved_damage" from="Hurtbox" to="." method="_on_hurtbox_recieved_damage"]
+[connection signal="hitbox_entered" from="Hurtbox" to="." method="_on_hurtbox_hitbox_entered"]

@@ -8,8 +8,8 @@ extends EntityState
 @export var enable_hitbox_distance: float = 64.0
 
 var _old_hitbox_state = false
-var _old_hitbox_layer = 0
-const thrown_hitbox_layer = 2**0 + 2**2
+var _old_hitbox_damages_enemies = false
+var _old_hitbox_damages_players = false
 
 var _throw_position: Vector2
 
@@ -24,7 +24,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	super(delta)
 	
-	entity.rotate(20.0 * delta)
+	#entity.rotate(20.0 * delta)
 	
 	if _throw_position.distance_to(entity.global_position) > enable_hitbox_distance and hitbox:
 		hitbox.enabled = true
@@ -35,15 +35,19 @@ func _on_enter_state(params: Dictionary = {}):
 	assert(params.has("direction") and params["direction"] != null, "No direction param")
 	
 	ejectable_component.activate(params["direction"])
+	_old_hitbox_damages_enemies = hitbox.damages_enemies
+	_old_hitbox_damages_players = hitbox.damages_players
+	hitbox.damages_enemies = true
+	hitbox.damages_players = true
+	
 	_old_hitbox_state = hitbox.enabled
-	_old_hitbox_layer = hitbox.collision_layer
 	hitbox.enabled = false
-	hitbox.collision_layer = thrown_hitbox_layer
 	
 	_throw_position = entity.global_position
 	
 	if particles:
 		particles.emitting = true
+
 
 func _on_exit_state():
 	super()
@@ -53,7 +57,8 @@ func _on_exit_state():
 	entity.rotation = 0.0
 	
 	hitbox.enabled = _old_hitbox_state
-	hitbox.collision_layer = _old_hitbox_layer
+	hitbox.damages_enemies = _old_hitbox_damages_enemies
+	hitbox.damages_players = _old_hitbox_damages_players
 	
 	if particles:
 		particles.emitting = false

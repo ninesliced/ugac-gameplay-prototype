@@ -37,3 +37,6 @@ func release_egg(area: VacuumArea = null):
 		egg.global_position = pos
 	
 	get_parent().add_child(egg)
+
+func _to_string() -> String:
+	return "<Nest:eggs=%d>" % [egg_count]
