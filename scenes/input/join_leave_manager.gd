@@ -2,7 +2,7 @@ extends Node2D
 
 #@export var splitscreen_view: SplitscreenView
 
-var player_tscn: PackedScene = load("res://scenes/entities/player/player.tscn")
+var player_tscn: PackedScene = preload("res://scenes/entities/player/player.tscn")
 
 signal player_joined(user_index: int)
 signal player_left(user_index: int)

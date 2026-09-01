@@ -2,6 +2,5 @@
 
 [ext_resource type="Script" uid="uid://gr7h44ctgg1j" path="res://scenes/components/state_machine/ejected_state.gd" id="1_amc07"]
 
-[node name="Ejected" type="Node2D" unique_id=521408716]
+[node name="Ejected" type="Node" unique_id=1909635536]
 script = ExtResource("1_amc07")
-metadata/_custom_type_script = "uid://j76sj18t8bt2"

@@ -1,5 +1,5 @@
 @abstract
-extends Node2D
+extends Node
 class_name AbstractState
 
 signal enter_state

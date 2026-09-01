@@ -1,6 +1,6 @@
 extends PlayerState
 
-@export var visuals: StackedAnimatedSprite
+@export var visuals: PlayerVisuals
 
 @export var vacuum: Node2D
 @export var vacuum_particles: CPUParticles2D
@@ -14,11 +14,8 @@ func _on_enter_state(params: Dictionary = {}):
 	super(params)
 	vacuum_raycast.enabled = true
 	
-	# Animation	
-	visuals.play("open_mouth")
-	await visuals.animation_finished
-	if is_in_state:
-		visuals.play("inhaling")
+	# Animation
+	visuals.play("Inhale")
 
 func _on_exit_state():
 	super()
@@ -41,8 +38,7 @@ func _physics_process(delta: float) -> void:
 	visuals.flip_h = player.aim_direction.x < 0
 	
 	if player.is_action_just_released("game_action"):
-		state_machine.set_state("Idle")
-		visuals.play("close_mouth")
+		state_machine.set_state("Move")
 	
 	if player.is_action_just_pressed("game_dash"):
 		state_machine.set_state("Rolling")

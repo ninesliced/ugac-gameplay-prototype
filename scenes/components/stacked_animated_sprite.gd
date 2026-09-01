@@ -1,5 +1,5 @@
 @tool
-@icon("AnimatedSprite2D")
+@icon("./stacked_animated_sprite.svg")
 ## Acts like an AnimatedSprite2D, but may contain mutliple layers, represented
 ## by its children.
 class_name StackedAnimatedSprite
@@ -15,6 +15,40 @@ extends Node2D
 @export var sprite_name_to_texture: Dictionary[StringName, Texture2D]
 @export_tool_button("Sync children", "Reload") var sync = _sync_children
 
+@export_group("Sprite")
+@export var animation: StringName = &"":
+	set(value):
+		animation = value
+		_run_for_all_children(func(spr: AnimatedSprite2D): spr.animation = value)
+
+
+## The displayed animation frame's index. Setting this property also resets frame_progress. If this is not desired, use set_frame_and_progress().
+@export var frame: int = 0:
+	set(value):
+		frame = value
+		_run_for_all_children(func(spr: AnimatedSprite2D): spr.frame = value)
+
+
+## The speed scaling ratio. For example, if this value is 1, then the animation plays at normal speed. If it's 0.5, then it plays at half speed. If it's 2, then it plays at double speed.[br]
+## If set to a negative value, the animation is played in reverse. If set to 0, the animation will not advance.
+@export var speed_scale: float = true:
+	set(value):
+		speed_scale = value
+		_run_for_all_children(func(spr: AnimatedSprite2D): spr.speed_scale = value)
+
+@export_group("Offset")
+## If true, texture will be centered.
+@export var centered: bool = true:
+	set(value):
+		centered = value
+		_run_for_all_children(func(spr: AnimatedSprite2D): spr.centered = value)
+
+## The texture's drawing offset.
+@export var offset: Vector2 = Vector2.ZERO:
+	set(value):
+		offset = value
+		_run_for_all_children(func(spr: AnimatedSprite2D): spr.offset = value)
+
 ## If true, texture is flipped horizontally.
 @export var flip_h: bool = false:
 	set(value):
@@ -26,12 +60,6 @@ extends Node2D
 	set(value):
 		flip_v = value
 		_run_for_all_children(func(spr: AnimatedSprite2D): spr.flip_v = value)
-
-@export var offset: Vector2 = Vector2.ZERO:
-	set(value):
-		offset = value
-		_run_for_all_nonref_children(func(spr: AnimatedSprite2D): spr.offset = reference_sprite.offset + value)
-var reference_offset: Vector2 = Vector2.ZERO
 
 @export var shake_decrease_speed = 30.0
 var shake_amount = 0.0
@@ -64,13 +92,14 @@ func _ready() -> void:
 		if child.name != reference_sprite.name:
 			assert(sprite_name_to_texture.has(child.name), "No entry in sprite_name_to_texture defined for " + str(child.name))
 	
+	_sync_children()
+	
 	reference_sprite.animation_changed.connect(func(): animation_changed.emit())
 	reference_sprite.animation_finished.connect(func(): animation_finished.emit())
 	reference_sprite.animation_looped.connect(func(): animation_looped.emit())
 	reference_sprite.frame_changed.connect(func(): frame_changed.emit())
 	reference_sprite.sprite_frames_changed.connect(func(): sprite_frames_changed.emit())
-	
-	reference_offset = reference_sprite.offset
+
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
@@ -81,7 +110,7 @@ func _process(delta: float) -> void:
 	var shake_offset_y = randf_range(-shake_amount, shake_amount)
 	_run_for_all_children(
 		func(spr: AnimatedSprite2D): 
-			spr.offset = reference_offset + offset + Vector2(shake_offset_x, shake_offset_y)
+			spr.offset = offset + Vector2(shake_offset_x, shake_offset_y)
 	)
 
 #-----------------------------------------
@@ -169,5 +198,7 @@ func _sync_children():
 			tar_sf.set_animation_speed(anim_name, ref_sf.get_animation_speed(anim_name))
 		
 		tar_sf.remove_animation(&"default")
+		
+		spr.queue_redraw()
 	)
 	print("Syncing StackedAnimatedSprite children done.")

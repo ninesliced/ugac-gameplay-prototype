@@ -2,7 +2,7 @@ extends PlayerState
 
 @export var default_knockback = 1000.0
 
-@export var visuals: StackedAnimatedSprite
+@export var visuals: PlayerVisuals
 @export var duration = 0.4
 @export var star_angle_rotation_speed = 2.0
 @export var slow_mo = 0.1
@@ -30,8 +30,8 @@ func _on_enter_state(params: Dictionary = {}):
 	super(params)
 	
 	time = duration
-	visuals.play("damaged")
-	visuals.shake(3.0)
+	#visuals.play("damaged")
+	#visuals.shake(3.0)
 	
 	if $"../../CapturerComponent".captured_entity:
 		$"../../CapturerComponent".uncapture(player.aim_direction)
@@ -82,4 +82,4 @@ func _physics_process(delta: float) -> void:
 	
 	time -= delta
 	if time <= 0.0:
-		state_machine.set_state("Idle")
+		state_machine.set_state("Move")

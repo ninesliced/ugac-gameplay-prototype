@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://costhn0s2oix6"]
+[gd_scene format=3 uid="uid://costhn0s2oix6"]
 
-[ext_resource type="Script" path="res://scenes/components/state_machine/state_machine.gd" id="1_psvop"]
+[ext_resource type="Script" uid="uid://drpttt3optl3r" path="res://scenes/components/state_machine/state_machine.gd" id="1_psvop"]
 
-[node name="StateMachine" type="Node2D"]
+[node name="StateMachine" type="Node" unique_id=254284196]
 script = ExtResource("1_psvop")

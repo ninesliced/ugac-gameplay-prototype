@@ -5,7 +5,9 @@ extends CharacterBody2D
 @export var deceleration := 1000.0
 
 var captured_entity: Entity
-var state_machine: StateMachine
+var state_machine: StateMachine: 
+	set(val): 
+		state_machine = val
 
 func _ready() -> void:
 	var node = get_node_or_null("StateMachine")

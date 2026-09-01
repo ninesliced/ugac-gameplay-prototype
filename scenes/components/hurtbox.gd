@@ -17,11 +17,14 @@ func on_hitbox_entered(hitbox: Hitbox):
 	
 	hitbox_entered.emit(hitbox)
 
+
 func process_overlapping_hitbox(hitbox: Hitbox):
 	pass
 
+
 func on_hitbox_exited(hitbox: Hitbox):
 	hitbox_exited.emit(hitbox)
+
 
 func is_hittable(hitbox: Hitbox):
 	if ignore_sibling_hitboxes and hitbox.get_parent() == get_parent():

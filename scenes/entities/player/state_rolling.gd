@@ -1,6 +1,6 @@
 extends PlayerState
 
-@export var visuals: StackedAnimatedSprite
+@export var visuals: PlayerVisuals
 @export var dust_particles: CPUParticles2D
 
 @export var speed = 300.0
@@ -16,11 +16,14 @@ func _on_enter_state(params: Dictionary = {}):
 	super(params)
 	time = duration
 	direction = player.aim_direction
+	visuals.play("Roll")
+
 
 func _on_exit_state():
 	super()
-	visuals.rotation = 0.0
+	visuals.sprite_rotation = 0.0
 	dust_particles.emitting = false
+
 
 func _physics_process(delta: float) -> void:
 	super(delta)
@@ -30,12 +33,12 @@ func _physics_process(delta: float) -> void:
 	
 	dust_particles.emitting = true
 	
-	var sign = 1
+	var rot_sign = 1
 	if direction.x < 0:
-		sign = -1
-	visuals.rotation += sign * delta * (TAU /duration)
+		rot_sign = -1
+	visuals.sprite_rotation = lerp(0.0, rot_sign * TAU, 1 - (time / duration))
 	
 	time = max(0.0, time - delta)
 	if time <= 0.0:
-		state_machine.set_state("Walking")
+		state_machine.set_state("Move")
 	

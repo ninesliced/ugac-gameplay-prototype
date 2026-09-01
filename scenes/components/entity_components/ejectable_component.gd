@@ -7,7 +7,7 @@ extends EntityComponent
 
 @export_category("Damage")
 @export var hitbox: Hitbox
-@export var hitbox_enable_delay: float = 0.1
+@export var hitbox_enable_delay: float = 0.2
 
 signal finished()
 
@@ -21,6 +21,7 @@ var _time: float = 0.0
 func _ready() -> void:
 	super()
 
+
 func activate(direction_: Vector2):
 	active = true
 	direction = direction_.normalized()
@@ -31,12 +32,14 @@ func activate(direction_: Vector2):
 		hitbox_enable_time = hitbox_enable_delay
 		hitbox_enabled = hitbox.enabled
 
+
 func deactivate():
 	active = false
 	if hitbox:
 		hitbox.enabled = hitbox_enabled
 	
 	finished.emit()
+
 
 func _physics_process(delta: float) -> void:
 	if not active:
@@ -61,6 +64,7 @@ func _physics_process(delta: float) -> void:
 			var normal: Vector2 = collision.get_normal()
 			direction = direction.bounce(normal)
 			bounces -= 1
+
 
 func _on_wall_detector_body_entered(body: Node2D):
 	pass

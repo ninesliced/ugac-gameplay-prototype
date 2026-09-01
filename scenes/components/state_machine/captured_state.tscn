@@ -2,6 +2,5 @@
 
 [ext_resource type="Script" uid="uid://dotb5rramnj33" path="res://scenes/components/state_machine/captured_state.gd" id="1_i88jr"]
 
-[node name="Captured" type="Node2D" unique_id=1903499686]
+[node name="Captured" type="Node" unique_id=193312774]
 script = ExtResource("1_i88jr")
-metadata/_custom_type_script = "uid://j76sj18t8bt2"

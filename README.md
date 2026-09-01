@@ -1,2 +1,1 @@
-# Untitled Action Co-op Game - Gameplay Prototype
-
+# Untitled Action Co-op Game - Art Prototype

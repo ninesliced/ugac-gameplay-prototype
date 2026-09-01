@@ -22,7 +22,6 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 	
 	var target = _get_target()
-	print(target)
 	var target_velocity: Vector2
 	if target: # and enemy.global_position.distance_to(target.global_position) < detect_range:
 		var dir = enemy.global_position.direction_to(target.global_position)

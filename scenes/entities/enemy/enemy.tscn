@@ -29,10 +29,10 @@ colors = PackedColorArray(0.62160003, 0.6808, 0.74, 1, 1, 1, 1, 1)
 font_size = 32
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sbss2"]
-radius = 20.0
+radius = 24.020824
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h26p2"]
-radius = 31.016125
+radius = 27.018513
 
 [node name="Enemy" type="CharacterBody2D" unique_id=722895607 node_paths=PackedStringArray("hitbox")]
 collision_mask = 2
@@ -76,6 +76,7 @@ max_bounces = 1
 hitbox = NodePath("../Hitbox")
 
 [node name="Label" type="Label" parent="." unique_id=1313278874]
+visible = false
 custom_minimum_size = Vector2(100, 0)
 offset_left = -50.0
 offset_top = -81.0
@@ -85,6 +86,7 @@ label_settings = SubResource("LabelSettings_g4v7s")
 horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="." unique_id=161265603]
+visible = false
 custom_minimum_size = Vector2(100, 0)
 offset_left = -50.0
 offset_top = 51.0
@@ -101,6 +103,7 @@ shape = SubResource("CircleShape2D_sbss2")
 debug_color = Color(0.99215883, 0, 0.25709292, 0.41960785)
 
 [node name="Hurtbox" parent="." unique_id=1391892694 instance=ExtResource("6_ddkys")]
+collision_layer = 257
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=503721195]
 shape = SubResource("CircleShape2D_h26p2")
