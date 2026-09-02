@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bkdec0qpoautj"]
 
-[ext_resource type="Script" uid="uid://cibd6087fudig" path="res://addons/shaker/ui/BasicMenu.gd" id="1_pm07a"]
+[ext_resource type="Script" uid="uid://cibd6087fudig" path="res://addons/shaker/ui/menu/BasicMenu.gd" id="1_pm07a"]
 
 [node name="Menu" type="Control" unique_id=1485647002]
 layout_mode = 3

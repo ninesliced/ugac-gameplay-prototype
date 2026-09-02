@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diug56incwsl3"
-path="res://.godot/imported/hitbox.svg-54812ce81241103c47647d8b5bcf5913.ctex"
+uid="uid://wy2vivhqmom0"
+path="res://.godot/imported/stacked_animated_sprite.svg-6509ca2af3c6de81e0a550b19d95a040.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/shaker/area/hitbox.svg"
-dest_files=["res://.godot/imported/hitbox.svg-54812ce81241103c47647d8b5bcf5913.ctex"]
+source_file="res://addons/shaker/graphics/sprite/stacked_animated_sprite.svg"
+dest_files=["res://.godot/imported/stacked_animated_sprite.svg-6509ca2af3c6de81e0a550b19d95a040.ctex"]
 
 [params]
 
