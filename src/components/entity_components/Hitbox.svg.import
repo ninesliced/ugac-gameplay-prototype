@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gr36x70qb1y1"
-path="res://.godot/imported/hurtbox.svg-a1b6331582a4fed66d80bf9e0c0d24e0.ctex"
+uid="uid://b2sd338xewpr6"
+path="res://.godot/imported/Hitbox.svg-f8cb989e105db9eb9cd05c246d595392.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/shaker/gameplay/area/hurtbox.svg"
-dest_files=["res://.godot/imported/hurtbox.svg-a1b6331582a4fed66d80bf9e0c0d24e0.ctex"]
+source_file="res://src/components/entity_components/Hitbox.svg"
+dest_files=["res://.godot/imported/Hitbox.svg-f8cb989e105db9eb9cd05c246d595392.ctex"]
 
 [params]
 

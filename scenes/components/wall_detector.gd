@@ -1,2 +1,0 @@
-class_name WallDetector
-extends Area2D

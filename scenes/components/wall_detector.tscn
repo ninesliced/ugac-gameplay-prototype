@@ -1,8 +1,0 @@
-[gd_scene format=3 uid="uid://cf36nupdtch3a"]
-
-[ext_resource type="Script" uid="uid://cbfwyac1wko6a" path="res://scenes/components/wall_detector.gd" id="1_5o6c1"]
-
-[node name="WallDetector" type="Area2D" unique_id=575123712]
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("1_5o6c1")

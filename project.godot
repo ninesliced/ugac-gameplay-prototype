@@ -34,7 +34,7 @@ window/stretch/mode="canvas_items"
 folder_colors={
 "res://assets/": "red",
 "res://resources/": "orange",
-"res://scenes/": "blue"
+"res://src/": "blue"
 }
 
 [global_group]

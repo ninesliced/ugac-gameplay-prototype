@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://dvube5c2o5lo3"]
-
-[ext_resource type="Script" uid="uid://wasomoq27gie" path="res://scenes/components/entity_components/vacuumable_component.gd" id="1_lw8ic"]
-
-[node name="VacuumableComponent" type="Node2D" unique_id=397787332]
-script = ExtResource("1_lw8ic")

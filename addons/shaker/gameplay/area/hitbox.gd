@@ -13,7 +13,7 @@ class_name Hitbox
 @export var damage: float = 1.0
 
 signal sent_damage(hurtbox: Hurtbox)
-signal on_hurt_box_hit(hurtbox: Hurtbox)
+signal on_hurtbox_hit(hurtbox: Hurtbox)
 
 @export var damages_enemies: bool = false
 @export var damages_players: bool = false
@@ -48,7 +48,7 @@ func _physics_process(delta: float) -> void:
 			var hurtbox = area as Hurtbox
 			hurtbox.process_overlapping_hitbox(self)
 			sent_damage.emit(hurtbox)
-			on_hurt_box_hit.emit(hurtbox)
+			on_hurtbox_hit.emit(hurtbox)
 
 func _on_area_entered(area: Area2D):
 	if not enabled:

@@ -1,3 +1,5 @@
 # Shaker
 TODOS:
-- port back old functionality from old shaker
+- camera
+- achievements
+- local multiplayer management

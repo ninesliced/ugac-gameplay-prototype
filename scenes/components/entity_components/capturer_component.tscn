@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://dea5735pyrhbo"]
-
-[ext_resource type="Script" uid="uid://c4rw8aakdurjv" path="res://scenes/components/entity_components/capturer_component.gd" id="1_578hm"]
-
-[node name="CapturerComponent" type="Node2D" unique_id=678066152]
-script = ExtResource("1_578hm")

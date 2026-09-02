@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://0oyhaxu6arcd"]
-
-[ext_resource type="Script" uid="uid://deki42gbkmplb" path="res://scenes/entities/actor.gd" id="1_vpdwn"]
-
-[node name="Actor" type="CharacterBody2D" unique_id=722895607]
-script = ExtResource("1_vpdwn")

@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://bv7vds3mjrvdv"]
-
-[ext_resource type="Script" uid="uid://c8fusu2ruq2ci" path="res://addons/shaker/graphics/sprite/stacked_animated_sprite.gd" id="1_aqh8w"]
-
-[node name="StackedAnimatedSprite" type="Node2D" unique_id=1035559148]
-script = ExtResource("1_aqh8w")

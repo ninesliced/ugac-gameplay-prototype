@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://du8bunvwp8ukg"]
+
+[ext_resource type="Script" uid="uid://bipiwko0s1pqm" path="res://src/components/entity_components/ejectable_component.gd" id="1_6exba"]
+
+[node name="EjectableComponent" type="Node2D" unique_id=776578125]
+script = ExtResource("1_6exba")
