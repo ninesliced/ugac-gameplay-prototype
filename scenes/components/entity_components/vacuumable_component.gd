@@ -1,7 +1,7 @@
 class_name VacuumableComponent
 extends EntityComponent
 
-@export var vacuum_acceleration = 800
+@export var vacuum_acceleration = 1600
 @export var vacuum_top_speed = 6000
 @export var finish_distance = 16
 

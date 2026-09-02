@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bjc7xwpwgvx7r"]
 
-[ext_resource type="Script" uid="uid://c30a75mfm243v" path="res://scenes/components/star_2d.gd" id="1_a2y5l"]
+[ext_resource type="Script" uid="uid://c30a75mfm243v" path="res://addons/shaker/polygon/star_2d.gd" id="1_a2y5l"]
 
 [sub_resource type="Curve" id="Curve_a2y5l"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5115154, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]

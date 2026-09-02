@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://c04fkqrhhobxr"]
-
-[ext_resource type="Script" uid="uid://bg5uck2mc3fjb" path="res://scenes/components/state_machine/actor_state.gd" id="1_uwvrd"]
-
-[node name="ActorState" type="Node2D" unique_id=855123822]
-script = ExtResource("1_uwvrd")

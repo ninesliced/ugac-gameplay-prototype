@@ -15,6 +15,13 @@ var _playback: AnimationNodeStateMachinePlayback
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var stacked_sprite: StackedAnimatedSprite = $Body/StackedAnimatedSprite
 @onready var shadow: AnimatedSprite2D = $Shadow
+@onready var body: Node2D = $Body
+
+var shake_intensity: float = 0.0
+var shake_duration: float = 0.0
+var _shake_timer: float = 0.0
+var _shake_frame_timer: float = 0.0
+const _shake_frame_delay: float = 0.02
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -30,6 +37,7 @@ func _process(delta: float) -> void:
 		return
 	
 	_update_body_flip()
+	_process_shake(delta)
 	$Label.text = ""
 	$Label.text += str(mouth_full) + "\n"
 
@@ -56,6 +64,13 @@ func set_mouth_full(value: bool) -> void:
 		set_layer_visibility("FaceMF", false)
 
 
+func shake(intensity: float, duration: float) -> void:
+	shake_intensity = intensity
+	shake_duration = duration
+	_shake_timer = duration
+	_shake_frame_timer = 0.0
+
+
 func _update_body_flip() -> void:
 	# This specifically excludes the case where walk_direction.x == 0.
 	if player.walk_direction.x < 0:
@@ -72,3 +87,24 @@ func _set_flip_h(value: bool) -> void:
 func _set_sprite_rotation(value: float) -> void:
 	sprite_rotation = value
 	stacked_sprite.rotation = value
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_accept"):
+		shake(10, 2)
+
+func _process_shake(delta: float) -> void:
+	_shake_timer = max(_shake_timer - delta, 0.0) 
+	if _shake_timer <= 0.0:
+		stacked_sprite.offset = Vector2.ZERO
+		return
+	
+	_shake_frame_timer -= delta
+	if _shake_frame_timer <= 0.0:
+		_shake_frame_timer += _shake_frame_delay
+	
+		var _shake_vec = Vector2(
+			randf_range(-shake_intensity, shake_intensity),
+			randf_range(-shake_intensity, shake_intensity)
+		)
+		stacked_sprite.offset = _shake_vec

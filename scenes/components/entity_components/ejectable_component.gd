@@ -1,7 +1,7 @@
 class_name EjectableComponent
 extends EntityComponent
 
-@export var eject_speed := 400.0
+@export var eject_speed := 800.0
 @export var max_bounces: int = 0
 @export var max_time: float = 2.0
 

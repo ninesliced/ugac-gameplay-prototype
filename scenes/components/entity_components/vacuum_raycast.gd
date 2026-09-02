@@ -18,7 +18,6 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	var coll = get_collider()
-	print("coll %s" % coll)
 	if coll is Hurtbox:
 		var own = coll.owner
 		if own is Entity and entity != own and own.has_component("VacuumableComponent"):

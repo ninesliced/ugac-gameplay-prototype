@@ -30,8 +30,8 @@ func _on_enter_state(params: Dictionary = {}):
 	super(params)
 	
 	time = duration
-	#visuals.play("damaged")
-	#visuals.shake(3.0)
+	visuals.play("Damaged")
+	visuals.shake(10.0, duration)
 	
 	if $"../../CapturerComponent".captured_entity:
 		$"../../CapturerComponent".uncapture(player.aim_direction)

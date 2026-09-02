@@ -7,11 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://dvube5c2o5lo3" path="res://scenes/components/entity_components/vacuumable_component.tscn" id="3_shwtd"]
 [ext_resource type="PackedScene" uid="uid://b5pl5ca7s0ywp" path="res://scenes/components/entity_components/capturable_component.tscn" id="4_ioro1"]
 [ext_resource type="PackedScene" uid="uid://du8bunvwp8ukg" path="res://scenes/components/entity_components/ejectable_component.tscn" id="5_vxua6"]
-[ext_resource type="PackedScene" uid="uid://dhkvjviu3e25u" path="res://scenes/components/hitbox.tscn" id="6_3gbkg"]
-[ext_resource type="PackedScene" uid="uid://bk2oqqxxglu2n" path="res://scenes/components/hurtbox.tscn" id="7_wnkol"]
-[ext_resource type="PackedScene" uid="uid://costhn0s2oix6" path="res://scenes/components/state_machine/state_machine.tscn" id="8_02xto"]
+[ext_resource type="Script" uid="uid://cyn16ubhn38rx" path="res://addons/shaker/area/hitbox.gd" id="8_shwtd"]
+[ext_resource type="Script" uid="uid://dr7h4c573avu2" path="res://addons/shaker/area/hurtbox.gd" id="9_ioro1"]
 [ext_resource type="Script" uid="uid://yk5j3l7455yv" path="res://scenes/entities/enemy/state_vacuumed.gd" id="10_82aao"]
-[ext_resource type="Script" uid="uid://bpqjpkhit0v31" path="res://scenes/components/state_machine/state.gd" id="10_eyb8l"]
+[ext_resource type="Script" uid="uid://bpqjpkhit0v31" path="res://addons/shaker/state/state.gd" id="10_eyb8l"]
+[ext_resource type="Script" uid="uid://drpttt3optl3r" path="res://addons/shaker/state/state_machine.gd" id="10_shwtd"]
 [ext_resource type="Script" uid="uid://u603175l0nxr" path="res://scenes/entities/egg/captured.gd" id="11_y7obs"]
 [ext_resource type="Script" uid="uid://dttu3aef5nwmi" path="res://scenes/entities/egg/ejected.gd" id="12_ncyu6"]
 
@@ -138,21 +138,24 @@ state_on_vacuum_area_exited = &"Idle"
 max_bounces = 1
 hitbox = NodePath("../Hitbox")
 
-[node name="Hitbox" parent="." unique_id=683540586 instance=ExtResource("6_3gbkg")]
+[node name="Hitbox" type="Area2D" parent="." unique_id=683540586]
+script = ExtResource("8_shwtd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1943845504]
 shape = SubResource("CircleShape2D_sbss2")
 debug_color = Color(0.99215883, 0, 0.25709292, 0.41960785)
 
-[node name="Hurtbox" parent="." unique_id=1391892694 instance=ExtResource("7_wnkol")]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1391892694]
 collision_layer = 257
+script = ExtResource("9_ioro1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=503721195]
 scale = Vector2(0.637, 0.637)
 shape = SubResource("CircleShape2D_h26p2")
 debug_color = Color(0.82714826, 0.39493513, 5.7756904e-07, 0.41960785)
 
-[node name="StateMachine" parent="." unique_id=583197379 node_paths=PackedStringArray("entity") instance=ExtResource("8_02xto")]
+[node name="StateMachine" type="Node" parent="." unique_id=583197379 node_paths=PackedStringArray("entity")]
+script = ExtResource("10_shwtd")
 default_state = &"Idle"
 entity = NodePath("..")
 

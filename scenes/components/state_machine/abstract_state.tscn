@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bnlcurc2qkf4g"]
-
-[ext_resource type="Script" path="res://scenes/components/state_machine/abstract_state.gd" id="1_oofs1"]
-
-[node name="AbstractState" type="Node2D"]
-script = ExtResource("1_oofs1")

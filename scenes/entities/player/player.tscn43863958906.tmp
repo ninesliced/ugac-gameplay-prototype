@@ -7,19 +7,19 @@
 [ext_resource type="PackedScene" uid="uid://dvube5c2o5lo3" path="res://scenes/components/entity_components/vacuumable_component.tscn" id="5_c0o85"]
 [ext_resource type="PackedScene" uid="uid://b5pl5ca7s0ywp" path="res://scenes/components/entity_components/capturable_component.tscn" id="6_2qi7f"]
 [ext_resource type="PackedScene" uid="uid://du8bunvwp8ukg" path="res://scenes/components/entity_components/ejectable_component.tscn" id="7_y8r86"]
-[ext_resource type="PackedScene" uid="uid://cdkvkbstvh6ef" path="res://addons/shaker/actor/life_component.tscn" id="8_wpfmx"]
-[ext_resource type="Script" uid="uid://cyn16ubhn38rx" path="res://addons/shaker/area/hitbox.gd" id="10_knlkd"]
+[ext_resource type="PackedScene" uid="uid://cdkvkbstvh6ef" path="res://scenes/components/life_component.tscn" id="8_wpfmx"]
+[ext_resource type="PackedScene" uid="uid://bk2oqqxxglu2n" path="res://scenes/components/hurtbox.tscn" id="9_lhs34"]
+[ext_resource type="Script" uid="uid://cyn16ubhn38rx" path="res://scenes/components/hitbox.gd" id="10_knlkd"]
 [ext_resource type="Script" uid="uid://du0ld436sx4gw" path="res://scenes/components/entity_components/vacuum_raycast.gd" id="11_ba6y3"]
-[ext_resource type="Script" uid="uid://c30a75mfm243v" path="res://addons/shaker/polygon/star_2d.gd" id="12_qrtbb"]
+[ext_resource type="Script" uid="uid://c30a75mfm243v" path="res://scenes/components/star_2d.gd" id="12_qrtbb"]
 [ext_resource type="Script" uid="uid://caesj77y2i8pc" path="res://scenes/entities/player/player_visuals.gd" id="13_j6ryb"]
 [ext_resource type="Texture2D" uid="uid://bvso2fk1d4xtm" path="res://assets/images/player/player_shadow.png" id="14_brjyi"]
-[ext_resource type="Script" uid="uid://c8fusu2ruq2ci" path="res://addons/shaker/sprite/stacked_animated_sprite.gd" id="16_3dn0q"]
+[ext_resource type="Script" uid="uid://c8fusu2ruq2ci" path="res://scenes/components/stacked_animated_sprite.gd" id="16_3dn0q"]
 [ext_resource type="Texture2D" uid="uid://bfdif2mudgopb" path="res://assets/images/player/player_body.png" id="16_7nfft"]
 [ext_resource type="Texture2D" uid="uid://bmud3ubh050m6" path="res://assets/images/player/player_face.png" id="16_brjyi"]
 [ext_resource type="Texture2D" uid="uid://d27fci63dhqgg" path="res://assets/images/player/player_faceMF.png" id="17_bnv2y"]
-[ext_resource type="Script" uid="uid://dr7h4c573avu2" path="res://addons/shaker/area/hurtbox.gd" id="17_brjyi"]
 [ext_resource type="Texture2D" uid="uid://cgje6abrtp3g8" path="res://assets/images/speed_line.png" id="19_5f3of"]
-[ext_resource type="Script" uid="uid://drpttt3optl3r" path="res://addons/shaker/state/state_machine.gd" id="20_nblmr"]
+[ext_resource type="Script" uid="uid://drpttt3optl3r" path="res://scenes/components/state_machine/state_machine.gd" id="20_nblmr"]
 [ext_resource type="Script" uid="uid://tjtxruw00jmt" path="res://scenes/entities/player/state_walking.gd" id="22_ih3p6"]
 [ext_resource type="Script" uid="uid://d0cchv25mg772" path="res://scenes/entities/player/state_rolling.gd" id="23_cll3r"]
 [ext_resource type="Script" uid="uid://1r1kfnpc6d0y" path="res://scenes/entities/player/state_inhaling.gd" id="24_mt1mk"]
@@ -445,9 +445,6 @@ _data = {
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2frc1"]
 animation = &"ExitInhale"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tswhv"]
-animation = &"Damaged"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bnv2y"]
 animation = &"EnterInhale"
 
@@ -521,24 +518,18 @@ advance_mode = 2
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4rrkf"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g3uyw"]
-
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_tipki"]
 states/CloseMouth/node = SubResource("AnimationNodeAnimation_2frc1")
-states/CloseMouth/position = Vector2(349, 391.65378)
-states/Damaged/node = SubResource("AnimationNodeAnimation_tswhv")
-states/Damaged/position = Vector2(340.40002, 241)
+states/CloseMouth/position = Vector2(321.8, 372.6)
 states/End/position = Vector2(1103.2, 26.584625)
 states/EnterInhale/node = SubResource("AnimationNodeAnimation_bnv2y")
-states/EnterInhale/position = Vector2(625.6988, 462.46255)
+states/EnterInhale/position = Vector2(639.29877, 462.25717)
 states/ExitInhale/node = SubResource("AnimationNodeAnimation_l2s38")
-states/ExitInhale/position = Vector2(482.13947, 462.7139)
+states/ExitInhale/position = Vector2(435.73947, 462.1408)
 states/Idle/node = SubResource("AnimationNodeAnimation_7nfft")
 states/Idle/position = Vector2(418.34814, 99.75192)
 states/Inhale/node = SubResource("AnimationNodeAnimation_0xxfp")
-states/Inhale/position = Vector2(551.63464, 540.9379)
+states/Inhale/position = Vector2(541.2346, 544.13794)
 states/Movement/node = SubResource("AnimationNodeAnimation_wg44p")
 states/Movement/position = Vector2(541.50385, 308.5215)
 states/Roll/node = SubResource("AnimationNodeAnimation_11qh6")
@@ -548,8 +539,8 @@ states/Spit/position = Vector2(823.21, 231.79999)
 states/Start/position = Vector2(217.6, 99.867065)
 states/Walk/node = SubResource("AnimationNodeAnimation_brjyi")
 states/Walk/position = Vector2(657.19995, 98.87071)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_bnv2y"), "EnterInhale", "Inhale", SubResource("AnimationNodeStateMachineTransition_wg44p"), "Inhale", "ExitInhale", SubResource("AnimationNodeStateMachineTransition_2frc1"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_l2s38"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_0xxfp"), "ExitInhale", "EnterInhale", SubResource("AnimationNodeStateMachineTransition_y7ulx"), "EnterInhale", "ExitInhale", SubResource("AnimationNodeStateMachineTransition_dh4vq"), "Movement", "EnterInhale", SubResource("AnimationNodeStateMachineTransition_1lgw8"), "ExitInhale", "Movement", SubResource("AnimationNodeStateMachineTransition_7nfft"), "Walk", "Movement", SubResource("AnimationNodeStateMachineTransition_o8jto"), "Idle", "Movement", SubResource("AnimationNodeStateMachineTransition_rt777"), "Movement", "Roll", SubResource("AnimationNodeStateMachineTransition_brjyi"), "Roll", "Movement", SubResource("AnimationNodeStateMachineTransition_11qh6"), "Movement", "Walk", SubResource("AnimationNodeStateMachineTransition_tswhv"), "Movement", "Idle", SubResource("AnimationNodeStateMachineTransition_3m0ly"), "Movement", "Spit", SubResource("AnimationNodeStateMachineTransition_d23qq"), "Spit", "Movement", SubResource("AnimationNodeStateMachineTransition_7tix7"), "Movement", "CloseMouth", SubResource("AnimationNodeStateMachineTransition_ei5f5"), "CloseMouth", "Movement", SubResource("AnimationNodeStateMachineTransition_5y5t1"), "Movement", "Damaged", SubResource("AnimationNodeStateMachineTransition_4rrkf"), "Damaged", "Movement", SubResource("AnimationNodeStateMachineTransition_g3uyw")]
-graph_offset = Vector2(-60, 106)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_bnv2y"), "EnterInhale", "Inhale", SubResource("AnimationNodeStateMachineTransition_wg44p"), "Inhale", "ExitInhale", SubResource("AnimationNodeStateMachineTransition_2frc1"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_l2s38"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_0xxfp"), "ExitInhale", "EnterInhale", SubResource("AnimationNodeStateMachineTransition_y7ulx"), "EnterInhale", "ExitInhale", SubResource("AnimationNodeStateMachineTransition_dh4vq"), "Movement", "EnterInhale", SubResource("AnimationNodeStateMachineTransition_1lgw8"), "ExitInhale", "Movement", SubResource("AnimationNodeStateMachineTransition_7nfft"), "Walk", "Movement", SubResource("AnimationNodeStateMachineTransition_o8jto"), "Idle", "Movement", SubResource("AnimationNodeStateMachineTransition_rt777"), "Movement", "Roll", SubResource("AnimationNodeStateMachineTransition_brjyi"), "Roll", "Movement", SubResource("AnimationNodeStateMachineTransition_11qh6"), "Movement", "Walk", SubResource("AnimationNodeStateMachineTransition_tswhv"), "Movement", "Idle", SubResource("AnimationNodeStateMachineTransition_3m0ly"), "Movement", "Spit", SubResource("AnimationNodeStateMachineTransition_d23qq"), "Spit", "Movement", SubResource("AnimationNodeStateMachineTransition_7tix7"), "Movement", "CloseMouth", SubResource("AnimationNodeStateMachineTransition_ei5f5"), "CloseMouth", "Movement", SubResource("AnimationNodeStateMachineTransition_5y5t1")]
+graph_offset = Vector2(6, 31)
 
 [sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
 font_size = 24
@@ -1228,9 +1219,9 @@ scale = Vector2(1.3333334, 1.3333334)
 
 [node name="DamageStar" type="Polygon2D" parent="Visuals/DamageStars" unique_id=1055897822]
 visible = false
-color = Color(0.9490196, 0.7058824, 0.18039216, 1)
+color = Color(1, 0.6996667, 0.47000003, 1)
 script = ExtResource("12_qrtbb")
-peaks = 20
+peaks = 15
 peak_randomness = 4
 angle_randomness = 0.175
 low_radius = 80.0
@@ -1243,7 +1234,7 @@ metadata/_custom_type_script = "uid://c30a75mfm243v"
 [node name="DamageStar2" type="Polygon2D" parent="Visuals/DamageStars" unique_id=446896060]
 visible = false
 script = ExtResource("12_qrtbb")
-peaks = 20
+peaks = 15
 peak_randomness = 4
 angle_randomness = 0.175
 low_radius = 80.0
@@ -1367,9 +1358,8 @@ text = "3/4"
 label_settings = SubResource("LabelSettings_6u2ft")
 horizontal_alignment = 1
 
-[node name="Hurtbox" type="Area2D" parent="." unique_id=1723729202]
+[node name="Hurtbox" parent="." unique_id=1723729202 instance=ExtResource("9_lhs34")]
 collision_layer = 257
-script = ExtResource("17_brjyi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1035310011]
 visible = false

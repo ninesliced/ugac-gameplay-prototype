@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://pkg0nor1rprk" path="res://assets/images/tileset.png" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://c0kheiqjm3el8" path="res://scenes/entities/nest/nest.tscn" id="7_o6xl0"]
 [ext_resource type="Script" uid="uid://b13odjx7eqfw8" path="res://scenes/enemy_spawner.gd" id="8_85g3d"]
-[ext_resource type="Script" uid="uid://cyn16ubhn38rx" path="res://scenes/components/hitbox.gd" id="8_choun"]
-[ext_resource type="Texture2D" uid="uid://diug56incwsl3" path="res://scenes/components/hitbox.svg" id="8_tipki"]
+[ext_resource type="Script" uid="uid://cyn16ubhn38rx" path="res://addons/shaker/area/hitbox.gd" id="8_choun"]
+[ext_resource type="Texture2D" uid="uid://diug56incwsl3" path="res://addons/shaker/area/hitbox.svg" id="8_tipki"]
 [ext_resource type="PackedScene" uid="uid://ful76yvdlyh6" path="res://scenes/entities/egg/egg.tscn" id="9_85g3d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jyhfs"]
