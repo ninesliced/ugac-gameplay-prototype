@@ -64,4 +64,4 @@ func _on_exit_state():
 		particles.emitting = false
 
 func _on_ejectable_component_finished():
-	state_machine.set_state(state_on_finished)
+	state_machine.travel_to(state_on_finished)

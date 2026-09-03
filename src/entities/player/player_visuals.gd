@@ -16,12 +16,15 @@ var _playback: AnimationNodeStateMachinePlayback
 @onready var stacked_sprite: StackedAnimatedSprite = $Body/StackedAnimatedSprite
 @onready var shadow: AnimatedSprite2D = $Shadow
 @onready var body: Node2D = $Body
+@onready var aim_indicator: AnimatedSprite2D = $AimIndicator
 
 var shake_intensity: float = 0.0
 var shake_duration: float = 0.0
 var _shake_timer: float = 0.0
 var _shake_frame_timer: float = 0.0
 const _shake_frame_delay: float = 0.02
+
+const aim_indicator_distance: float = 100.0
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
@@ -38,8 +41,9 @@ func _process(delta: float) -> void:
 	
 	_update_body_flip()
 	_process_shake(delta)
+	_update_aim_indicator(delta)
 	$Label.text = ""
-	$Label.text += str(mouth_full) + "\n"
+	$Label.text += str($"../StateMachine".current_state_name) + "\n"
 
 
 func play(anim: String) -> void:
@@ -93,6 +97,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept"):
 		shake(10, 2)
 
+
 func _process_shake(delta: float) -> void:
 	_shake_timer = max(_shake_timer - delta, 0.0) 
 	if _shake_timer <= 0.0:
@@ -108,3 +113,10 @@ func _process_shake(delta: float) -> void:
 			randf_range(-shake_intensity, shake_intensity)
 		)
 		stacked_sprite.offset = _shake_vec
+
+
+func _update_aim_indicator(delta: float) -> void:
+	var anchor = to_local(player.global_position)
+	aim_indicator.position = anchor + player.aim_direction * aim_indicator_distance
+	aim_indicator.rotation = PI/2 + player.aim_angle
+	

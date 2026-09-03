@@ -27,12 +27,12 @@ func _physics_process(delta: float) -> void:
 	
 	if player.is_action_just_pressed("game_action"):
 		if player.has_captured_entity():
-			player.exhale()
+			state_machine.travel_to("Aiming")
 		else:
-			state_machine.set_state("Inhaling")
+			state_machine.travel_to("Inhaling")
 			
 	if player.is_action_just_pressed("game_dash"):
-		state_machine.set_state("Rolling")
+		state_machine.travel_to("Rolling")
 
 func _on_enter_state(params: Dictionary = {}) -> void:
 	super(params)

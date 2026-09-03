@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://cl2u2owlfi0fm"]
-
-[ext_resource type="Script" uid="uid://j76sj18t8bt2" path="res://src/components/state_machine/entity_state.gd" id="1_rskvk"]
-
-[node name="EntityState" type="Node2D" unique_id=188772322]
-script = ExtResource("1_rskvk")

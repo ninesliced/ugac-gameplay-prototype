@@ -125,11 +125,11 @@ func has_captured_entity():
 
 func exhale():
 	capturer_component.uncapture(aim_direction)
-	state_machine.set_state("Spitting")
+	state_machine.travel_to("Spitting")
 
 
 func _on_capturer_component_captured(new_captured_entity: Entity) -> void:
-	state_machine.set_state("Move")
+	state_machine.travel_to("Move")
 	set_squash(post_capture_squash)
 
 
@@ -141,6 +141,12 @@ func get_vector(negative_x: StringName, positive_x: StringName, negative_y: Stri
 	if block_inputs:
 		return Vector2.ZERO
 	return InputManager.get_vector(user_index, negative_x, positive_x, negative_y, positive_y, deadzone)
+
+
+func is_action_pressed(action: StringName, exact_match: bool = false) -> bool:
+	if block_inputs:
+		return false
+	return InputManager.is_action_pressed(user_index, action, exact_match)
 
 
 func is_action_just_pressed(action: StringName, exact_match: bool = false) -> bool:
@@ -161,7 +167,7 @@ func _on_hurtbox_hitbox_entered(area: Hitbox) -> void:
 	if not area.damages_players:
 		return
 	life_component.damage(area.damage)
-	state_machine.set_state("Damaged", {"damager": area, "damage": area.damage})
+	state_machine.travel_to("Damaged", {"damager": area, "damage": area.damage})
 
 
 func _on_user_removed(_user_index: int):

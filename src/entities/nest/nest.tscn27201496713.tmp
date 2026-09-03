@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c0kheiqjm3el8"]
 
-[ext_resource type="PackedScene" uid="uid://0oyhaxu6arcd" path="res://addons/shaker/gameplay/actor/actor.tscn" id="1_b0c5k"]
+[ext_resource type="PackedScene" uid="uid://0oyhaxu6arcd" path="res://src/entities/actor.tscn" id="1_b0c5k"]
 [ext_resource type="Script" uid="uid://0m54283yce4g" path="res://src/entities/nest/nest.gd" id="2_l0jt2"]
 [ext_resource type="Texture2D" uid="uid://d3eo8lfhqyv4x" path="res://assets/images/nest/nest.png" id="3_3tcgh"]
 [ext_resource type="Script" uid="uid://b5bpmm7c3jbhl" path="res://src/components/vacuum_hurtbox.gd" id="4_eliyu"]
@@ -9,7 +9,7 @@
 radius = 134.09325
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3tcgh"]
-radius = 155.0
+radius = 140.03214
 
 [sub_resource type="LabelSettings" id="LabelSettings_3tcgh"]
 font_size = 38

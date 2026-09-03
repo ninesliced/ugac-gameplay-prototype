@@ -40,5 +40,5 @@ func _physics_process(delta: float) -> void:
 	
 	time = max(0.0, time - delta)
 	if time <= 0.0:
-		state_machine.set_state("Move")
+		state_machine.travel_to("Move")
 	

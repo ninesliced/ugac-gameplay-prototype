@@ -6,6 +6,7 @@ signal healed(amount: float)
 signal damaged(amount: float)
 signal died
 
+## The maximum amount of life this Component can take.
 @export_range(0, 200, 0.2, "or_greater") var max_life = 10.0:
 	set(value):
 		max_life = value

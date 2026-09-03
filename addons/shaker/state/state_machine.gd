@@ -23,16 +23,23 @@ func _ready() -> void:
 		state.process_mode = Node.PROCESS_MODE_DISABLED
 	
 	if default_state:
-		set_state(default_state)
+		travel_to(default_state)
 
 
-func set_state(name: StringName, params: Dictionary = {}):
-	var node = get_node_or_null(str(name))
-	assert(node, "Invalid state: '" + str(name) + "'")
-	assert(node is AbstractState, "Node '" + str(name) + "' isn't an AbstractState")
+func travel_to(state_name: StringName, params: Dictionary = {}):
+	var node = get_node_or_null(str(state_name))
+	assert(node, "Invalid state: '" + str(state_name) + "'")
+	assert(node is AbstractState, "Node '" + str(state_name) + "' isn't an AbstractState")
 	
-	if current_state_name == name:
+	if current_state_name == state_name:
 		return
+	
+	travel_to_state(node, params)
+
+
+func travel_to_state(state: AbstractState, params: Dictionary = {}) -> void:
+	# TODO manage nested states (e.g. nested state machines)
+	assert(state is AbstractState, "Node '" + str(name) + "' isn't an AbstractState")
 	
 	if current_state:
 		current_state.is_in_state = false
@@ -40,10 +47,10 @@ func set_state(name: StringName, params: Dictionary = {}):
 		current_state._on_exit_state()
 		current_state.process_mode = Node.PROCESS_MODE_DISABLED
 	
-	node.process_mode = Node.PROCESS_MODE_INHERIT
-	node.is_in_state = true
-	node._on_enter_state(params)
-	node.enter_state.emit()
+	state.process_mode = Node.PROCESS_MODE_INHERIT
+	state.is_in_state = true
+	state._on_enter_state(params)
+	state.enter_state.emit()
 	
-	current_state_name = name
-	current_state = node
+	current_state_name = state.name
+	current_state = state

@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="UGAC Art Style Proto"
+config/name="UGAC Gameplay Proto"
 config/tags=PackedStringArray("ugac")
 run/main_scene="uid://b834rvpgpr65b"
 config/features=PackedStringArray("4.7", "Forward Plus")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2sd338xewpr6"
-path="res://.godot/imported/Hitbox.svg-f8cb989e105db9eb9cd05c246d595392.ctex"
+uid="uid://c7hkmh5ua7s84"
+path="res://.godot/imported/aiming_indicator.png-ad0bcb10105407bcebc3ab5bc9787752.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/components/entity_components/Hitbox.svg"
-dest_files=["res://.godot/imported/Hitbox.svg-f8cb989e105db9eb9cd05c246d595392.ctex"]
+source_file="res://assets/images/player/aiming_indicator.png"
+dest_files=["res://.godot/imported/aiming_indicator.png-ad0bcb10105407bcebc3ab5bc9787752.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

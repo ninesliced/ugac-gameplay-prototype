@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 
 func _on_capturable_component_exited_capture(direction: Vector2):
-	state_machine.set_state(state_on_uncapture, {
+	state_machine.travel_to(state_on_uncapture, {
 		"direction": direction
 	})
 	

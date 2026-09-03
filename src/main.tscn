@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://b13odjx7eqfw8" path="res://src/enemy_spawner.gd" id="8_85g3d"]
 [ext_resource type="Script" uid="uid://cyn16ubhn38rx" path="res://addons/shaker/gameplay/area/hitbox.gd" id="8_choun"]
 [ext_resource type="Texture2D" uid="uid://b72l1ujjt5vvk" path="res://addons/shaker/gameplay/area/hitbox.svg" id="8_tipki"]
-[ext_resource type="PackedScene" uid="uid://ful76yvdlyh6" path="res://src/entities/egg/egg.tscn" id="9_85g3d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jyhfs"]
 texture = ExtResource("1_sugp2")
@@ -166,32 +165,32 @@ label_settings = SubResource("LabelSettings_g4v7s")
 horizontal_alignment = 1
 
 [node name="Nest" parent="." unique_id=722895607 instance=ExtResource("7_o6xl0")]
-position = Vector2(952, 906)
+position = Vector2(957, 536)
 egg_count = 30
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=2051713295]
-position = Vector2(1813, 602)
+position = Vector2(1802, 940)
 script = ExtResource("8_85g3d")
 
 [node name="Sprite2D" type="Sprite2D" parent="EnemySpawner" unique_id=1781032609]
 texture = ExtResource("8_tipki")
 
 [node name="EnemySpawner2" type="Node2D" parent="." unique_id=1619249648]
-position = Vector2(128, 604)
+position = Vector2(103, 944)
 script = ExtResource("8_85g3d")
 
 [node name="Sprite2D" type="Sprite2D" parent="EnemySpawner2" unique_id=715114265]
 texture = ExtResource("8_tipki")
 
 [node name="EnemySpawner3" type="Node2D" parent="." unique_id=963897442]
-position = Vector2(1572, 81)
+position = Vector2(1809, 83)
 script = ExtResource("8_85g3d")
 
 [node name="Sprite2D3" type="Sprite2D" parent="EnemySpawner3" unique_id=1949382758]
 texture = ExtResource("8_tipki")
 
 [node name="EnemySpawner4" type="Node2D" parent="." unique_id=1723368851]
-position = Vector2(390, 91)
+position = Vector2(125, 105)
 script = ExtResource("8_85g3d")
 
 [node name="Sprite2D4" type="Sprite2D" parent="EnemySpawner4" unique_id=1238367509]
@@ -232,27 +231,3 @@ metadata/_custom_type_script = "uid://cyn16ubhn38rx"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox3" unique_id=75100939]
 rotation = 1.5707964
 shape = SubResource("WorldBoundaryShape2D_g4v7s")
-
-[node name="Egg" parent="." unique_id=367509732 instance=ExtResource("9_85g3d")]
-position = Vector2(1186, 660)
-
-[node name="Egg2" parent="." unique_id=441259245 instance=ExtResource("9_85g3d")]
-position = Vector2(1294, 517)
-
-[node name="Egg3" parent="." unique_id=225755875 instance=ExtResource("9_85g3d")]
-position = Vector2(1142, 427)
-
-[node name="Egg4" parent="." unique_id=1063357928 instance=ExtResource("9_85g3d")]
-position = Vector2(1333, 328)
-
-[node name="Egg5" parent="." unique_id=1035227305 instance=ExtResource("9_85g3d")]
-position = Vector2(1147, 255)
-
-[node name="Egg6" parent="." unique_id=253744608 instance=ExtResource("9_85g3d")]
-position = Vector2(996, 318)
-
-[node name="Egg7" parent="." unique_id=625431551 instance=ExtResource("9_85g3d")]
-position = Vector2(935, 178)
-
-[node name="Egg8" parent="." unique_id=197089560 instance=ExtResource("9_85g3d")]
-position = Vector2(788, 258)

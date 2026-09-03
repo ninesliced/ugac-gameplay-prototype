@@ -9,11 +9,8 @@ func _process(delta: float) -> void:
 	$Label.text = "Eggs: " + str(egg_count)
 
 
-func _on_hurtbox_hitbox_entered(area: Hitbox) -> void:
-	#if area is VacuumArea:
-		#release_egg(area)
-	if area.get_parent() is Egg:
-		add_egg(area.get_parent() as Egg)
+func _on_hurtbox_ray_entered(ray: VacuumRaycast, enter_pos: Vector2) -> void:
+	release_egg(ray, enter_pos)
 
 
 func add_egg(egg: Egg):
@@ -21,22 +18,25 @@ func add_egg(egg: Egg):
 	egg.queue_free()
 
 
-func release_egg(area = null):
+func release_egg(ray: VacuumRaycast = null, release_pos: Vector2 = global_position):
 	if egg_count <= 0:
 		return
 	
 	egg_count -= 1
 	
-	var egg = EGG.instantiate()
+	var egg: Egg = EGG.instantiate()
 	
-	if area and area.get_parent() is Player:
-		var player = area.get_parent() as Player
-		var vector_to_self = global_position - player.global_position
-		var distance_along_line = vector_to_self.dot(player.aim_direction)
-		var pos = player.global_position + (player.aim_direction * distance_along_line)
-		egg.global_position = pos
+	if ray:
+		egg.global_position = release_pos
 	
 	get_parent().add_child(egg)
+	
+	if ray and ray.owner is Player:
+		await egg.ready
+		egg.state_machine.travel_to("Vacuumed", {
+			"vacuum_attract_target": ray.owner as Player,
+			"vacuum_attract_raycast": ray
+		})
 
 
 func _to_string() -> String:

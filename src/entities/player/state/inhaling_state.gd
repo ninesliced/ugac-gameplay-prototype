@@ -17,6 +17,7 @@ func _on_enter_state(params: Dictionary = {}):
 	# Animation
 	visuals.play("Inhale")
 
+
 func _on_exit_state():
 	super()
 	vacuum_particles.emitting = false
@@ -24,11 +25,12 @@ func _on_exit_state():
 	
 	vacuum_raycast.enabled = false
 
+
 func _physics_process(delta: float) -> void:
 	super(delta)
 	
 	player.walk_direction = player.aim_direction
-	vacuum_raycast.direction = player.aim_angle
+	vacuum_raycast.angle = player.aim_angle
 	vacuum_raycast.length = player.vacuum_range
 	vacuum.rotation = player.aim_angle
 	
@@ -38,9 +40,9 @@ func _physics_process(delta: float) -> void:
 	visuals.flip_h = player.aim_direction.x < 0
 	
 	if player.is_action_just_released("game_action"):
-		state_machine.set_state("Move")
+		state_machine.travel_to("Move")
 	
 	if player.is_action_just_pressed("game_dash"):
-		state_machine.set_state("Rolling")
+		state_machine.travel_to("Rolling")
 	
 	player.move_and_slide()
