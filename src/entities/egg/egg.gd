@@ -1,5 +1,5 @@
 class_name Egg
-extends Enemy
+extends Actor
 
 var is_nest_mergeable: bool = false
 var nest_mergeable_timer: float = 0.1

@@ -4,9 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://da0y23of43mxk" path="res://assets/images/egg/egg.png" id="2_dtxs4"]
 [ext_resource type="Texture2D" uid="uid://bmaipib8dmfy" path="res://assets/images/dust.png" id="2_eyb8l"]
 [ext_resource type="Texture2D" uid="uid://bvso2fk1d4xtm" path="res://assets/images/player/player_shadow.png" id="2_shwtd"]
-[ext_resource type="PackedScene" uid="uid://dvube5c2o5lo3" path="res://src/components/entity_components/vacuumable_component.tscn" id="3_shwtd"]
-[ext_resource type="PackedScene" uid="uid://b5pl5ca7s0ywp" path="res://src/components/entity_components/capturable_component.tscn" id="4_ioro1"]
-[ext_resource type="PackedScene" uid="uid://du8bunvwp8ukg" path="res://src/components/entity_components/ejectable_component.tscn" id="5_vxua6"]
+[ext_resource type="Script" uid="uid://dqclidgh2402b" path="res://src/components/entity_components/capturable_component.gd" id="5_5b3q5"]
 [ext_resource type="Script" uid="uid://cyn16ubhn38rx" path="res://addons/shaker/gameplay/area/hitbox.gd" id="8_shwtd"]
 [ext_resource type="Script" uid="uid://dr7h4c573avu2" path="res://addons/shaker/gameplay/area/hurtbox.gd" id="9_ioro1"]
 [ext_resource type="Script" uid="uid://bpqjpkhit0v31" path="res://addons/shaker/state/state.gd" id="10_eyb8l"]
@@ -90,10 +88,9 @@ radius = 23.021729
 [sub_resource type="CircleShape2D" id="CircleShape2D_h26p2"]
 radius = 61.22449
 
-[node name="Egg" type="CharacterBody2D" unique_id=722895607 node_paths=PackedStringArray("hitbox")]
+[node name="Egg" type="CharacterBody2D" unique_id=722895607]
 collision_mask = 2
 script = ExtResource("1_dtxs4")
-hitbox = NodePath("Hitbox")
 deceleration = 500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=671228925]
@@ -127,13 +124,8 @@ scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_jkr0c")
 color_initial_ramp = SubResource("Gradient_sbss2")
 
-[node name="VacuumableComponent" parent="." unique_id=2108671917 instance=ExtResource("3_shwtd")]
-
-[node name="CapturableComponent" parent="." unique_id=182143796 instance=ExtResource("4_ioro1")]
-
-[node name="EjectableComponent" parent="." unique_id=776578125 node_paths=PackedStringArray("hitbox") instance=ExtResource("5_vxua6")]
-max_bounces = 1
-hitbox = NodePath("../Hitbox")
+[node name="CapturableComponent" type="Node" parent="." unique_id=998890672]
+script = ExtResource("5_5b3q5")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=683540586]
 script = ExtResource("8_shwtd")
@@ -182,12 +174,12 @@ capturable_component = NodePath("../../CapturableComponent")
 state_on_uncapture = &"Ejected"
 hitbox = NodePath("../../Hitbox")
 
-[node name="Ejected" type="Node" parent="StateMachine" unique_id=260147241 node_paths=PackedStringArray("ejectable_component", "particles", "hitbox")]
+[node name="Ejected" type="Node" parent="StateMachine" unique_id=260147241 node_paths=PackedStringArray("hitbox", "particles")]
 script = ExtResource("12_ncyu6")
-ejectable_component = NodePath("../../EjectableComponent")
-state_on_finished = &"Idle"
-particles = NodePath("../../EjectedParticles")
+max_bounces = 1
 hitbox = NodePath("../../Hitbox")
+particles = NodePath("../../EjectedParticles")
+state_on_finished = &"Idle"
 
 [node name="Label" type="Label" parent="." unique_id=695189201]
 offset_right = 40.0

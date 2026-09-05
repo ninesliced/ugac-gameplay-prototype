@@ -1,5 +1,5 @@
 class_name Nest
-extends Actor
+extends Entity
 
 const EGG = preload("uid://ful76yvdlyh6")
 
@@ -18,25 +18,23 @@ func add_egg(egg: Egg):
 	egg.queue_free()
 
 
-func release_egg(ray: VacuumRaycast = null, release_pos: Vector2 = global_position):
+func release_egg(ray: VacuumRaycast = null, release_pos: Vector2 = global_position) -> Egg:
 	if egg_count <= 0:
 		return
 	
 	egg_count -= 1
 	
 	var egg: Egg = EGG.instantiate()
-	
-	if ray:
-		egg.global_position = release_pos
-	
+	egg.global_position = release_pos
 	get_parent().add_child(egg)
 	
 	if ray and ray.owner is Player:
-		await egg.ready
 		egg.state_machine.travel_to("Vacuumed", {
 			"vacuum_attract_target": ray.owner as Player,
 			"vacuum_attract_raycast": ray
 		})
+	
+	return egg
 
 
 func _to_string() -> String:

@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://0oyhaxu6arcd"]
+
+[ext_resource type="Script" uid="uid://deki42gbkmplb" path="res://src/entities/actor/actor.gd" id="1_kidy7"]
+[ext_resource type="Script" uid="uid://drpttt3optl3r" path="res://addons/shaker/state/state_machine.gd" id="2_g1i6l"]
+[ext_resource type="Script" uid="uid://brpc8vu40tecn" path="res://src/entities/player/state/player_vacuumed_state.gd" id="3_erjtj"]
+[ext_resource type="PackedScene" uid="uid://ds7sr1p10iahk" path="res://src/components/state_machine/captured_state.tscn" id="4_xa5ws"]
+[ext_resource type="PackedScene" uid="uid://ck3nv4efqlkt0" path="res://src/components/state_machine/ejected_state.tscn" id="5_ew0rt"]
+[ext_resource type="Script" uid="uid://bf5vahjy1entk" path="res://src/entities/player/state/ejected_state.gd" id="6_m3d8w"]
+
+[node name="Actor" type="CharacterBody2D" unique_id=722895607]
+script = ExtResource("1_kidy7")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1278400254]
+script = ExtResource("2_g1i6l")
+default_state = &"Move"
+
+[node name="Vacuumed" type="Node" parent="StateMachine" unique_id=1931595159]
+script = ExtResource("3_erjtj")
+state_on_finished = &"Move"
+state_on_captured = &"Captured"
+metadata/_custom_type_script = "uid://brpc8vu40tecn"
+
+[node name="Captured" parent="StateMachine" unique_id=193312774 instance=ExtResource("4_xa5ws")]
+state_on_uncapture = &"Ejected"
+
+[node name="Ejected" parent="StateMachine" unique_id=1909635536 instance=ExtResource("5_ew0rt")]
+script = ExtResource("6_m3d8w")
+state_on_finished = &"Move"

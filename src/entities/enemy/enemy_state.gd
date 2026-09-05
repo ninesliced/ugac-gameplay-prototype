@@ -5,4 +5,4 @@ var enemy: Enemy
 
 func _ready() -> void:
 	super()
-	enemy = state_machine.entity as Enemy
+	enemy = entity as Enemy

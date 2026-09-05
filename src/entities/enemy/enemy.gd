@@ -9,14 +9,11 @@ var spawn_node: Node2D
 
 func _ready() -> void:
 	super()
-	
 	hitbox.enabled = true
 
 
 func _process(delta: float) -> void:
-	if life_component:
-		label.text = "%s/%s" % [int(life_component.life), int(life_component.max_life)]
-	#$Label2.text = str(String.num_int64($Hurtbox.collision_layer, 2))
+	$Label.text = state_machine.current_state_name
 
 
 func _physics_process(delta: float) -> void:
@@ -33,5 +30,5 @@ func _on_hurtbox_hitbox_entered(area: Hitbox) -> void:
 			knockback_from_entity(area.owner, 1000.0)
 		life_component.damage(area.damage)
 	
-	elif area.owner and area.owner is Enemy:
-		apply_impulse(global_position.direction_to(area.owner.global_position) * 300.0)
+	#elif area.owner and area.owner is Enemy:
+		#apply_impulse(global_position.direction_to(area.owner.global_position) * 300.0)

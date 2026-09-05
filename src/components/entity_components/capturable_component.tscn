@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b5pl5ca7s0ywp"]
+[gd_scene format=3 uid="uid://dca8kx48gmcgt"]
 
 [ext_resource type="Script" uid="uid://dqclidgh2402b" path="res://src/components/entity_components/capturable_component.gd" id="1_ykatx"]
 

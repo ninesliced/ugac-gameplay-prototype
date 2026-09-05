@@ -4,7 +4,7 @@
 ## that have to set active to true and false respectively. 
 @abstract
 class_name EntityComponent
-extends Node2D
+extends Node
 
 var active: bool = false
 var entity: Entity

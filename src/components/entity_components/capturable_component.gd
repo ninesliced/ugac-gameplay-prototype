@@ -10,13 +10,15 @@ func _ready() -> void:
 	super()
 
 
-func activate(new_capturer: Entity):
+func activate(new_capturer: Entity, hide_entity: bool = true):
 	assert(new_capturer, "new_capturer is undefined")
 	assert(new_capturer.has_component("CapturerComponent"), "new_capturer has no CapturerComponent")
 	
 	active = true
 	capturer = new_capturer
 	entity.set_physics_process(false)
+	#if hide_entity:
+		#entity.hide()
 	
 	entered_capture.emit(capturer)
 
@@ -25,6 +27,8 @@ func deactivate(direction: Vector2):
 	active = false
 	entity.set_physics_process(true)
 	
+	entity.show()
+	
 	exited_capture.emit(direction)
 	capturer = null
 
@@ -32,5 +36,6 @@ func deactivate(direction: Vector2):
 func _physics_process(_delta: float) -> void:
 	if not active:
 		return
-	
+	if not is_instance_valid(capturer):
+		return
 	entity.global_position = capturer.global_position

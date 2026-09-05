@@ -29,6 +29,10 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/multiplayer_input/plugin.cfg", "res://addons/project-time-tracker/plugin.cfg", "res://addons/shaker/plugin.cfg")
+
 [file_customization]
 
 folder_colors={
@@ -41,6 +45,7 @@ folder_colors={
 
 player="Player"
 nest=""
+spawner=""
 
 [input]
 

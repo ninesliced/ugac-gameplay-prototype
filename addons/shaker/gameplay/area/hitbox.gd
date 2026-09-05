@@ -12,7 +12,6 @@ class_name Hitbox
 			_disable()
 @export var damage: float = 1.0
 
-signal sent_damage(hurtbox: Hurtbox)
 signal on_hurtbox_hit(hurtbox: Hurtbox)
 
 @export var damages_enemies: bool = false
@@ -26,29 +25,20 @@ func _ready() -> void:
 func _disable() -> void:
 	monitoring = false
 
+
 func _enable() -> void:
 	monitoring = true
+
 
 func disable() -> void:
 	enabled = false
 	_disable()
 
+
 func enable() -> void:
 	enabled = true
 	_enable()
 
-func _physics_process(delta: float) -> void:
-	if not enabled:
-		return
-	
-	var areas = get_overlapping_areas()
-	
-	for area in areas:
-		if area is Hurtbox:
-			var hurtbox = area as Hurtbox
-			hurtbox.process_overlapping_hitbox(self)
-			sent_damage.emit(hurtbox)
-			on_hurtbox_hit.emit(hurtbox)
 
 func _on_area_entered(area: Area2D):
 	if not enabled:
@@ -56,7 +46,9 @@ func _on_area_entered(area: Area2D):
 	
 	if area is Hurtbox:
 		var hurtbox = area as Hurtbox
-		hurtbox.on_hitbox_entered(self)
+		var success = hurtbox.on_hitbox_entered(self)
+		on_hurtbox_hit.emit(hurtbox)
+
 
 func _on_area_exited(area: Area2D):
 	if not enabled:

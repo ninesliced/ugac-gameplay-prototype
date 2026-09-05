@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://eljb2gxouxh4"]
+
+[ext_resource type="Script" uid="uid://b13odjx7eqfw8" path="res://src/enemy_spawner.gd" id="1_vgwuj"]
+[ext_resource type="Texture2D" uid="uid://b72l1ujjt5vvk" path="res://addons/shaker/gameplay/area/hitbox.svg" id="2_uhg4k"]
+
+[node name="EnemySpawner" type="Node2D" unique_id=545141128]
+script = ExtResource("1_vgwuj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1449256669]
+texture = ExtResource("2_uhg4k")

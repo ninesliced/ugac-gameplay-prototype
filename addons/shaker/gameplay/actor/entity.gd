@@ -5,18 +5,21 @@ extends CharacterBody2D
 @export var deceleration := 1000.0
 
 var captured_entity: Entity
-var state_machine: StateMachine: 
-	set(val): 
+var state_machine: StateMachine:
+	set(val):
 		state_machine = val
+
 
 func _ready() -> void:
 	var node = get_node_or_null("StateMachine")
 	if node and node is StateMachine:
 		state_machine = node
 
+
 func has_component(component_name: StringName) -> bool:
 	var node = get_node_or_null(str(component_name))
 	return node != null and node is EntityComponent
+
 
 func get_component(component_name: StringName) -> EntityComponent:
 	var node = get_node_or_null(str(component_name))
@@ -25,9 +28,18 @@ func get_component(component_name: StringName) -> EntityComponent:
 	
 	return node
 
+
 func knockback_from_entity(entity: Entity, amount: float) -> void:
 	var dir = global_position.direction_to(entity.global_position)
 	apply_impulse(-dir * amount)
 
+
 func apply_impulse(vector: Vector2) -> void:
 	velocity += vector
+
+
+func has_state(state_name: NodePath) -> bool:
+	if not state_machine:
+		return false
+	
+	return state_machine.has_node(state_name)

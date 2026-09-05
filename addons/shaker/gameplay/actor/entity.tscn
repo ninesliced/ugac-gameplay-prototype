@@ -2,5 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bgy1lm7nnyjcf" path="res://addons/shaker/gameplay/actor/entity.gd" id="1_wcjeu"]
 
-[node name="Entity" type="Node2D" unique_id=249924079]
+[node name="Entity" type="CharacterBody2D" unique_id=1381843015]
 script = ExtResource("1_wcjeu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2048618765]

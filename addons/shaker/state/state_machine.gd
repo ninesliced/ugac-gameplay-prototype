@@ -4,7 +4,7 @@ class_name StateMachine
 @export var default_state: StringName = ""
 
 # dev note: this needs to be an @export in order to be able to be accessed by children states from _ready.
-@export var entity: Entity
+var entity: Entity
 
 var _states = []
 var current_state_name: StringName
@@ -15,9 +15,6 @@ var current_state: AbstractState = null
 func _ready() -> void:
 	var children = get_children()
 	_states = children.filter(func(child): return child is AbstractState)
-	
-	if get_parent() is Entity:
-		entity = get_parent()
 	
 	for state in _states:
 		state.process_mode = Node.PROCESS_MODE_DISABLED

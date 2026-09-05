@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://ceqq073f1b11a"]
+
+[ext_resource type="PackedScene" uid="uid://vj3wo05qw4el" path="res://addons/shaker/gameplay/actor/entity.tscn" id="1_vny36"]
+
+[node name="Nest" unique_id=249924079 instance=ExtResource("1_vny36")]

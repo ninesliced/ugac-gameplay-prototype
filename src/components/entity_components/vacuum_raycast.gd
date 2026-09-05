@@ -31,9 +31,13 @@ func _physics_process(delta: float) -> void:
 	
 	if not enabled:
 		return
+	if not is_instance_valid(targeted_entity) or not is_instance_valid(targeted_hurtbox):
+		targeted_entity = null
+		targeted_hurtbox = null
 	if not is_colliding():
 		targeted_entity = null
-		targeted_hurtbox._ray_exited(self)
+		if targeted_hurtbox:
+			targeted_hurtbox._ray_exited(self)
 		return
 	
 	var coll = get_collider()

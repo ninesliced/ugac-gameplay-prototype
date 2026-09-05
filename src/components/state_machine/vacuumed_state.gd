@@ -70,7 +70,7 @@ func release() -> void:
 
 
 func on_ray_exited(ray: VacuumRaycast) -> void:
-	pass
+	release()
 
 
 func _clear_vacuum_data() -> void:

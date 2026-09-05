@@ -1,3 +1,4 @@
+class_name EnemySpawner
 extends Node2D
 
 const ENEMY = preload("uid://b1dkuou1ki3ra")
@@ -7,8 +8,10 @@ const ENEMY = preload("uid://b1dkuou1ki3ra")
 @export var limit = 5
 var time = 0.0
 
+
 func _ready() -> void:
 	time = 0.0
+
 
 func _process(delta: float) -> void:
 	time -= delta

@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://cdkvkbstvh6ef"]
+[gd_scene format=3 uid="uid://bhlvn8i7hyo54"]
 
 [ext_resource type="Script" uid="uid://dv3y8d0pcf1ay" path="res://addons/shaker/gameplay/life_component.gd" id="1_oos36"]
 
-[node name="LifeComponent" type="Node2D"]
+[node name="LifeComponent" type="Node2D" unique_id=282198214]
 script = ExtResource("1_oos36")

@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 class_name LifeComponent
 
 signal life_changed(new_value: float)

@@ -11,15 +11,12 @@ signal hitbox_entered(area: Hitbox)
 signal hitbox_exited(area: Hitbox)
 
 
-func on_hitbox_entered(hitbox: Hitbox):
+func on_hitbox_entered(hitbox: Hitbox) -> bool:
 	if not is_hittable(hitbox):
-		return
+		return false
 	
 	hitbox_entered.emit(hitbox)
-
-
-func process_overlapping_hitbox(hitbox: Hitbox):
-	pass
+	return true
 
 
 func on_hitbox_exited(hitbox: Hitbox):
