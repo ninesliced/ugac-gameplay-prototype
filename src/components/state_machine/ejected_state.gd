@@ -34,14 +34,12 @@ func _on_enter_state(params: Dictionary = {}) -> void:
 	super(params)
 	assert(params.has("direction") and params["direction"] != null, "No direction param")
 	
-	# Initialize physics state
 	direction = params["direction"].normalized()
 	bounces = max_bounces
 	_time = max_time
 	_throw_position = entity.global_position
 	_hitbox_enable_timer = hitbox_enable_delay
 	
-	# Backup and setup hitbox
 	if hitbox:
 		_old_hitbox_state = hitbox.enabled
 		_old_hitbox_damages_enemies = hitbox.damages_enemies
@@ -63,17 +61,14 @@ func _physics_process(delta: float) -> void:
 		_finish()
 		return
 		
-	# Handle hitbox enabling (triggers on either time or distance)
 	if hitbox and not hitbox.enabled:
 		_hitbox_enable_timer -= delta
 		if _hitbox_enable_timer <= 0.0 or _throw_position.distance_to(entity.global_position) > enable_hitbox_distance:
-			hitbox.enable() # Assuming your Hitbox class has an enable() func, otherwise use hitbox.enabled = true
+			hitbox.enable()
 			
-	# Movement
 	entity.velocity = direction * eject_speed
 	entity.move_and_slide()
 	
-	# Collision and Bouncing
 	var collision: KinematicCollision2D = entity.get_last_slide_collision()
 	if collision:
 		if bounces <= 0:
@@ -88,7 +83,6 @@ func _on_exit_state() -> void:
 	super()
 	entity.rotation = 0.0
 	
-	# Restore hitbox state
 	if hitbox:
 		hitbox.enabled = _old_hitbox_state
 		hitbox.damages_enemies = _old_hitbox_damages_enemies

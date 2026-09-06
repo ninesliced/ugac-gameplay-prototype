@@ -1,5 +1,7 @@
 extends PlayerState
 
+@onready var capturer_component: CapturerComponent = $"../../CapturerComponent"
+
 @export var visuals: PlayerVisuals
 
 @export var vacuum: Node2D
@@ -14,6 +16,8 @@ func _on_enter_state(params: Dictionary = {}):
 	super(params)
 	vacuum_raycast.enabled = true
 	
+	capturer_component.captured.connect(_capturer_component_captured)
+	
 	# Animation
 	visuals.play("Inhale")
 
@@ -22,6 +26,8 @@ func _on_exit_state():
 	super()
 	vacuum_particles.emitting = false
 	vacuum_dust_particles.emitting = false
+	
+	capturer_component.captured.disconnect(_capturer_component_captured)
 	
 	vacuum_raycast.enabled = false
 
@@ -46,3 +52,7 @@ func _physics_process(delta: float) -> void:
 		state_machine.travel_to("Rolling")
 	
 	player.move_and_slide()
+
+
+func _capturer_component_captured(new_captured_entity: Entity) -> void:
+	state_machine.travel_to("Move")

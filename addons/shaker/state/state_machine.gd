@@ -38,6 +38,9 @@ func travel_to_state(state: AbstractState, params: Dictionary = {}) -> void:
 	# TODO manage nested states (e.g. nested state machines)
 	assert(state is AbstractState, "Node '" + str(name) + "' isn't an AbstractState")
 	
+	if state == current_state:
+		return
+	
 	if current_state:
 		current_state.is_in_state = false
 		current_state.exit_state.emit()

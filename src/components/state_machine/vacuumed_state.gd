@@ -61,7 +61,10 @@ func _on_exit_state() -> void:
 func capture() -> void:
 	var capturer = target
 	_clear_vacuum_data()
-	state_machine.travel_to(state_on_captured, {"capturer": capturer})
+	
+	if capturer is Entity and capturer.has_component("CapturerComponent"):
+		var capturer_component = capturer.get_component("CapturerComponent")
+		capturer_component.capture(entity)
 
 
 func release() -> void:

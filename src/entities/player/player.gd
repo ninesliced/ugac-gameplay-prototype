@@ -69,7 +69,7 @@ func _process(delta: float) -> void:
 	visuals.mouth_full = has_captured_entity()
 	
 	$Label.text = ""
-	$Label.text += "mouth_full = %s\n" % visuals.mouth_full
+	$Label.text += "captured = %s\n" % str($CapturerComponent.captured_entity)
 	
 	_update_aim_direction()
 	

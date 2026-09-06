@@ -43,3 +43,12 @@ func has_state(state_name: NodePath) -> bool:
 		return false
 	
 	return state_machine.has_node(state_name)
+
+
+func capture_from(capturer: Entity):
+	state_machine.travel_to("Captured", {"capturer": capturer})
+
+
+func uncapture(direction: Vector2):
+	assert(state_machine.current_state is CapturedState)
+	state_machine.current_state.uncapture(direction)

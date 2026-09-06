@@ -11,6 +11,8 @@ func _ready() -> void:
 
 
 func activate(new_capturer: Entity, hide_entity: bool = true):
+	return
+	
 	assert(new_capturer, "new_capturer is undefined")
 	assert(new_capturer.has_component("CapturerComponent"), "new_capturer has no CapturerComponent")
 	
@@ -24,6 +26,7 @@ func activate(new_capturer: Entity, hide_entity: bool = true):
 
 
 func deactivate(direction: Vector2):
+	return
 	active = false
 	entity.set_physics_process(true)
 	
@@ -34,6 +37,8 @@ func deactivate(direction: Vector2):
 
 
 func _physics_process(_delta: float) -> void:
+	return
+	
 	if not active:
 		return
 	if not is_instance_valid(capturer):

@@ -1,13 +1,19 @@
 class_name CapturedState
 extends EntityState
 
+signal entered_capture(capturer: Entity)
+signal exited_capture()
+
 @export var capturable_component: CapturableComponent
-@export var state_on_uncapture: StringName
+@export var state_on_uncapture: StringName = &"Ejected"
 @export var hitbox: Hitbox
 
+var capturer: Node2D
+
 func _ready() -> void:
-	capturable_component.exited_capture.connect(_on_capturable_component_exited_capture)
 	super()
+	
+	process_mode = Node.PROCESS_MODE_ALWAYS
 
 
 func _on_enter_state(params: Dictionary = {}):
@@ -17,23 +23,39 @@ func _on_enter_state(params: Dictionary = {}):
 	assert(params["capturer"] is Entity, "capturer is not Entity")
 	assert(params["capturer"].has_component("CapturerComponent"), "capturer has no CapturerComponent")
 	
+	capturer = params["capturer"]
+	
+	entity.reparent(capturer)
+	entity.position = Vector2.ZERO
+	
 	var hide_entity_when_captured = params.get("hide_entity_when_captured", true)
-	params["capturer"].get_component("CapturerComponent").capture(entity, hide_entity_when_captured)
+	if hide_entity_when_captured:
+		entity.hide()
 	
 	if hitbox:
 		hitbox.enabled = false
+	
+	entity.set_physics_process(false)
+	entered_capture.emit(capturer)
 
 
 func _on_exit_state():
 	super()
+	
+	entity.reparent(entity.get_parent().get_parent(), true)
+	
+	entity.set_physics_process(true)
 	entity.show()
+	
+	exited_capture.emit()
+	capturer = null
 
 
 func _physics_process(delta: float) -> void:
 	super(delta)
 
 
-func _on_capturable_component_exited_capture(direction: Vector2):
-	state_machine.travel_to(state_on_uncapture, {
+func uncapture(direction: Vector2):
+	state_machine.travel_to(&"Ejected", {
 		"direction": direction
 	})

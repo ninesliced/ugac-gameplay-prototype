@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://pkg0nor1rprk" path="res://assets/images/tileset.png" id="5_tbgi4"]
 [ext_resource type="PackedScene" uid="uid://eljb2gxouxh4" path="res://src/level/spawner/enemy_spawner.tscn" id="6_rlaii"]
 [ext_resource type="PackedScene" uid="uid://c0kheiqjm3el8" path="res://src/entities/nest/nest.tscn" id="7_o6xl0"]
-[ext_resource type="Script" uid="uid://cyn16ubhn38rx" path="res://addons/shaker/gameplay/area/hitbox.gd" id="8_choun"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jyhfs"]
 texture = ExtResource("1_sugp2")
@@ -108,8 +107,6 @@ font_size = 30
 outline_size = 15
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_g4v7s"]
-
 [node name="Main" type="Node2D" unique_id=1062764275]
 script = ExtResource("1_tefeu")
 
@@ -179,39 +176,3 @@ position = Vector2(90, 113)
 
 [node name="EnemySpawner4" parent="." unique_id=2085871622 groups=["spawner"] instance=ExtResource("6_rlaii")]
 position = Vector2(1809, 99)
-
-[node name="Hurtbox" type="Area2D" parent="." unique_id=159607729]
-position = Vector2(13, 565)
-script = ExtResource("8_choun")
-damage = 400.0
-damages_enemies = true
-metadata/_custom_type_script = "uid://cyn16ubhn38rx"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1843791064]
-rotation = 1.5707964
-shape = SubResource("WorldBoundaryShape2D_g4v7s")
-
-[node name="Hurtbox2" type="Area2D" parent="." unique_id=2066343215]
-position = Vector2(942, -5)
-rotation = 1.5707964
-script = ExtResource("8_choun")
-damage = 400.0
-damages_enemies = true
-metadata/_custom_type_script = "uid://cyn16ubhn38rx"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox2" unique_id=2107072850]
-rotation = 1.5707964
-shape = SubResource("WorldBoundaryShape2D_g4v7s")
-
-[node name="Hurtbox3" type="Area2D" parent="." unique_id=1833727940]
-position = Vector2(1920, 545)
-rotation = 3.1415927
-scale = Vector2(0.61002016, 1.1191593)
-script = ExtResource("8_choun")
-damage = 400.0
-damages_enemies = true
-metadata/_custom_type_script = "uid://cyn16ubhn38rx"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox3" unique_id=75100939]
-rotation = 1.5707964
-shape = SubResource("WorldBoundaryShape2D_g4v7s")

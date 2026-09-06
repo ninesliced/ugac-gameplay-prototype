@@ -1334,11 +1334,10 @@ script = ExtResource("5_4tw7w")
 max_life = 5.0
 
 [node name="Label" type="Label" parent="." unique_id=2071724087]
-visible = false
 offset_left = -19.0
-offset_top = -118.0
+offset_top = -140.0
 offset_right = 21.0
-offset_bottom = -95.0
+offset_bottom = -117.0
 text = "3/4"
 label_settings = SubResource("LabelSettings_go8vc")
 horizontal_alignment = 1
@@ -1602,7 +1601,6 @@ metadata/_custom_type_script = "uid://brpc8vu40tecn"
 
 [node name="Captured" parent="StateMachine" unique_id=1903499686 node_paths=PackedStringArray("capturable_component", "hitbox") instance=ExtResource("28_fqqv1")]
 capturable_component = NodePath("../../CapturableComponent")
-state_on_uncapture = &"Ejected"
 hitbox = NodePath("../../Hitbox")
 
 [node name="Ejected" parent="StateMachine" unique_id=521408716 node_paths=PackedStringArray("hitbox", "particles") instance=ExtResource("29_38p5y")]

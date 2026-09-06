@@ -21,6 +21,10 @@ config/icon="uid://dirdm44lds8cl"
 MultiplayerInput="*uid://sgpjuwqex1fu"
 InputManager="*uid://cvairblcppl1i"
 
+[debug]
+
+gdscript/warnings/unused_parameter=0
+
 [display]
 
 window/size/viewport_width=1920

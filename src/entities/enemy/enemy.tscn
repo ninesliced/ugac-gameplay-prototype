@@ -12,10 +12,10 @@
 [ext_resource type="Script" uid="uid://b5bpmm7c3jbhl" path="res://src/components/vacuum_hurtbox.gd" id="10_e3lpk"]
 [ext_resource type="Script" uid="uid://drpttt3optl3r" path="res://addons/shaker/state/state_machine.gd" id="10_h0e4h"]
 [ext_resource type="Script" uid="uid://u603175l0nxr" path="res://src/entities/egg/captured.gd" id="11_frkcr"]
-[ext_resource type="Script" uid="uid://hq3hve0msv3h" path="res://src/components/state_machine/vacuumed_state.gd" id="12_ojdix"]
 [ext_resource type="Script" uid="uid://bblvl36o6ljws" path="res://src/entities/enemy/state/steal_egg_state.gd" id="13_yml0g"]
 [ext_resource type="Script" uid="uid://bpqg0ahdytw3o" path="res://src/entities/enemy/state/walk_to_spawner.gd" id="14_agll4"]
 [ext_resource type="Script" uid="uid://gr7h44ctgg1j" path="res://src/components/state_machine/ejected_state.gd" id="14_ojdix"]
+[ext_resource type="Script" uid="uid://brd5tpwe1rl73" path="res://src/entities/enemy/enemy_vacuumed_state.gd" id="14_yml0g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cmbxo"]
 radius = 8.0
@@ -149,7 +149,7 @@ script = ExtResource("14_agll4")
 metadata/_custom_type_script = "uid://6vnnk6v0hqq0"
 
 [node name="Vacuumed" type="Node" parent="StateMachine" unique_id=506810548 node_paths=PackedStringArray("hitbox")]
-script = ExtResource("12_ojdix")
+script = ExtResource("14_yml0g")
 state_on_finished = &"WalkToNest"
 state_on_captured = &"Captured"
 hitbox = NodePath("../../Hitbox")
@@ -158,7 +158,6 @@ metadata/_custom_type_script = "uid://hq3hve0msv3h"
 [node name="Captured" type="Node" parent="StateMachine" unique_id=1016288308 node_paths=PackedStringArray("capturable_component", "hitbox")]
 script = ExtResource("11_frkcr")
 capturable_component = NodePath("../../CapturableComponent")
-state_on_uncapture = &"Ejected"
 hitbox = NodePath("../../Hitbox")
 
 [node name="Ejected" type="Node" parent="StateMachine" unique_id=1646688511 node_paths=PackedStringArray("hitbox", "particles")]
