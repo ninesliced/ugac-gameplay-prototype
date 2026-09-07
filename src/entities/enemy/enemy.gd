@@ -21,7 +21,11 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_life_component_died() -> void:
-	queue_free()
+	die()
+
+
+func die() -> void:
+	super()
 
 
 func _on_hurtbox_hitbox_entered(area: Hitbox) -> void:

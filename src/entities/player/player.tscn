@@ -1370,7 +1370,8 @@ shape = SubResource("CircleShape2D_jkr0c")
 debug_color = Color(0.8344506, 0.3897286, 0, 0.41960785)
 
 [node name="VacuumHurtbox" type="Area2D" parent="." unique_id=383023062 node_paths=PackedStringArray("vacuumed_state")]
-collision_layer = 257
+collision_layer = 256
+collision_mask = 0
 script = ExtResource("19_4tw7w")
 vacuumed_state = NodePath("../StateMachine/Vacuumed")
 metadata/_custom_type_script = "uid://b5bpmm7c3jbhl"
@@ -1401,6 +1402,7 @@ tree_root = SubResource("AnimationNodeStateMachine_tipki")
 anim_player = NodePath("../AnimationPlayer")
 
 [node name="Label" type="Label" parent="Visuals" unique_id=242333848]
+visible = false
 offset_left = -22.666668
 offset_top = -268.0
 offset_right = 17.333332

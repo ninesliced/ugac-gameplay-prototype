@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://dr7h4c573avu2" path="res://addons/shaker/gameplay/area/hurtbox.gd" id="9_sbss2"]
 [ext_resource type="Script" uid="uid://b5bpmm7c3jbhl" path="res://src/components/vacuum_hurtbox.gd" id="10_e3lpk"]
 [ext_resource type="Script" uid="uid://drpttt3optl3r" path="res://addons/shaker/state/state_machine.gd" id="10_h0e4h"]
-[ext_resource type="Script" uid="uid://u603175l0nxr" path="res://src/entities/egg/captured.gd" id="11_frkcr"]
+[ext_resource type="Script" uid="uid://u603175l0nxr" path="res://src/entities/egg/egg_captured_state.gd" id="11_frkcr"]
 [ext_resource type="Script" uid="uid://bblvl36o6ljws" path="res://src/entities/enemy/state/steal_egg_state.gd" id="13_yml0g"]
 [ext_resource type="Script" uid="uid://bpqg0ahdytw3o" path="res://src/entities/enemy/state/walk_to_spawner.gd" id="14_agll4"]
 [ext_resource type="Script" uid="uid://gr7h44ctgg1j" path="res://src/components/state_machine/ejected_state.gd" id="14_ojdix"]
@@ -102,6 +102,7 @@ label_settings = SubResource("LabelSettings_g4v7s")
 horizontal_alignment = 1
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=683540586]
+collision_mask = 257
 script = ExtResource("8_jkr0c")
 damages_players = true
 
@@ -120,7 +121,8 @@ shape = SubResource("CircleShape2D_h26p2")
 debug_color = Color(0.82714826, 0.39493513, 5.7756904e-07, 0.41960785)
 
 [node name="VacuumHurtbox" type="Area2D" parent="." unique_id=1087980591 node_paths=PackedStringArray("vacuumed_state")]
-collision_layer = 257
+collision_layer = 256
+collision_mask = 0
 script = ExtResource("10_e3lpk")
 vacuumed_state = NodePath("../StateMachine/Vacuumed")
 metadata/_custom_type_script = "uid://b5bpmm7c3jbhl"
@@ -160,10 +162,12 @@ script = ExtResource("11_frkcr")
 capturable_component = NodePath("../../CapturableComponent")
 hitbox = NodePath("../../Hitbox")
 
-[node name="Ejected" type="Node" parent="StateMachine" unique_id=1646688511 node_paths=PackedStringArray("hitbox", "particles")]
+[node name="Ejected" type="Node" parent="StateMachine" unique_id=1646688511 node_paths=PackedStringArray("visuals", "hitbox", "life_component", "particles")]
 script = ExtResource("14_ojdix")
+visuals = NodePath("../../Sprite2D")
 max_bounces = 1
 hitbox = NodePath("../../Hitbox")
+life_component = NodePath("../../LifeComponent")
 particles = NodePath("../../EjectedParticles")
 state_on_finished = &"WalkToNest"
 

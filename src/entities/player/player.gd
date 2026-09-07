@@ -70,6 +70,8 @@ func _process(delta: float) -> void:
 	
 	$Label.text = ""
 	$Label.text += "captured = %s\n" % str($CapturerComponent.captured_entity)
+	$Label.text += "state = %s\n" % str($StateMachine.current_state_name)
+	$Label.text += "vacuum_raycast.enabled = %s\n" % str($VacuumRaycast.enabled)
 	
 	_update_aim_direction()
 	

@@ -28,8 +28,7 @@ scale = Vector2(0.87012994, 0.8701299)
 texture = ExtResource("3_3tcgh")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1039259176]
-collision_layer = 261
-collision_mask = 5
+collision_layer = 257
 script = ExtResource("4_eliyu")
 metadata/_custom_type_script = "uid://b5bpmm7c3jbhl"
 

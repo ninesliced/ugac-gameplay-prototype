@@ -28,8 +28,8 @@ func _on_enter_state(params: Dictionary = {}):
 	entity.reparent(capturer)
 	entity.position = Vector2.ZERO
 	
-	var hide_entity_when_captured = params.get("hide_entity_when_captured", true)
-	if hide_entity_when_captured:
+	var hide_entity = params.get("hide_entity", true)
+	if hide_entity:
 		entity.hide()
 	
 	if hitbox:

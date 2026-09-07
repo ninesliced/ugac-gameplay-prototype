@@ -16,7 +16,7 @@ func capture(new_captured_entity: Entity, hide_entity: bool = true):
 	assert(new_captured_entity, "new_captured_entity is undefined")
 	
 	captured_entity = new_captured_entity
-	captured_entity.capture_from(entity)
+	captured_entity.capture_from(entity, hide_entity)
 	captured.emit(new_captured_entity)
 
 

@@ -45,8 +45,11 @@ func has_state(state_name: NodePath) -> bool:
 	return state_machine.has_node(state_name)
 
 
-func capture_from(capturer: Entity):
-	state_machine.travel_to("Captured", {"capturer": capturer})
+func capture_from(capturer: Entity, hide_entity: bool = true):
+	state_machine.travel_to("Captured", {
+		"capturer": capturer,
+		"hide_entity": hide_entity
+	})
 
 
 func uncapture(direction: Vector2):

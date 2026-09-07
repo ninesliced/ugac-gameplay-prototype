@@ -10,12 +10,12 @@
 [ext_resource type="Script" uid="uid://bpqjpkhit0v31" path="res://addons/shaker/state/state.gd" id="10_eyb8l"]
 [ext_resource type="Script" uid="uid://b5bpmm7c3jbhl" path="res://src/components/vacuum_hurtbox.gd" id="10_hxiek"]
 [ext_resource type="Script" uid="uid://drpttt3optl3r" path="res://addons/shaker/state/state_machine.gd" id="10_shwtd"]
-[ext_resource type="Script" uid="uid://u603175l0nxr" path="res://src/entities/egg/captured.gd" id="11_y7obs"]
-[ext_resource type="Script" uid="uid://dttu3aef5nwmi" path="res://src/entities/egg/ejected.gd" id="12_ncyu6"]
+[ext_resource type="Script" uid="uid://u603175l0nxr" path="res://src/entities/egg/egg_captured_state.gd" id="11_y7obs"]
+[ext_resource type="Script" uid="uid://dttu3aef5nwmi" path="res://src/entities/egg/egg_ejected_state.gd" id="12_ncyu6"]
 [ext_resource type="Script" uid="uid://hq3hve0msv3h" path="res://src/components/state_machine/vacuumed_state.gd" id="13_r5g7u"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cmbxo"]
-radius = 8.0
+radius = 38.052597
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wg44p"]
 atlas = ExtResource("2_shwtd")
@@ -83,7 +83,7 @@ point_count = 2
 colors = PackedColorArray(0.62160003, 0.6808, 0.74, 1, 1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sbss2"]
-radius = 23.021729
+radius = 28.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_h26p2"]
 radius = 61.22449
@@ -128,6 +128,7 @@ color_initial_ramp = SubResource("Gradient_sbss2")
 script = ExtResource("5_5b3q5")
 
 [node name="Hitbox" type="Area2D" parent="." unique_id=683540586]
+collision_layer = 257
 script = ExtResource("8_shwtd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1943845504]
@@ -143,7 +144,8 @@ shape = SubResource("CircleShape2D_h26p2")
 debug_color = Color(0.82714826, 0.39493513, 5.7756904e-07, 0.41960785)
 
 [node name="VacuumHurtbox" type="Area2D" parent="." unique_id=595839166 node_paths=PackedStringArray("vacuumed_state")]
-collision_layer = 257
+collision_layer = 256
+collision_mask = 0
 script = ExtResource("10_hxiek")
 vacuumed_state = NodePath("../StateMachine/Vacuumed")
 metadata/_custom_type_script = "uid://b5bpmm7c3jbhl"
@@ -153,10 +155,9 @@ scale = Vector2(0.637, 0.637)
 shape = SubResource("CircleShape2D_h26p2")
 debug_color = Color(0.3666348, 0.6161351, 9.62615e-07, 0.41960785)
 
-[node name="StateMachine" type="Node" parent="." unique_id=583197379 node_paths=PackedStringArray("entity")]
+[node name="StateMachine" type="Node" parent="." unique_id=583197379]
 script = ExtResource("10_shwtd")
 default_state = &"Idle"
-entity = NodePath("..")
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=347763947]
 script = ExtResource("10_eyb8l")
@@ -171,7 +172,6 @@ metadata/_custom_type_script = "uid://hq3hve0msv3h"
 [node name="Captured" type="Node" parent="StateMachine" unique_id=1089388332 node_paths=PackedStringArray("capturable_component", "hitbox")]
 script = ExtResource("11_y7obs")
 capturable_component = NodePath("../../CapturableComponent")
-state_on_uncapture = &"Ejected"
 hitbox = NodePath("../../Hitbox")
 
 [node name="Ejected" type="Node" parent="StateMachine" unique_id=260147241 node_paths=PackedStringArray("hitbox", "particles")]

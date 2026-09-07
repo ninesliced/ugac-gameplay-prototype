@@ -28,30 +28,26 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		return 
-	
 	if not enabled:
 		return
+	
 	if not is_instance_valid(targeted_entity) or not is_instance_valid(targeted_hurtbox):
-		targeted_entity = null
-		targeted_hurtbox = null
+		_set_target(null, null)
+	
 	if not is_colliding():
-		targeted_entity = null
-		if targeted_hurtbox:
-			targeted_hurtbox._ray_exited(self)
+		_set_target(null, null)
 		return
 	
 	var coll = get_collider()
 	var coll_pos = get_collision_point()
 	if coll is VacuumHurtbox:
-		var own = coll.owner
-		if own is Entity and entity != own:
-			targeted_entity = own
-			targeted_hurtbox = coll
-			coll._ray_entered(self, coll_pos)
+		var coll_owner = coll.owner
+		if coll_owner is Entity and entity != coll_owner:
+			_set_target(coll_owner, coll, coll_pos)
 
 
-func _set_length(len: float):
-	length = len
+func _set_length(new_len: float):
+	length = new_len
 	_update_target()
 
 
@@ -66,3 +62,18 @@ func get_direction():
 
 func _update_target():
 	target_position = (Vector2.RIGHT * length).rotated(angle)
+
+
+func _set_target(new_entity: Entity, new_hurtbox: VacuumHurtbox, target_pos: Vector2 = target_position) -> void:
+	if new_entity == entity:
+		return
+	if new_hurtbox == targeted_hurtbox:
+		return
+	
+	if targeted_hurtbox:
+		targeted_hurtbox._ray_exited(self)
+	
+	targeted_entity = new_entity
+	targeted_hurtbox = new_hurtbox
+	if new_hurtbox:
+		new_hurtbox._ray_entered(self, target_pos)
