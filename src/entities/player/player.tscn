@@ -1469,7 +1469,7 @@ metadata/_custom_type_script = "uid://c4rw8aakdurjv"
 [node name="LifeComponent" type="Node" parent="." unique_id=1605112948]
 unique_name_in_owner = true
 script = ExtResource("4_snams")
-max_life = 2.0
+max_life = 3.0
 damage_cooldown = 3.0
 
 [node name="Label" type="Label" parent="." unique_id=2071724087]
@@ -1595,6 +1595,11 @@ layout_mode = 2
 texture = ExtResource("3_4tw7w")
 
 [node name="TextureRect2" type="TextureRect" parent="Visuals/LifeBar" unique_id=244364774]
+custom_maximum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("3_4tw7w")
+
+[node name="TextureRect3" type="TextureRect" parent="Visuals/LifeBar" unique_id=1903790715]
 custom_maximum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("3_4tw7w")
@@ -1773,8 +1778,7 @@ acceleration = 5000.0
 [node name="Rolling" type="Node" parent="StateMachine" unique_id=1130615496 node_paths=PackedStringArray("dust_particles")]
 script = ExtResource("23_cll3r")
 dust_particles = NodePath("../../Visuals/DustParticles")
-speed = 1000.0
-duration = 0.2
+speed = 800.0
 
 [node name="Inhaling" type="Node" parent="StateMachine" unique_id=1366899563 node_paths=PackedStringArray("vacuum", "vacuum_particles", "vacuum_dust_particles", "vacuum_raycast")]
 script = ExtResource("24_mt1mk")

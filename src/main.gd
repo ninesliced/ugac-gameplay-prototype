@@ -36,6 +36,9 @@ func start_game():
 	for spawner in spawners:
 		spawner.activate()
 	
+	for player: Player in get_tree().get_nodes_in_group("player"):
+		player.life_component.set_life(player.life_component.max_life)
+	
 	%StartTutorial.hide()
 	$CanvasLayer/Control/EnemiesLeft2.show()
 	await get_tree().create_timer(5.0).timeout
