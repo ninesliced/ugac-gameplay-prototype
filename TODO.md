@@ -1,2 +1,2 @@
-- Fix nest 
-- Player aiming state
+- Fix issue where invincible players can stay in enemy (because damage is only detected on enter)
+- Transportable nest 

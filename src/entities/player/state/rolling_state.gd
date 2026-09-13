@@ -1,10 +1,12 @@
 extends PlayerState
 
-@export var visuals: PlayerVisuals
 @export var dust_particles: CPUParticles2D
 
 @export var speed = 300.0
 @export var duration = 0.3
+
+@onready var visuals: PlayerVisuals = %Visuals
+
 
 var time = 0.0
 var direction := Vector2.RIGHT

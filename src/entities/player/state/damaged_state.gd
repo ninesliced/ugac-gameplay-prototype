@@ -2,13 +2,16 @@ extends PlayerState
 
 @export var default_knockback = 1000.0
 
-@export var visuals: PlayerVisuals
 @export var duration = 0.4
 @export var star_angle_rotation_speed = 2.0
 @export var slow_mo = 0.1
 
 @export var damage_star: Star2D
 @export var damage_star_2: Star2D
+
+@onready var life_component: LifeComponent = %LifeComponent
+@onready var visuals: PlayerVisuals = %Visuals
+
 var damage_stars: bool = false
 
 var time = 0.0
@@ -52,6 +55,7 @@ func _on_enter_state(params: Dictionary = {}):
 			
 		star_angle = randf_range(0, TAU)
 
+
 func _on_exit_state():
 	super()
 	
@@ -63,6 +67,7 @@ func _on_exit_state():
 	
 	if damager:
 		player.apply_impulse(-knockback_dir * default_knockback)
+
 
 func _process(delta: float) -> void:
 	super(delta)
@@ -77,9 +82,13 @@ func _process(delta: float) -> void:
 			star.generate()
 			star.show()
 
+
 func _physics_process(delta: float) -> void:
 	super(delta)
 	
 	time -= delta
 	if time <= 0.0:
-		state_machine.travel_to("Move")
+		if life_component.is_dead():
+			state_machine.travel_to("Fainted")
+		else:
+			state_machine.travel_to("Move")

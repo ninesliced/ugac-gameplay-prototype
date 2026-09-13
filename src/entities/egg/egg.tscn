@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://da0y23of43mxk" path="res://assets/images/egg/egg.png" id="2_dtxs4"]
 [ext_resource type="Texture2D" uid="uid://bmaipib8dmfy" path="res://assets/images/dust.png" id="2_eyb8l"]
 [ext_resource type="Texture2D" uid="uid://bvso2fk1d4xtm" path="res://assets/images/player/player_shadow.png" id="2_shwtd"]
-[ext_resource type="Script" uid="uid://dqclidgh2402b" path="res://src/components/entity_components/capturable_component.gd" id="5_5b3q5"]
 [ext_resource type="Script" uid="uid://cyn16ubhn38rx" path="res://addons/shaker/gameplay/area/hitbox.gd" id="8_shwtd"]
 [ext_resource type="Script" uid="uid://dr7h4c573avu2" path="res://addons/shaker/gameplay/area/hurtbox.gd" id="9_ioro1"]
 [ext_resource type="Script" uid="uid://bpqjpkhit0v31" path="res://addons/shaker/state/state.gd" id="10_eyb8l"]
@@ -16,6 +15,19 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cmbxo"]
 radius = 38.052597
+
+[sub_resource type="Curve" id="Curve_jkr0c"]
+_data = [Vector2(0, 1), 0.0, -0.82866544, 0, 0, Vector2(1, 0), -0.88153005, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_sbss2"]
+colors = PackedColorArray(0.62160003, 0.6808, 0.74, 1, 1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sbss2"]
+radius = 28.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h26p2"]
+radius = 61.22449
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wg44p"]
 atlas = ExtResource("2_shwtd")
@@ -75,19 +87,6 @@ animations = [{
 "speed": 10.0
 }]
 
-[sub_resource type="Curve" id="Curve_jkr0c"]
-_data = [Vector2(0, 1), 0.0, -0.82866544, 0, 0, Vector2(1, 0), -0.88153005, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="Gradient_sbss2"]
-colors = PackedColorArray(0.62160003, 0.6808, 0.74, 1, 1, 1, 1, 1)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_sbss2"]
-radius = 28.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_h26p2"]
-radius = 61.22449
-
 [node name="Egg" type="CharacterBody2D" unique_id=722895607]
 collision_mask = 2
 script = ExtResource("1_dtxs4")
@@ -96,20 +95,6 @@ deceleration = 500.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=671228925]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("CircleShape2D_cmbxo")
-
-[node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=421533876]
-modulate = Color(1, 1, 1, 0.2901961)
-z_index = -1
-position = Vector2(0, 21.000002)
-rotation = 0.03386799
-scale = Vector2(0.6238162, 0.922963)
-sprite_frames = SubResource("SpriteFrames_ioro1")
-frame_progress = 0.16743906
-
-[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1267643313]
-scale = Vector2(0.888, 0.888)
-sprite_frames = SubResource("SpriteFrames_g4v7s")
-frame_progress = 0.13916513
 
 [node name="EjectedParticles" type="CPUParticles2D" parent="." unique_id=1184248200]
 emitting = false
@@ -124,11 +109,8 @@ scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_jkr0c")
 color_initial_ramp = SubResource("Gradient_sbss2")
 
-[node name="CapturableComponent" type="Node" parent="." unique_id=998890672]
-script = ExtResource("5_5b3q5")
-
 [node name="Hitbox" type="Area2D" parent="." unique_id=683540586]
-collision_layer = 257
+collision_mask = 257
 script = ExtResource("8_shwtd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1943845504]
@@ -155,6 +137,20 @@ scale = Vector2(0.637, 0.637)
 shape = SubResource("CircleShape2D_h26p2")
 debug_color = Color(0.3666348, 0.6161351, 9.62615e-07, 0.41960785)
 
+[node name="Shadow" type="AnimatedSprite2D" parent="." unique_id=421533876]
+modulate = Color(1, 1, 1, 0.2901961)
+z_index = -1
+position = Vector2(0, 21.000002)
+rotation = 0.03386799
+scale = Vector2(0.6238162, 0.922963)
+sprite_frames = SubResource("SpriteFrames_ioro1")
+frame_progress = 0.16743906
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1267643313]
+scale = Vector2(0.888, 0.888)
+sprite_frames = SubResource("SpriteFrames_g4v7s")
+frame_progress = 0.13916513
+
 [node name="StateMachine" type="Node" parent="." unique_id=583197379]
 script = ExtResource("10_shwtd")
 default_state = &"Idle"
@@ -169,9 +165,8 @@ state_on_captured = &"Captured"
 hitbox = NodePath("../../Hitbox")
 metadata/_custom_type_script = "uid://hq3hve0msv3h"
 
-[node name="Captured" type="Node" parent="StateMachine" unique_id=1089388332 node_paths=PackedStringArray("capturable_component", "hitbox")]
+[node name="Captured" type="Node" parent="StateMachine" unique_id=1089388332 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("11_y7obs")
-capturable_component = NodePath("../../CapturableComponent")
 hitbox = NodePath("../../Hitbox")
 
 [node name="Ejected" type="Node" parent="StateMachine" unique_id=260147241 node_paths=PackedStringArray("hitbox", "particles")]
@@ -182,6 +177,7 @@ particles = NodePath("../../EjectedParticles")
 state_on_finished = &"Idle"
 
 [node name="Label" type="Label" parent="." unique_id=695189201]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 

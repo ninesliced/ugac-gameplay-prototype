@@ -3,20 +3,33 @@ extends Node2D
 
 const ENEMY = preload("uid://b1dkuou1ki3ra")
 
-@export var max_time = 15.0
+@export var min_time = 20.0
+@export var max_time = 35.0
 
-@export var limit = 5
+@export var limit = 20
 var time = 0.0
+
+var active = false
 
 
 func _ready() -> void:
-	time = 0.0
+	modulate = Color(0.5, 0.5, 0.5)
+
+
+func activate() -> void:
+	active = true
+	time = randf_range(0.0, max_time)
+	modulate = Color.WHITE
 
 
 func _process(delta: float) -> void:
+	if not active:
+		return
+	
 	time -= delta
 	if time <= 0 and limit > 0:
-		time += max_time
+		var t = randf_range(min_time, max_time)
+		time += t
 		limit -= 1
 		
 		var enemy: Enemy = ENEMY.instantiate()

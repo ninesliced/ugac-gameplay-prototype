@@ -1,7 +1,8 @@
 extends PlayerState
 
-@export var visuals: PlayerVisuals
 @export var duration = 0.25
+
+@onready var visuals: PlayerVisuals = %Visuals
 
 var time = 0.0
 

@@ -114,7 +114,6 @@ func remove_player_from_user(user_index: int):
 	user_data[user_index]["player"] = null
 
 func get_player(input_user: int) -> Player:
-	print("user_data ", user_data)
 	return user_data[input_user]["player"]
 
 ####

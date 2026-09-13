@@ -51,6 +51,9 @@ func _on_enter_state(params: Dictionary = {}) -> void:
 	
 	if hitbox:
 		hitbox.enabled = false
+	
+	if entity is Actor and entity.capturer_component:
+		(entity as Actor).capturer_component.uncapture(Vector2.RIGHT.rotated(randf_range(0, TAU)))
 
 
 func _on_exit_state() -> void:
@@ -68,6 +71,8 @@ func capture() -> void:
 
 
 func release() -> void:
+	if not is_in_state:
+		return
 	_clear_vacuum_data()
 	state_machine.travel_to(state_on_finished)
 

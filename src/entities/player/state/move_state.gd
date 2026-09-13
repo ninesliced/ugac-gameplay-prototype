@@ -1,13 +1,15 @@
 extends PlayerState
 
-@export var visuals: PlayerVisuals
 @export var walk_particles: CPUParticles2D
 
 @export var idle_velocity_threshold: float = 4.0
 @export var acceleration: float = 3500.0
 @export var speed: float = 400.0
 
+@onready var visuals: PlayerVisuals = %Visuals
+
 var _is_walking: bool = false
+var revive_bar: float = 0.0
 
 func _ready() -> void:
 	super()
@@ -25,14 +27,37 @@ func _physics_process(delta: float) -> void:
 	
 	_update_animation_state(input_direction)
 	
-	if player.is_action_just_pressed("game_action"):
-		if player.has_captured_entity():
-			state_machine.travel_to("Aiming")
+	var has_fainted_player_in_range = false
+	var fainted_player = null
+	var players = get_tree().get_nodes_in_group("player")
+	for p: Player in players:
+		if p != player and p.state_machine.current_state_name == "Fainted" and p.global_position.distance_to(player.global_position) < 100.0:
+			fainted_player = p
+			has_fainted_player_in_range = true
+	
+	if has_fainted_player_in_range:
+		%Revive.show()
+		%ReviveText.text = "%.1f %%" % [100 * revive_bar / 3.0]
+		if player.is_action_pressed("game_action"):
+			revive_bar += delta
+			if revive_bar > 3.0:
+				fainted_player.revive()
 		else:
-			state_machine.travel_to("Inhaling")
+			revive_bar = 0.0
+	
+	else:
+		%Revive.hide()
+		revive_bar = 0.0
+		
+		if player.is_action_just_pressed("game_action"):
+			if player.has_captured_entity():
+				state_machine.travel_to("Aiming")
+			else:
+				state_machine.travel_to("Inhaling")
 			
 	if player.is_action_just_pressed("game_dash"):
 		state_machine.travel_to("Rolling")
+
 
 func _on_enter_state(params: Dictionary = {}) -> void:
 	super(params)
@@ -40,9 +65,11 @@ func _on_enter_state(params: Dictionary = {}) -> void:
 	_is_walking = _check_should_walk(input_direction)
 	_apply_visual_state()
 
+
 func _on_exit_state() -> void:
 	super()
 	walk_particles.emitting = false
+
 
 func _update_animation_state(input_direction: Vector2) -> void:
 	var should_walk = _check_should_walk(input_direction)

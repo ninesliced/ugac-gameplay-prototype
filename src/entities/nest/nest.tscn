@@ -1,14 +1,16 @@
 [gd_scene format=3 uid="uid://c0kheiqjm3el8"]
 
 [ext_resource type="Script" uid="uid://0m54283yce4g" path="res://src/entities/nest/nest.gd" id="2_l0jt2"]
-[ext_resource type="Texture2D" uid="uid://d3eo8lfhqyv4x" path="res://assets/images/nest/nest.png" id="3_3tcgh"]
+[ext_resource type="Texture2D" uid="uid://n5ruduqei3xp" path="res://assets/images/nest/nest.png" id="3_3tcgh"]
 [ext_resource type="Script" uid="uid://b5bpmm7c3jbhl" path="res://src/components/vacuum_hurtbox.gd" id="4_eliyu"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_g4v7s"]
-radius = 139.17615
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_laxwx"]
+radius = 50.0
+height = 182.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3tcgh"]
-radius = 155.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p6mpa"]
+radius = 63.0
+height = 210.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_3tcgh"]
 font_size = 38
@@ -20,21 +22,25 @@ collision_layer = 2
 collision_mask = 0
 script = ExtResource("2_l0jt2")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=253220884]
-shape = SubResource("CircleShape2D_g4v7s")
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=569872567]
+position = Vector2(0, -7)
 scale = Vector2(0.87012994, 0.8701299)
 texture = ExtResource("3_3tcgh")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=253220884]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_laxwx")
+
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1039259176]
-collision_layer = 257
+collision_layer = 256
+collision_mask = 0
 script = ExtResource("4_eliyu")
 metadata/_custom_type_script = "uid://b5bpmm7c3jbhl"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=138726042]
-shape = SubResource("CircleShape2D_3tcgh")
-debug_color = Color(0.92422503, 0.27232912, 0, 0.41960785)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=126643427]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_p6mpa")
+debug_color = Color(0.91766834, 0.28633466, 0, 0.41960785)
 
 [node name="Label" type="Label" parent="." unique_id=1213924383]
 offset_left = -60.0
@@ -43,6 +49,7 @@ offset_right = 73.0
 offset_bottom = 132.0
 label_settings = SubResource("LabelSettings_3tcgh")
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="." unique_id=1292998405]
 

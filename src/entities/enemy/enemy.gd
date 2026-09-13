@@ -6,10 +6,18 @@ var spawn_node: Node2D
 
 @onready var label: Label = $Label
 @onready var life_component: LifeComponent = $LifeComponent
+@onready var sprite: Sprite2D = $Sprite2D
+
+var targets_players: bool = false
 
 func _ready() -> void:
 	super()
 	hitbox.enabled = true
+	targets_players = randf_range(0.0, 1.0) < 0.5
+	if targets_players:
+		$Sprite2D.modulate = Color.BLUE
+		$LifeComponent.max_life = 1
+		$LifeComponent.set_life(1)
 
 
 func _process(delta: float) -> void:
@@ -18,6 +26,13 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	pass
+
+
+func _on_life_component_damaged(amount: float) -> void:
+	var old = Color(sprite.modulate)
+	sprite.modulate = Color(20.0, 20.0, 20.0, 1.0)
+	await get_tree().create_timer(0.3, false).timeout
+	sprite.modulate = old
 
 
 func _on_life_component_died() -> void:

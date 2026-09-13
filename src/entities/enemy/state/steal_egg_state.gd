@@ -21,6 +21,9 @@ func _physics_process(delta: float) -> void:
 		collect_timer = INF
 		
 		var egg: Egg = nest.release_egg(null, enemy.global_position)
-		capturer_component.capture(egg, false)
-		
-		state_machine.travel_to("WalkToSpawner")
+		if egg:
+			capturer_component.capture(egg, false)
+			
+			state_machine.travel_to("WalkToSpawner")
+		else:
+			state_machine.travel_to("WalkToNest")

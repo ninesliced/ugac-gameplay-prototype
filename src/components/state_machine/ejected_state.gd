@@ -4,7 +4,7 @@ extends EntityState
 @export var visuals: Node2D
 
 @export_group("Eject Physics")
-@export var eject_speed: float = 800.0
+@export var default_eject_speed: float = 800.0
 @export var max_bounces: int = 0
 @export var max_time: float = 2.0
 
@@ -21,6 +21,7 @@ extends EntityState
 
 var direction: Vector2 = Vector2.ZERO
 var bounces: int = 0
+var speed: float = 0.0
 var _time: float = 0.0
 var _hitbox_enable_timer: float = 0.0
 var _throw_position: Vector2
@@ -29,7 +30,7 @@ var _old_hitbox_state: bool = false
 var _old_hitbox_damages_enemies: bool = false
 var _old_hitbox_damages_players: bool = false
 
-const spin_speed: float = 8.0
+const spin_speed: float = 20.0
 var _visuals_rotation: float 
 
 func _ready() -> void:
@@ -40,9 +41,14 @@ func _ready() -> void:
 func _on_enter_state(params: Dictionary = {}) -> void:
 	super(params)
 	assert(params.has("direction") and params["direction"] != null, "No direction param")
+	assert(params.has("speed"), "No speed param")
 	
 	direction = params["direction"].normalized()
 	bounces = max_bounces
+	if params["speed"] >= 0.0:
+		speed = params["speed"]
+	else:
+		speed = default_eject_speed
 	_time = max_time
 	_throw_position = entity.global_position
 	_hitbox_enable_timer = hitbox_enable_delay
@@ -76,7 +82,7 @@ func _physics_process(delta: float) -> void:
 		if _hitbox_enable_timer <= 0.0 or _throw_position.distance_to(entity.global_position) > enable_hitbox_distance:
 			hitbox.enable()
 	
-	entity.velocity = direction * eject_speed
+	entity.velocity = direction * speed
 	entity.move_and_slide()
 	
 	var collision: KinematicCollision2D = entity.get_last_slide_collision()
@@ -89,15 +95,18 @@ func _physics_process(delta: float) -> void:
 
 func _on_exit_state() -> void:
 	super()
-	entity.rotation = 0.0
 	
 	if hitbox:
 		hitbox.enabled = _old_hitbox_state
 		hitbox.damages_enemies = _old_hitbox_damages_enemies
 		hitbox.damages_players = _old_hitbox_damages_players
-		
+	
 	if particles:
 		particles.emitting = false
+	
+	if visuals:
+		await get_tree().process_frame
+		visuals.rotation = 0.0
 
 
 func _bounce(normal: Vector2) -> void:

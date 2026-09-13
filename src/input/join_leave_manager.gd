@@ -30,7 +30,8 @@ func handle_join_leave_input():
 	for device_index in InputManager.get_all_devices():
 		if MultiplayerInput.is_action_just_pressed(device_index, "game_join"):
 			if InputManager.is_device_joined(device_index):
-				leave(InputManager.get_user_from_device_index(device_index))
+				pass
+				#leave(InputManager.get_user_from_device_index(device_index))
 			else:
 				join(device_index)
 

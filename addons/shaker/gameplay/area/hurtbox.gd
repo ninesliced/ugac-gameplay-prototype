@@ -6,6 +6,24 @@ class_name Hurtbox
 ## Whether to ignore sibling hitboxes. 
 @export var ignore_sibling_hitboxes := true
 
+
+@export var enabled: bool = true :
+	set(value):
+		enabled = value
+		if enabled:
+			_enable()
+		else:
+			_disable()
+
+func _disable() -> void:
+	monitoring = false
+
+
+func _enable() -> void:
+	monitoring = true
+
+
+
 ## Emitted when entered in collision with a hitbox.
 signal hitbox_entered(area: Hitbox)
 signal hitbox_exited(area: Hitbox)

@@ -4,7 +4,6 @@ extends EntityState
 signal entered_capture(capturer: Entity)
 signal exited_capture()
 
-@export var capturable_component: CapturableComponent
 @export var state_on_uncapture: StringName = &"Ejected"
 @export var hitbox: Hitbox
 
@@ -18,7 +17,6 @@ func _ready() -> void:
 
 func _on_enter_state(params: Dictionary = {}):
 	super(params)
-	assert(capturable_component, "capturable_component is undefined")
 	assert(params.has("capturer") and params["capturer"], "Entered state without capturer param")
 	assert(params["capturer"] is Entity, "capturer is not Entity")
 	assert(params["capturer"].has_component("CapturerComponent"), "capturer has no CapturerComponent")
@@ -55,7 +53,8 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 
 
-func uncapture(direction: Vector2):
+func uncapture(direction: Vector2, speed: float = -1.0):
 	state_machine.travel_to(&"Ejected", {
-		"direction": direction
+		"direction": direction,
+		"speed": speed
 	})
