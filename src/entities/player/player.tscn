@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dffxrdhsyg2ur" path="res://assets/images/player_body.png" id="2_u4ub8"]
 [ext_resource type="Texture2D" uid="uid://bh41e1q4pcdiv" path="res://assets/images/ui/heart.png" id="3_4tw7w"]
 [ext_resource type="Texture2D" uid="uid://bmaipib8dmfy" path="res://assets/images/dust.png" id="3_iwlaa"]
+[ext_resource type="Script" uid="uid://dq5nhp2525nh1" path="res://src/entities/player/regenerating_life_component.gd" id="4_snams"]
 [ext_resource type="Script" uid="uid://c4rw8aakdurjv" path="res://src/components/entity_components/capturer_component.gd" id="4_xmbk1"]
-[ext_resource type="Script" uid="uid://dv3y8d0pcf1ay" path="res://addons/shaker/gameplay/life_component.gd" id="5_4tw7w"]
 [ext_resource type="Shader" uid="uid://2fwum2y65xi" path="res://src/entities/player/player_visuals.gdshader" id="9_snams"]
 [ext_resource type="Texture2D" uid="uid://d4fy65cyqri67" path="res://assets/images/ui/input/nintendo-switch_sheet_default.png" id="10_2cmg6"]
 [ext_resource type="Script" uid="uid://cyn16ubhn38rx" path="res://addons/shaker/gameplay/area/hitbox.gd" id="10_knlkd"]
@@ -1468,8 +1468,8 @@ metadata/_custom_type_script = "uid://c4rw8aakdurjv"
 
 [node name="LifeComponent" type="Node" parent="." unique_id=1605112948]
 unique_name_in_owner = true
-script = ExtResource("5_4tw7w")
-max_life = 1.0
+script = ExtResource("4_snams")
+max_life = 2.0
 damage_cooldown = 3.0
 
 [node name="Label" type="Label" parent="." unique_id=2071724087]
@@ -1517,7 +1517,7 @@ collide_with_areas = true
 collide_with_bodies = false
 script = ExtResource("11_ba6y3")
 
-[node name="Visuals" type="CanvasGroup" parent="." unique_id=709723392]
+[node name="Visuals" type="Node2D" parent="." unique_id=550729901]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_2cmg6")
 position = Vector2(0, 28)
@@ -1595,11 +1595,6 @@ layout_mode = 2
 texture = ExtResource("3_4tw7w")
 
 [node name="TextureRect2" type="TextureRect" parent="Visuals/LifeBar" unique_id=244364774]
-custom_maximum_size = Vector2(32, 32)
-layout_mode = 2
-texture = ExtResource("3_4tw7w")
-
-[node name="TextureRect3" type="TextureRect" parent="Visuals/LifeBar" unique_id=464650488]
 custom_maximum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("3_4tw7w")
@@ -1778,8 +1773,8 @@ acceleration = 5000.0
 [node name="Rolling" type="Node" parent="StateMachine" unique_id=1130615496 node_paths=PackedStringArray("dust_particles")]
 script = ExtResource("23_cll3r")
 dust_particles = NodePath("../../Visuals/DustParticles")
-speed = 800.0
-duration = 0.075
+speed = 1000.0
+duration = 0.2
 
 [node name="Inhaling" type="Node" parent="StateMachine" unique_id=1366899563 node_paths=PackedStringArray("vacuum", "vacuum_particles", "vacuum_dust_particles", "vacuum_raycast")]
 script = ExtResource("24_mt1mk")

@@ -1,3 +1,4 @@
+@icon("./life_component.svg")
 extends Node
 class_name LifeComponent
 

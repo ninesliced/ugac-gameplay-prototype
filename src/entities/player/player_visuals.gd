@@ -1,6 +1,6 @@
 @tool
 class_name PlayerVisuals
-extends CanvasGroup
+extends Node2D
 
 @export var flip_h: bool = false: set = _set_flip_h
 
