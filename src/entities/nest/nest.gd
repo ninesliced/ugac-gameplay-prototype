@@ -10,7 +10,8 @@ func _process(delta: float) -> void:
 
 
 func _on_hurtbox_ray_entered(ray: VacuumRaycast, enter_pos: Vector2) -> void:
-	release_egg(ray, enter_pos)
+	pass
+	#release_egg(ray, enter_pos)
 
 
 func add_egg(egg: Egg):

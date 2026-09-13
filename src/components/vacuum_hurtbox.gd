@@ -10,13 +10,19 @@ signal ray_exited(ray: VacuumRaycast, enter_pos: Vector2)
 
 const VACUUM_COLLISION_LAYER = 9
 
+var active = true
+
 func _enter_tree() -> void:
 	collision_layer = 0
 	collision_mask = 0
 	set_collision_layer_value(VACUUM_COLLISION_LAYER, true)
 
+
 ## Called by [VacuumRaycast] when touching this Hurtbox. 
 func _ray_entered(ray: VacuumRaycast, enter_pos: Vector2) -> void:
+	if not active:
+		return 
+	
 	ray_entered.emit(ray, enter_pos)
 	if vacuumed_state:
 		vacuumed_state.state_machine.travel_to(vacuumed_state.name, {
@@ -29,3 +35,7 @@ func _ray_exited(ray: VacuumRaycast):
 	ray_exited.emit(ray)
 	if vacuumed_state:
 		vacuumed_state.on_ray_exited(ray)
+
+
+func disable():
+	active = false

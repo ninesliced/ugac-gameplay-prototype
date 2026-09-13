@@ -3,9 +3,16 @@
 [ext_resource type="Script" uid="uid://beoy46porlu2u" path="res://src/input/join_leave_manager.gd" id="1_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://q6mykvntp4ni" path="res://icon.svg" id="1_sugp2"]
 [ext_resource type="Script" uid="uid://c1vuc1hta40g" path="res://src/main.gd" id="1_tefeu"]
+[ext_resource type="Texture2D" uid="uid://d4fy65cyqri67" path="res://assets/images/ui/input/nintendo-switch_sheet_default.png" id="5_kf8lf"]
 [ext_resource type="Texture2D" uid="uid://pkg0nor1rprk" path="res://assets/images/tileset.png" id="5_tbgi4"]
+[ext_resource type="Texture2D" uid="uid://bt2in7h1wwbjj" path="res://assets/images/ui/input/keyboard-&-mouse_sheet_default.png" id="6_kqbth"]
 [ext_resource type="PackedScene" uid="uid://eljb2gxouxh4" path="res://src/level/spawner/enemy_spawner.tscn" id="6_rlaii"]
+[ext_resource type="Texture2D" uid="uid://c8t3ak6aldxkq" path="res://assets/images/ui/input/xbox-series_sheet_default.png" id="6_uewes"]
+[ext_resource type="Texture2D" uid="uid://bwhwxugra0vvo" path="res://assets/images/ui/input/playstation-series_sheet_default.png" id="7_kqbth"]
 [ext_resource type="PackedScene" uid="uid://c0kheiqjm3el8" path="res://src/entities/nest/nest.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://ful76yvdlyh6" path="res://src/entities/egg/egg.tscn" id="7_rlaii"]
+[ext_resource type="PackedScene" uid="uid://cx3yglr6133ww" path="res://src/ui/pause_menu.tscn" id="9_kqbth"]
+[ext_resource type="PackedScene" uid="uid://b6hix4bb07kyl" path="res://src/entities/rock/rock.tscn" id="13_srxbw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jyhfs"]
 texture = ExtResource("1_sugp2")
@@ -102,16 +109,68 @@ terrain_set_0/terrain_1/color = Color(0.07665848, 0.07305556, 0.059842974, 1)
 sources/0 = SubResource("TileSetAtlasSource_jyhfs")
 sources/1 = SubResource("TileSetAtlasSource_tefeu")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_srxbw"]
+atlas = ExtResource("5_kf8lf")
+region = Rect2(128, 448, 64, 64)
+
 [sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
 font_size = 30
+outline_size = 15
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mlv6i"]
+atlas = ExtResource("6_kqbth")
+region = Rect2(0, 192, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uewes"]
+atlas = ExtResource("5_kf8lf")
+region = Rect2(64, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mgm53"]
+atlas = ExtResource("6_uewes")
+region = Rect2(576, 576, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d3u4l"]
+atlas = ExtResource("7_kqbth")
+region = Rect2(0, 256, 64, 64)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_kf8lf"]
+load_path = "res://.godot/imported/keyboard_enter.svg-35ccfa18567427a20da7ee927590f8ff.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tb146"]
+atlas = ExtResource("5_kf8lf")
+region = Rect2(384, 448, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqbth"]
+atlas = ExtResource("6_kqbth")
+region = Rect2(960, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e7lu8"]
+atlas = ExtResource("5_kf8lf")
+region = Rect2(0, 384, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_okx7f"]
+atlas = ExtResource("6_kqbth")
+region = Rect2(256, 896, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sta5p"]
+atlas = ExtResource("5_kf8lf")
+region = Rect2(384, 512, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sif16"]
+atlas = ExtResource("6_kqbth")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="LabelSettings" id="LabelSettings_srxbw"]
+font_size = 51
 outline_size = 15
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Main" type="Node2D" unique_id=1062764275]
 script = ExtResource("1_tefeu")
 
-[node name="JoinLeaveManager" type="Node2D" parent="." unique_id=220211555]
-position = Vector2(953, 611)
+[node name="JoinLeaveManager" type="Node2D" parent="." unique_id=1183188046]
+position = Vector2(952, 710)
 script = ExtResource("1_jyhfs")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1738053152]
@@ -139,40 +198,257 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer" unique_id=904271041]
+[node name="StartTutorial" type="VBoxContainer" parent="CanvasLayer/Control/MarginContainer" unique_id=904271041]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer" unique_id=836971568]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/StartTutorial" unique_id=1917529932]
 layout_mode = 2
-text = "[J] / [-] / [Share] / [Back] Join"
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/StartTutorial/HBoxContainer" unique_id=495106471]
+layout_mode = 2
+texture = SubResource("AtlasTexture_srxbw")
+
+[node name="StartGameLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/StartTutorial/HBoxContainer" unique_id=1251576784]
+layout_mode = 2
+text = "/"
 label_settings = SubResource("LabelSettings_g4v7s")
 horizontal_alignment = 1
 
-[node name="StartGameLabel" type="Label" parent="CanvasLayer/Control/MarginContainer/VBoxContainer" unique_id=1251576784]
-visible = false
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/StartTutorial/HBoxContainer" unique_id=1857902409]
 layout_mode = 2
-text = "[+] Start game "
+texture = SubResource("AtlasTexture_mlv6i")
+
+[node name="StartGameLabel2" type="Label" parent="CanvasLayer/Control/MarginContainer/StartTutorial/HBoxContainer" unique_id=911077308]
+layout_mode = 2
+text = " Join"
 label_settings = SubResource("LabelSettings_g4v7s")
 horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/StartTutorial" unique_id=745365850]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/StartTutorial/HBoxContainer2" unique_id=1723202887]
+layout_mode = 2
+texture = SubResource("AtlasTexture_uewes")
+
+[node name="StartGameLabel4" type="Label" parent="CanvasLayer/Control/MarginContainer/StartTutorial/HBoxContainer2" unique_id=604383497]
+visible = false
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+
+[node name="TextureRect3" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/StartTutorial/HBoxContainer2" unique_id=2001833358]
+visible = false
+layout_mode = 2
+texture = SubResource("AtlasTexture_mgm53")
+
+[node name="StartGameLabel5" type="Label" parent="CanvasLayer/Control/MarginContainer/StartTutorial/HBoxContainer2" unique_id=596613302]
+visible = false
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+
+[node name="TextureRect4" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/StartTutorial/HBoxContainer2" unique_id=984102621]
+visible = false
+layout_mode = 2
+texture = SubResource("AtlasTexture_d3u4l")
+
+[node name="StartGameLabel2" type="Label" parent="CanvasLayer/Control/MarginContainer/StartTutorial/HBoxContainer2" unique_id=735883935]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/StartTutorial/HBoxContainer2" unique_id=1252818224]
+layout_mode = 2
+texture = SubResource("CompressedTexture2D_kf8lf")
+
+[node name="StartGameLabel3" type="Label" parent="CanvasLayer/Control/MarginContainer/StartTutorial/HBoxContainer2" unique_id=1709376609]
+layout_mode = 2
+text = " Start game"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+
+[node name="BottomTutorial" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer" unique_id=1665946580]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 43
+
+[node name="Tuto" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/BottomTutorial" unique_id=947131362]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/BottomTutorial/Tuto" unique_id=687130717]
+layout_mode = 2
+texture = SubResource("AtlasTexture_tb146")
+
+[node name="StartGameLabel2" type="Label" parent="CanvasLayer/Control/MarginContainer/BottomTutorial/Tuto" unique_id=445358205]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/BottomTutorial/Tuto" unique_id=89976828]
+layout_mode = 2
+texture = SubResource("AtlasTexture_kqbth")
+
+[node name="StartGameLabel3" type="Label" parent="CanvasLayer/Control/MarginContainer/BottomTutorial/Tuto" unique_id=340920872]
+layout_mode = 2
+text = "Inhale"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+
+[node name="Tuto2" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/BottomTutorial" unique_id=1041059472]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/BottomTutorial/Tuto2" unique_id=313352857]
+layout_mode = 2
+texture = SubResource("AtlasTexture_e7lu8")
+
+[node name="StartGameLabel2" type="Label" parent="CanvasLayer/Control/MarginContainer/BottomTutorial/Tuto2" unique_id=274107865]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/BottomTutorial/Tuto2" unique_id=824141876]
+layout_mode = 2
+texture = SubResource("AtlasTexture_okx7f")
+
+[node name="StartGameLabel3" type="Label" parent="CanvasLayer/Control/MarginContainer/BottomTutorial/Tuto2" unique_id=1769527674]
+layout_mode = 2
+text = "Put"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+
+[node name="Tuto3" type="HBoxContainer" parent="CanvasLayer/Control/MarginContainer/BottomTutorial" unique_id=71206487]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/BottomTutorial/Tuto3" unique_id=219422507]
+layout_mode = 2
+texture = SubResource("AtlasTexture_sta5p")
+
+[node name="StartGameLabel2" type="Label" parent="CanvasLayer/Control/MarginContainer/BottomTutorial/Tuto3" unique_id=1824580983]
+layout_mode = 2
+text = "/"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+
+[node name="TextureRect2" type="TextureRect" parent="CanvasLayer/Control/MarginContainer/BottomTutorial/Tuto3" unique_id=1890020909]
+layout_mode = 2
+texture = SubResource("AtlasTexture_sif16")
+
+[node name="StartGameLabel3" type="Label" parent="CanvasLayer/Control/MarginContainer/BottomTutorial/Tuto3" unique_id=150946813]
+layout_mode = 2
+text = "Dash"
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+
+[node name="EnemiesLeft" type="Label" parent="CanvasLayer/Control" unique_id=1009067314]
+layout_mode = 0
+offset_left = 860.0
+offset_top = 995.0
+offset_right = 872.0
+offset_bottom = 1037.0
+text = "Enemies left: "
+label_settings = SubResource("LabelSettings_g4v7s")
+horizontal_alignment = 1
+
+[node name="EnemiesLeft2" type="Label" parent="CanvasLayer/Control" unique_id=1048728526]
+visible = false
+layout_mode = 0
+offset_left = 575.0
+offset_top = 513.0
+offset_right = 1341.0
+offset_bottom = 583.0
+text = "PROTECT THE EGGS TOGETHER!"
+label_settings = SubResource("LabelSettings_srxbw")
+horizontal_alignment = 1
+
+[node name="GameOver" type="Label" parent="CanvasLayer/Control" unique_id=720176458]
+visible = false
+z_index = 20
+layout_mode = 0
+offset_left = 566.0
+offset_top = 499.0
+offset_right = 1332.0
+offset_bottom = 642.0
+text = "GAME OVER
+"
+label_settings = SubResource("LabelSettings_srxbw")
+horizontal_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control/GameOver" unique_id=1663296654]
+z_index = -1
+layout_mode = 0
+offset_left = -573.0
+offset_top = -509.0
+offset_right = 1332.0
+offset_bottom = 576.0
+color = Color(0, 0, 0, 0.7529412)
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/GameOver" unique_id=875389589]
+layout_mode = 0
+offset_left = 370.0
+offset_top = 128.0
+offset_right = 378.0
+offset_bottom = 136.0
+text = "Replay"
+
+[node name="PauseMenu" parent="CanvasLayer" unique_id=1236955612 instance=ExtResource("9_kqbth")]
+visible = false
+z_index = 300
 
 [node name="Nest" parent="." unique_id=722895607 instance=ExtResource("7_o6xl0")]
 position = Vector2(957, 536)
-egg_count = 30
+egg_count = 20
 
 [node name="EnemySpawner" parent="." unique_id=545141128 groups=["spawner"] instance=ExtResource("6_rlaii")]
-position = Vector2(1802, 940)
+position = Vector2(1800, 954)
+limit = 15
 
 [node name="EnemySpawner2" parent="." unique_id=1447097154 groups=["spawner"] instance=ExtResource("6_rlaii")]
-position = Vector2(106, 983)
+position = Vector2(104, 997)
+limit = 15
 
 [node name="EnemySpawner3" parent="." unique_id=1926381900 groups=["spawner"] instance=ExtResource("6_rlaii")]
-position = Vector2(90, 113)
+position = Vector2(110, 115)
+limit = 15
 
 [node name="EnemySpawner4" parent="." unique_id=2085871622 groups=["spawner"] instance=ExtResource("6_rlaii")]
-position = Vector2(1809, 99)
+position = Vector2(1807, 113)
+limit = 15
+
+[node name="Egg" parent="." unique_id=973528875 instance=ExtResource("7_rlaii")]
+position = Vector2(954, 813)
+
+[node name="Rock" parent="." unique_id=74192177 instance=ExtResource("13_srxbw")]
+position = Vector2(484, 395)
+
+[node name="Rock2" parent="." unique_id=2043831204 instance=ExtResource("13_srxbw")]
+position = Vector2(1470, 646)
+
+[connection signal="pressed" from="CanvasLayer/Control/GameOver/Button" to="." method="_on_button_pressed"]

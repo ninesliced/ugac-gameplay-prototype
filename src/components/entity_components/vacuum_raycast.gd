@@ -46,6 +46,15 @@ func _physics_process(delta: float) -> void:
 			_set_target(coll_owner, coll, coll_pos)
 
 
+func enable():
+	enabled = true
+
+
+func disable():
+	enabled = false
+	_set_target(null, null)
+
+
 func _set_length(new_len: float):
 	length = new_len
 	_update_target()

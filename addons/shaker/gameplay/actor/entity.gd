@@ -53,5 +53,6 @@ func capture_from(capturer: Entity, hide_entity: bool = true):
 
 
 func uncapture(direction: Vector2):
-	assert(state_machine.current_state is CapturedState)
-	state_machine.current_state.uncapture(direction)
+	if not state_machine.current_state is CapturedState:
+		return
+	(state_machine.current_state as CapturedState).uncapture(direction)

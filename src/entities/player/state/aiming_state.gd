@@ -1,7 +1,7 @@
 class_name AimingState
 extends PlayerState
 
-@onready var visuals: PlayerVisuals = $"../../Visuals"
+@onready var visuals: PlayerVisuals = %Visuals
 
 func _ready() -> void:
 	super()

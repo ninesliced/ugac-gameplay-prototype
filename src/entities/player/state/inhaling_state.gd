@@ -1,20 +1,21 @@
 extends PlayerState
 
-@onready var capturer_component: CapturerComponent = $"../../CapturerComponent"
-
-@export var visuals: PlayerVisuals
 
 @export var vacuum: Node2D
 @export var vacuum_particles: CPUParticles2D
 @export var vacuum_dust_particles: CPUParticles2D
 @export var vacuum_raycast: VacuumRaycast
 
+@onready var visuals: PlayerVisuals = %Visuals
+@onready var capturer_component: CapturerComponent = $"../../CapturerComponent"
+
+
 func _ready() -> void:
 	super()
 
 func _on_enter_state(params: Dictionary = {}):
 	super(params)
-	vacuum_raycast.enabled = true
+	vacuum_raycast.enable()
 	
 	capturer_component.captured.connect(_capturer_component_captured)
 	
@@ -29,7 +30,7 @@ func _on_exit_state():
 	
 	capturer_component.captured.disconnect(_capturer_component_captured)
 	
-	vacuum_raycast.enabled = false
+	vacuum_raycast.disable()
 
 
 func _physics_process(delta: float) -> void:

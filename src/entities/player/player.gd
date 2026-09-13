@@ -4,13 +4,10 @@ extends Actor
 @export var block_inputs := false
 
 @export_category("Imports")
-@export var visuals: PlayerVisuals
 @export var vacuum_raycast: VacuumRaycast
 @export var vacuum_particles: CPUParticles2D
 @export var vacuum_dust_particles: CPUParticles2D
-@export var capturer_component: CapturerComponent
 @export var hitbox: Hitbox
-@onready var life_component: LifeComponent = $LifeComponent
 
 @export_category("Vacuum")
 @export var vacuum_range = 400
@@ -35,6 +32,9 @@ var aim_direction := Vector2.RIGHT
 var aim_angle := 0.0
 
 var splitscreen_cell: SplitscreenCell
+
+@onready var life_component: LifeComponent = $LifeComponent
+@onready var visuals: PlayerVisuals = %Visuals
 
 func _ready() -> void:
 	super()
@@ -168,8 +168,19 @@ func _on_hurtbox_hitbox_entered(area: Hitbox) -> void:
 		return
 	if not area.damages_players:
 		return
-	life_component.damage(area.damage)
-	state_machine.travel_to("Damaged", {"damager": area, "damage": area.damage})
+	
+	damage(area.damage, area)
+
+
+func damage(value: float, damager: Node2D) -> void:
+	var success = life_component.damage(value)
+	if success:
+		state_machine.travel_to("Damaged", {"damager": damager, "damage": value})
+
+
+func revive():
+	life_component.set_life(life_component.max_life)
+	state_machine.travel_to("Move")
 
 
 func _on_user_removed(_user_index: int):

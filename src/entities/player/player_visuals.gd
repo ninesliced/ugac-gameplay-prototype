@@ -17,6 +17,7 @@ var _playback: AnimationNodeStateMachinePlayback
 @onready var shadow: AnimatedSprite2D = $Shadow
 @onready var body: Node2D = $Body
 @onready var aim_indicator: AnimatedSprite2D = $AimIndicator
+@onready var life_component: LifeComponent = $"../LifeComponent"
 
 var shake_intensity: float = 0.0
 var shake_duration: float = 0.0
@@ -26,6 +27,8 @@ const _shake_frame_delay: float = 0.02
 
 const aim_indicator_distance: float = 100.0
 
+var _t := 0.0
+
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
@@ -33,6 +36,8 @@ func _ready() -> void:
 	animation_tree.active = true
 	_playback = animation_tree["parameters/playback"]
 	shadow.play()
+	
+	%PlayerIndexLabel.text = "P%d" % [player.user_index + 1]
 
 
 func _process(delta: float) -> void:
@@ -43,7 +48,24 @@ func _process(delta: float) -> void:
 	_process_shake(delta)
 	_update_aim_indicator(delta)
 	$Label.text = ""
-	$Label.text += str($"../StateMachine".current_state_name) + "\n"
+	$Label.text += "%s\n" % [$"../StateMachine".current_state_name]
+	$Label.text += "is_in_cooldown = %s\n" % [life_component.is_in_cooldown()]
+	$Label.text += "cooldown = %s\n" % [life_component.cooldown_value]
+	
+	# Life bar
+	for i in %LifeBar.get_child_count():
+		var texture_rect: TextureRect = %LifeBar.get_child(i)
+		if i < life_component.life:
+			texture_rect.modulate = Color.WHITE
+		else:
+			texture_rect.modulate = Color.DIM_GRAY
+	
+	# Flash
+	_t += delta
+	if fmod(_t, 0.2) < 0.1 and life_component.is_in_cooldown():
+		stacked_sprite.modulate = Color.GRAY
+	else:
+		stacked_sprite.modulate = Color.WHITE
 
 
 func play(anim: String) -> void:
@@ -93,9 +115,9 @@ func _set_sprite_rotation(value: float) -> void:
 	stacked_sprite.rotation = value
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept"):
-		shake(10, 2)
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed("ui_accept"):
+		#shake(10, 2)
 
 
 func _process_shake(delta: float) -> void:
