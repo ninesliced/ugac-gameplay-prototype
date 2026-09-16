@@ -5,6 +5,7 @@ extends EntityState
 @export var vacuum_acceleration: float = 1600.0
 @export var vacuum_top_speed: float = 6000.0
 @export var finish_distance: float = 64.0
+@export var lock_inhale_distance: float = 128.0
 
 @export_group("State Transitions & Hitbox")
 @export var state_on_finished: StringName
@@ -15,6 +16,8 @@ var target: Node2D = null
 var vacuum_raycast: VacuumRaycast = null
 var vacuum_speed: float = 0.0
 
+var vaccum_lock: bool = false
+
 func _ready() -> void:
 	super()
 	assert(state_on_finished, "state_on_finished is undefined")
@@ -22,7 +25,8 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	if not target:
+	if not is_instance_valid(target):
+		release()
 		return
 	
 	var direction = entity.global_position.direction_to(target.global_position)
@@ -30,10 +34,13 @@ func _physics_process(delta: float) -> void:
 	vacuum_speed = min(vacuum_speed + vacuum_acceleration * delta, vacuum_top_speed)
 	entity.velocity = direction * vacuum_speed
 	
-	if entity.global_position.distance_to(target.global_position) < finish_distance:
+	var dist = entity.global_position.distance_to(target.global_position)
+	vaccum_lock = (dist <= lock_inhale_distance)
+	
+	if dist <= finish_distance:
 		# Reached close enough to target
 		capture()
-	elif not vacuum_raycast or not vacuum_raycast.enabled:
+	elif (not is_instance_valid(vacuum_raycast) or not vacuum_raycast.enabled) and (not vaccum_lock):
 		# Attract area gets disabled
 		release()
 	else:
@@ -48,6 +55,8 @@ func _on_enter_state(params: Dictionary = {}) -> void:
 	target = params["vacuum_attract_target"]
 	vacuum_raycast = params["vacuum_attract_raycast"]
 	vacuum_speed = 0.0
+	
+	vaccum_lock = false
 	
 	if hitbox:
 		hitbox.enabled = false
@@ -66,7 +75,7 @@ func capture() -> void:
 	_clear_vacuum_data()
 	
 	if capturer is Entity and capturer.has_component("CapturerComponent"):
-		var capturer_component = capturer.get_component("CapturerComponent")
+		var capturer_component: CapturerComponent = capturer.get_component("CapturerComponent")
 		capturer_component.capture(entity)
 
 
@@ -78,6 +87,8 @@ func release() -> void:
 
 
 func on_ray_exited(ray: VacuumRaycast) -> void:
+	if vaccum_lock:
+		return
 	release()
 
 

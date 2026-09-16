@@ -18,6 +18,7 @@ func _on_enter_state(params: Dictionary = {}):
 	$"../../VacuumHurtbox/CollisionShape2D".disabled = true
 	$"../../VacuumHurtbox".disable()
 
+
 func _physics_process(delta: float) -> void:
 	super(delta)
 	var input_direction = player.get_vector("game_left", "game_right", "game_up", "game_down")

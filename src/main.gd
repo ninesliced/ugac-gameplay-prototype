@@ -14,19 +14,12 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("game_start"):
 		start_game()
 
+
 func _process(delta: float) -> void:
 	var n = 0
 	for spawner: EnemySpawner in get_tree().get_nodes_in_group("spawner"):
 		n += spawner.limit
-	$CanvasLayer/Control/EnemiesLeft.text = "Enemies left: %s" % [n]
-	
-	n = 0
-	for player: Player in get_tree().get_nodes_in_group("player"):
-		if player.state_machine.current_state_name == "Fainted":
-			n += 1
-	
-	if n >= InputManager.get_user_count() and InputManager.get_user_count() > 0:
-		$CanvasLayer/Control/GameOver.show()
+	$CanvasLayer/Control/EnemiesLeft.text = "Enemies left: %s" % [n]	
 
 
 func start_game():

@@ -89,6 +89,6 @@ func _physics_process(delta: float) -> void:
 	time -= delta
 	if time <= 0.0:
 		if life_component.is_dead():
-			state_machine.travel_to("Fainted")
+			state_machine.travel_to("Dying")
 		else:
 			state_machine.travel_to("Move")

@@ -38,6 +38,7 @@ func _ready() -> void:
 	shadow.play()
 	
 	%PlayerIndexLabel.text = "P%d" % [player.user_index + 1]
+	$AimIndicator.play()
 
 
 func _process(delta: float) -> void:

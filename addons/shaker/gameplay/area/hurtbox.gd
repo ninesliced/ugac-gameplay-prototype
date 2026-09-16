@@ -10,19 +10,7 @@ class_name Hurtbox
 @export var enabled: bool = true :
 	set(value):
 		enabled = value
-		if enabled:
-			_enable()
-		else:
-			_disable()
-
-func _disable() -> void:
-	monitoring = false
-
-
-func _enable() -> void:
-	monitoring = true
-
-
+		monitorable = value
 
 ## Emitted when entered in collision with a hitbox.
 signal hitbox_entered(area: Hitbox)
@@ -45,3 +33,11 @@ func is_hittable(hitbox: Hitbox):
 	if ignore_sibling_hitboxes and hitbox.get_parent() == get_parent():
 		return false
 	return true
+
+
+func disable() -> void:
+	enabled = false
+
+
+func enable() -> void:
+	enabled = true
