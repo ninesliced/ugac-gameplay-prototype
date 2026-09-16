@@ -13,4 +13,5 @@ func _on_hitbox_on_hurtbox_hit(hurtbox: Hurtbox) -> void:
 
 
 func _on_exit_state() -> void:
+	super()
 	hitbox.on_hurtbox_hit.disconnect(_on_hitbox_on_hurtbox_hit)

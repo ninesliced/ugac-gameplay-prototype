@@ -36,8 +36,8 @@ func _physics_process(delta: float) -> void:
 			has_fainted_player_in_range = true
 	
 	if has_fainted_player_in_range:
-		%Revive.show()
-		%ReviveText.text = "%.1f %%" % [100 * revive_bar / 3.0]
+		#%Revive.show()
+		#%ReviveText.text = "%.1f %%" % [100 * revive_bar / 3.0]
 		if player.is_action_pressed("game_action"):
 			revive_bar += delta
 			if revive_bar > 3.0:
@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 			revive_bar = 0.0
 	
 	else:
-		%Revive.hide()
+		#%Revive.hide()
 		revive_bar = 0.0
 		
 		if player.is_action_just_pressed("game_action"):

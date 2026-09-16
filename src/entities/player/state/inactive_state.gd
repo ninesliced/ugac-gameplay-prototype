@@ -17,14 +17,17 @@ func _on_enter_state(params: Dictionary = {}):
 	collision_shape.disabled = true
 	
 	visuals.hide()
-	
 	time = duration
+	
+	%RespawnTimeLabel.show()
 
 
 func _physics_process(delta: float) -> void:
 	time -= delta
 	if time <= 0:
 		player.revive()
+	
+	%RespawnTimeLabel.text = "Respawn in %.1fs" % [time]
 
 
 func _on_exit_state():
@@ -34,3 +37,4 @@ func _on_exit_state():
 	collision_shape.disabled = false
 	
 	visuals.show()
+	%RespawnTimeLabel.hide()

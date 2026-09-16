@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://dq5nhp2525nh1" path="res://src/entities/player/regenerating_life_component.gd" id="4_snams"]
 [ext_resource type="Script" uid="uid://c4rw8aakdurjv" path="res://src/components/entity_components/capturer_component.gd" id="4_xmbk1"]
 [ext_resource type="Shader" uid="uid://2fwum2y65xi" path="res://src/entities/player/player_visuals.gdshader" id="9_snams"]
-[ext_resource type="Texture2D" uid="uid://d4fy65cyqri67" path="res://assets/images/ui/input/nintendo-switch_sheet_default.png" id="10_2cmg6"]
 [ext_resource type="Script" uid="uid://cyn16ubhn38rx" path="res://addons/shaker/gameplay/area/hitbox.gd" id="10_knlkd"]
 [ext_resource type="Texture2D" uid="uid://c7hkmh5ua7s84" path="res://assets/images/player/aiming_indicator.png" id="11_2cmg6"]
 [ext_resource type="Script" uid="uid://du0ld436sx4gw" path="res://src/components/entity_components/vacuum_raycast.gd" id="11_ba6y3"]
@@ -174,6 +173,11 @@ radius = 39.051247
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tvulh"]
 radius = 76.02631
+
+[sub_resource type="LabelSettings" id="LabelSettings_t4js2"]
+font_size = 24
+outline_size = 9
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2cmg6"]
 shader = ExtResource("9_snams")
@@ -806,15 +810,6 @@ states/Walk/node = SubResource("AnimationNodeAnimation_brjyi")
 states/Walk/position = Vector2(657.19995, 98.87071)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_bnv2y"), "EnterInhale", "Inhale", SubResource("AnimationNodeStateMachineTransition_wg44p"), "Inhale", "ExitInhale", SubResource("AnimationNodeStateMachineTransition_2frc1"), "Walk", "Idle", SubResource("AnimationNodeStateMachineTransition_l2s38"), "Idle", "Walk", SubResource("AnimationNodeStateMachineTransition_0xxfp"), "ExitInhale", "EnterInhale", SubResource("AnimationNodeStateMachineTransition_y7ulx"), "EnterInhale", "ExitInhale", SubResource("AnimationNodeStateMachineTransition_dh4vq"), "Movement", "EnterInhale", SubResource("AnimationNodeStateMachineTransition_1lgw8"), "ExitInhale", "Movement", SubResource("AnimationNodeStateMachineTransition_7nfft"), "Walk", "Movement", SubResource("AnimationNodeStateMachineTransition_o8jto"), "Idle", "Movement", SubResource("AnimationNodeStateMachineTransition_rt777"), "Movement", "Roll", SubResource("AnimationNodeStateMachineTransition_brjyi"), "Roll", "Movement", SubResource("AnimationNodeStateMachineTransition_11qh6"), "Movement", "Walk", SubResource("AnimationNodeStateMachineTransition_tswhv"), "Movement", "Idle", SubResource("AnimationNodeStateMachineTransition_3m0ly"), "Movement", "Spit", SubResource("AnimationNodeStateMachineTransition_d23qq"), "Spit", "Movement", SubResource("AnimationNodeStateMachineTransition_7tix7"), "Movement", "CloseMouth", SubResource("AnimationNodeStateMachineTransition_ei5f5"), "CloseMouth", "Movement", SubResource("AnimationNodeStateMachineTransition_5y5t1"), "Movement", "Damaged", SubResource("AnimationNodeStateMachineTransition_4rrkf"), "Damaged", "Movement", SubResource("AnimationNodeStateMachineTransition_g3uyw"), "Movement", "Aiming", SubResource("AnimationNodeStateMachineTransition_snams"), "Aiming", "Movement", SubResource("AnimationNodeStateMachineTransition_45rvh"), "Movement", "Fainted", SubResource("AnimationNodeStateMachineTransition_2cmg6"), "Fainted", "Movement", SubResource("AnimationNodeStateMachineTransition_xm7nl"), "Movement", "RESET", SubResource("AnimationNodeStateMachineTransition_f610a"), "RESET", "Movement", SubResource("AnimationNodeStateMachineTransition_lacky")]
 graph_offset = Vector2(127, 196)
-
-[sub_resource type="LabelSettings" id="LabelSettings_t4js2"]
-font_size = 24
-outline_size = 9
-outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_3j5rn"]
-atlas = ExtResource("10_2cmg6")
-region = Rect2(384, 448, 64, 64)
 
 [sub_resource type="LabelSettings" id="LabelSettings_g4v7s"]
 font_size = 24
@@ -1480,9 +1475,10 @@ metadata/_custom_type_script = "uid://c4rw8aakdurjv"
 [node name="LifeComponent" type="Node" parent="." unique_id=1605112948]
 unique_name_in_owner = true
 script = ExtResource("4_snams")
-max_life = 1.0
+max_life = 3.0
 
 [node name="Label" type="Label" parent="." unique_id=2071724087]
+visible = false
 offset_left = -19.0
 offset_top = -238.0
 offset_right = 21.0
@@ -1529,6 +1525,17 @@ collide_with_areas = true
 collide_with_bodies = false
 script = ExtResource("11_ba6y3")
 
+[node name="RespawnTimeLabel" type="Label" parent="." unique_id=436844620]
+unique_name_in_owner = true
+visible = false
+offset_left = -36.0
+offset_top = -169.0
+offset_right = 68.0
+offset_bottom = -135.0
+text = "Save me!"
+label_settings = SubResource("LabelSettings_t4js2")
+horizontal_alignment = 1
+
 [node name="Visuals" type="Node2D" parent="." unique_id=550729901]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_2cmg6")
@@ -1552,44 +1559,6 @@ offset_top = -232.0
 offset_right = 42.666668
 offset_bottom = -198.0
 text = "P1"
-label_settings = SubResource("LabelSettings_t4js2")
-horizontal_alignment = 1
-
-[node name="SaveMeLabel" type="Label" parent="Visuals" unique_id=436844620]
-unique_name_in_owner = true
-visible = false
-offset_left = -48.0
-offset_top = -262.66666
-offset_right = 56.0
-offset_bottom = -228.66666
-text = "Save me!"
-label_settings = SubResource("LabelSettings_t4js2")
-horizontal_alignment = 1
-
-[node name="Revive" type="HBoxContainer" parent="Visuals" unique_id=1429480238]
-unique_name_in_owner = true
-offset_left = -117.33334
-offset_top = -261.33334
-offset_right = 142.66666
-offset_bottom = -227.33334
-size_flags_vertical = 4
-
-[node name="TextureRect" type="TextureRect" parent="Visuals/Revive" unique_id=1477595004]
-custom_maximum_size = Vector2(32, 32)
-layout_mode = 2
-texture = SubResource("AtlasTexture_3j5rn")
-
-[node name="SaveMeLabel2" type="Label" parent="Visuals/Revive" unique_id=586232032]
-unique_name_in_owner = true
-layout_mode = 2
-text = "(Hold): Revive"
-label_settings = SubResource("LabelSettings_t4js2")
-horizontal_alignment = 1
-
-[node name="ReviveText" type="Label" parent="Visuals/Revive" unique_id=1822724141]
-unique_name_in_owner = true
-layout_mode = 2
-text = "100%"
 label_settings = SubResource("LabelSettings_t4js2")
 horizontal_alignment = 1
 

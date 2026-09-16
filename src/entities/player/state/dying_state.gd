@@ -16,9 +16,8 @@ func _ready() -> void:
 func _on_enter_state(params: Dictionary = {}):
 	super(params)
 	
-	visuals.play("Damaged")
+	visuals.play("Fainted")
 	visuals.shake(10.0, duration)
-	visuals.sprite_rotation = 0.0
 	
 	time = duration
 
@@ -29,17 +28,10 @@ func _process(delta: float) -> void:
 	time -= delta
 	if time <= 0.0:
 		state_machine.travel_to("Inactive")
-	
-	visuals.sprite_rotation += delta * rotate_speed
-	visuals.scale = Vector2.ONE * remap(time, duration, 0.0, 1.0, 0.0)
 
 
 func _on_exit_state():
 	super()
-	
-	visuals.sprite_rotation = 0.0
-	visuals.scale = Vector2.ONE
-	visuals.play("RESET")
 
 
 func _physics_process(delta: float) -> void:
