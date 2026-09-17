@@ -1,13 +1,13 @@
 extends PlayerState
 
-const duration = 2.0
+@export var duration = 2.0
 
 var time = 0.0
 
 @onready var hitbox: Hitbox = %Hitbox
 @onready var hurtbox: Hurtbox = %Hurtbox
 @onready var vacuum_hurtbox: VacuumHurtbox = %VacuumHurtbox
-@onready var collision_shape: CollisionShape2D = $"../../CollisionShape2D"
+@onready var collision_shape: CollisionShape2D = %CollisionShape2D
 @onready var visuals: PlayerVisuals = %Visuals
 
 func _on_enter_state(params: Dictionary = {}):
@@ -25,7 +25,7 @@ func _on_enter_state(params: Dictionary = {}):
 func _physics_process(delta: float) -> void:
 	time -= delta
 	if time <= 0:
-		player.revive()
+		state_machine.travel_to("Fainted")
 	
 	%RespawnTimeLabel.text = "Respawn in %.1fs" % [time]
 

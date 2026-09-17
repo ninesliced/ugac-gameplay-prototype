@@ -19,6 +19,8 @@ extends EntityState
 @export var particles: CPUParticles2D
 @export var state_on_finished: StringName
 
+const EJECTED_COLLISION_LAYER = 10
+
 var direction: Vector2 = Vector2.ZERO
 var bounces: int = 0
 var speed: float = 0.0
@@ -61,6 +63,8 @@ func _on_enter_state(params: Dictionary = {}) -> void:
 		hitbox.damages_enemies = true
 		hitbox.damages_players = true
 		hitbox.enabled = false
+		
+		hitbox.set_collision_mask_value(EJECTED_COLLISION_LAYER, true)
 	
 	if particles:
 		particles.emitting = true
@@ -100,6 +104,8 @@ func _on_exit_state() -> void:
 		hitbox.enabled = _old_hitbox_state
 		hitbox.damages_enemies = _old_hitbox_damages_enemies
 		hitbox.damages_players = _old_hitbox_damages_players
+		
+		hitbox.set_collision_layer_value(EJECTED_COLLISION_LAYER, false)
 	
 	if particles:
 		particles.emitting = false

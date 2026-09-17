@@ -127,6 +127,7 @@ game_pause={
 2d_physics/layer_2="Terrain"
 2d_physics/layer_3="Player"
 2d_physics/layer_9="VacuumDetectable"
+2d_physics/layer_10="Ejected"
 
 [physics]
 

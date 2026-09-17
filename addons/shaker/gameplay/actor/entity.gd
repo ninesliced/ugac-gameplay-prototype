@@ -52,6 +52,10 @@ func capture_from(capturer: Entity, hide_entity: bool = true):
 	})
 
 
+func decelerate(delta: float):
+	velocity = velocity.move_toward(Vector2.ZERO, deceleration * delta)
+
+
 func uncapture(direction: Vector2):
 	if not state_machine.current_state is CapturedState:
 		return

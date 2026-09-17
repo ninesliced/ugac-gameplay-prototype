@@ -99,6 +99,8 @@ func _ready() -> void:
 	reference_sprite.animation_looped.connect(func(): animation_looped.emit())
 	reference_sprite.frame_changed.connect(func(): frame_changed.emit())
 	reference_sprite.sprite_frames_changed.connect(func(): sprite_frames_changed.emit())
+	
+	_run_for_all_children(func(spr: AnimatedSprite2D): spr.material = material)
 
 
 func _process(delta: float) -> void:

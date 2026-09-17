@@ -21,7 +21,7 @@ func _on_enter_state(params: Dictionary = {}):
 
 
 func _physics_process(delta: float) -> void:
-	super(delta)
+	enemy.decelerate(delta)
 	
 	var target = _get_closest_nest()
 	var target_velocity: Vector2

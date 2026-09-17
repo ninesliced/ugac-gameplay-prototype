@@ -20,7 +20,7 @@ func _on_enter_state(params: Dictionary = {}):
 
 
 func _physics_process(delta: float) -> void:
-	super(delta)
+	enemy.decelerate(delta)
 	
 	var target_velocity: Vector2
 	if target: # and enemy.global_position.distance_to(target.global_position) < detect_range:
@@ -33,7 +33,6 @@ func _physics_process(delta: float) -> void:
 			enemy.queue_free()
 	else:
 		target_velocity = Vector2.ZERO
-	
 	
 	enemy.velocity = enemy.velocity.move_toward(target_velocity, accel * delta)
 	enemy.move_and_slide()

@@ -13,15 +13,15 @@ func _on_enter_state(params: Dictionary = {}):
 	visuals.play("Aiming")
 
 
-func _on_exit_state():
-	super()
-	visuals.aim_indicator.hide()
-
-
 func _physics_process(delta: float) -> void:
-	super(delta)
+	player.decelerate(delta)
 	
 	visuals.shake(3, 0.1)
 	
 	if not player.is_action_pressed("game_action"):
 		player.exhale()
+
+
+func _on_exit_state():
+	super()
+	visuals.aim_indicator.hide()

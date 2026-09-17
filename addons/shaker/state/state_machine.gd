@@ -47,6 +47,8 @@ func travel_to_state(state: AbstractState, params: Dictionary = {}) -> void:
 		current_state._on_exit_state()
 		current_state.process_mode = Node.PROCESS_MODE_DISABLED
 	
+	params["previous_state_name"] = current_state_name
+	
 	state.process_mode = Node.PROCESS_MODE_INHERIT
 	state.is_in_state = true
 	state._on_enter_state(params)

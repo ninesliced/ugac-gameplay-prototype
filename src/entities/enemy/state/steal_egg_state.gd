@@ -15,6 +15,8 @@ func _on_enter_state(params: Dictionary = {}) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	enemy.decelerate(delta)
+	
 	collect_timer -= delta
 	
 	if collect_timer <= 0:
@@ -27,3 +29,5 @@ func _physics_process(delta: float) -> void:
 			state_machine.travel_to("WalkToSpawner")
 		else:
 			state_machine.travel_to("WalkToNest")
+	
+	entity.move_and_slide()

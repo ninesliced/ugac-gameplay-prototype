@@ -28,8 +28,6 @@ func _on_exit_state():
 
 
 func _physics_process(delta: float) -> void:
-	super(delta)
-	
 	player.velocity = direction * speed
 	player.move_and_slide()
 	

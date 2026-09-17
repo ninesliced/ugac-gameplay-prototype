@@ -16,13 +16,13 @@ func _on_enter_state(params: Dictionary = {}):
 	visuals.play("Spit")
 
 
-func _on_exit_state():
-	super()
-
-
 func _physics_process(delta: float) -> void:
-	super(delta)
+	player.decelerate(delta)
 	
 	time -= delta
 	if time <= 0.0:
 		state_machine.travel_to("Move")
+
+
+func _on_exit_state():
+	super()

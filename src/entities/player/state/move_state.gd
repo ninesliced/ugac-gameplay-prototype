@@ -3,16 +3,31 @@ extends PlayerState
 @export var walk_particles: CPUParticles2D
 
 @export var idle_velocity_threshold: float = 4.0
-@export var acceleration: float = 3500.0
+@export var acceleration: float = 5000.0
 @export var speed: float = 400.0
+
+@export var roll_cooldown: float = 0.2
+var _roll_cooldown_timer: float = 0.0
 
 @onready var visuals: PlayerVisuals = %Visuals
 
 var _is_walking: bool = false
 var revive_bar: float = 0.0
 
+
 func _ready() -> void:
 	super()
+
+
+func _on_enter_state(params: Dictionary = {}) -> void:
+	super(params)
+	var input_direction = player.get_vector("game_left", "game_right", "game_up", "game_down")
+	_is_walking = _check_should_walk(input_direction)
+	_apply_visual_state()
+	
+	if params.get("previous_state_name", "") == "Rolling":
+		_roll_cooldown_timer = roll_cooldown
+
 
 func _physics_process(delta: float) -> void:
 	super(delta)
@@ -22,48 +37,23 @@ func _physics_process(delta: float) -> void:
 	if input_direction:
 		player.velocity = player.velocity.move_toward(input_direction * speed, acceleration * delta)
 		player.walk_direction = input_direction.normalized()
-		
+	else:
+		player.decelerate(delta)
+	
 	player.move_and_slide()
 	
 	_update_animation_state(input_direction)
 	
-	var has_fainted_player_in_range = false
-	var fainted_player = null
-	var players = get_tree().get_nodes_in_group("player")
-	for p: Player in players:
-		if p != player and p.state_machine.current_state_name == "Fainted" and p.global_position.distance_to(player.global_position) < 100.0:
-			fainted_player = p
-			has_fainted_player_in_range = true
+	_roll_cooldown_timer = max(_roll_cooldown_timer - delta, 0.0)
 	
-	if has_fainted_player_in_range:
-		#%Revive.show()
-		#%ReviveText.text = "%.1f %%" % [100 * revive_bar / 3.0]
-		if player.is_action_pressed("game_action"):
-			revive_bar += delta
-			if revive_bar > 3.0:
-				fainted_player.revive()
+	if player.is_action_just_pressed("game_action"):
+		if player.has_captured_entity():
+			state_machine.travel_to("Aiming")
 		else:
-			revive_bar = 0.0
+			state_machine.travel_to("Inhaling")
 	
-	else:
-		#%Revive.hide()
-		revive_bar = 0.0
-		
-		if player.is_action_just_pressed("game_action"):
-			if player.has_captured_entity():
-				state_machine.travel_to("Aiming")
-			else:
-				state_machine.travel_to("Inhaling")
-			
-	if player.is_action_just_pressed("game_dash"):
+	if player.is_action_just_pressed("game_dash") and _roll_cooldown_timer <= 0:
 		state_machine.travel_to("Rolling")
-
-
-func _on_enter_state(params: Dictionary = {}) -> void:
-	super(params)
-	var input_direction = player.get_vector("game_left", "game_right", "game_up", "game_down")
-	_is_walking = _check_should_walk(input_direction)
-	_apply_visual_state()
 
 
 func _on_exit_state() -> void:

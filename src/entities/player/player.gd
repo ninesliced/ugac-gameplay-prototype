@@ -1,6 +1,8 @@
 class_name Player
 extends Actor
 
+signal damaged(amount: float, source: Node)
+
 @export var block_inputs := false
 
 @export_category("Imports")
@@ -169,13 +171,14 @@ func _on_hurtbox_hitbox_entered(area: Hitbox) -> void:
 	if not area.damages_players:
 		return
 	
-	damage(area.damage, area)
+	damage(area.damage, area.owner)
 
 
 func damage(value: float, damager: Node2D) -> void:
-	var success = life_component.damage(value)
+	var success = life_component.damage(value, damager)
 	if success:
 		state_machine.travel_to("Damaged", {"damager": damager, "damage": value})
+		damaged.emit()
 
 
 func revive():

@@ -13,28 +13,18 @@ extends PlayerState
 func _ready() -> void:
 	super()
 
+
 func _on_enter_state(params: Dictionary = {}):
 	super(params)
 	vacuum_raycast.enable()
 	
 	capturer_component.captured.connect(_capturer_component_captured)
 	
-	# Animation
 	visuals.play("Inhale")
 
 
-func _on_exit_state():
-	super()
-	vacuum_particles.emitting = false
-	vacuum_dust_particles.emitting = false
-	
-	capturer_component.captured.disconnect(_capturer_component_captured)
-	
-	vacuum_raycast.disable()
-
-
 func _physics_process(delta: float) -> void:
-	super(delta)
+	player.decelerate(delta)
 	
 	player.walk_direction = player.aim_direction
 	vacuum_raycast.angle = player.aim_angle
@@ -53,6 +43,15 @@ func _physics_process(delta: float) -> void:
 		state_machine.travel_to("Rolling")
 	
 	player.move_and_slide()
+
+
+func _on_exit_state():
+	vacuum_particles.emitting = false
+	vacuum_dust_particles.emitting = false
+	
+	capturer_component.captured.disconnect(_capturer_component_captured)
+	
+	vacuum_raycast.disable()
 
 
 func _capturer_component_captured(new_captured_entity: Entity) -> void:

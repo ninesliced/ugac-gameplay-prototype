@@ -5,8 +5,8 @@
 [ext_resource type="Texture2D" uid="uid://bmaipib8dmfy" path="res://assets/images/dust.png" id="2_eyb8l"]
 [ext_resource type="Texture2D" uid="uid://bvso2fk1d4xtm" path="res://assets/images/player/player_shadow.png" id="2_shwtd"]
 [ext_resource type="Script" uid="uid://cyn16ubhn38rx" path="res://addons/shaker/gameplay/area/hitbox.gd" id="8_shwtd"]
+[ext_resource type="Script" uid="uid://bp0tg4xr65stt" path="res://src/entities/egg/idle.gd" id="9_c6pds"]
 [ext_resource type="Script" uid="uid://dr7h4c573avu2" path="res://addons/shaker/gameplay/area/hurtbox.gd" id="9_ioro1"]
-[ext_resource type="Script" uid="uid://bpqjpkhit0v31" path="res://addons/shaker/state/state.gd" id="10_eyb8l"]
 [ext_resource type="Script" uid="uid://b5bpmm7c3jbhl" path="res://src/components/vacuum_hurtbox.gd" id="10_hxiek"]
 [ext_resource type="Script" uid="uid://drpttt3optl3r" path="res://addons/shaker/state/state_machine.gd" id="10_shwtd"]
 [ext_resource type="Script" uid="uid://u603175l0nxr" path="res://src/entities/egg/egg_captured_state.gd" id="11_y7obs"]
@@ -155,8 +155,9 @@ frame_progress = 0.13916513
 script = ExtResource("10_shwtd")
 default_state = &"Idle"
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=347763947]
-script = ExtResource("10_eyb8l")
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1585749248]
+script = ExtResource("9_c6pds")
+metadata/_custom_type_script = "uid://j76sj18t8bt2"
 
 [node name="Vacuumed" type="Node" parent="StateMachine" unique_id=30739782 node_paths=PackedStringArray("hitbox")]
 script = ExtResource("13_r5g7u")
