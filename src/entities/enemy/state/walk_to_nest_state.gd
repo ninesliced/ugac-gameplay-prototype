@@ -52,7 +52,7 @@ func _get_closest_nest():
 	for node in nodes:
 		var dist = enemy.global_position.distance_squared_to(node.global_position)
 		if enemy.targets_players:
-			if (node as Player).state_machine.current_state_name != "Fainted":
+			if (node as Player).is_targetable:
 				if dist < min_dist:
 					min_dist = dist
 					closest = node

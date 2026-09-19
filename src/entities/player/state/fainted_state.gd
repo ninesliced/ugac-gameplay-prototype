@@ -32,6 +32,8 @@ func _on_enter_state(params: Dictionary = {}):
 	life_component.heal(2)
 	
 	player.velocity = Vector2.ZERO
+	
+	player.is_targetable = false
 
 
 func _process(delta: float) -> void:
@@ -63,6 +65,8 @@ func _on_exit_state():
 	life_component.damaged.disconnect(_on_life_component_damaged)
 	
 	hurtbox.collision_layer = _old_collision_layer
+	
+	player.is_targetable = true
 
 
 func _finish():

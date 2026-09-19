@@ -35,6 +35,9 @@ var aim_angle := 0.0
 
 var splitscreen_cell: SplitscreenCell
 
+var is_dead: bool = false
+var is_targetable: bool = true
+
 @onready var life_component: LifeComponent = $LifeComponent
 @onready var visuals: PlayerVisuals = %Visuals
 
@@ -184,6 +187,8 @@ func damage(value: float, damager: Node2D) -> void:
 func revive():
 	life_component.set_life(life_component.max_life)
 	state_machine.travel_to("Move")
+	
+	is_dead = false
 
 
 func _on_user_removed(_user_index: int):

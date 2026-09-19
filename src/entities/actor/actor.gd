@@ -18,6 +18,10 @@ func _ready() -> void:
 			capturer_component = child
 
 
+func _physics_process(delta: float) -> void:
+	pass
+
+
 func die() -> void:
 	queue_free()
 	queued_death.emit()

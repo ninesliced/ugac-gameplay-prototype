@@ -18,28 +18,26 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	var n = 0
 	for spawner: EnemySpawner in get_tree().get_nodes_in_group("spawner"):
-		n += spawner.limit
-	$CanvasLayer/Control/EnemiesLeft.text = "Enemies left: %s" % [n]	
+		n += spawner.limit_count
+	#$UI/Control/EnemiesLeft.text = "Enemies left: %s" % [n]
 
 
 func start_game():
 	print("START GAME")
 	game_started = true
 	
-	for spawner in spawners:
-		spawner.activate()
-	
 	for player: Player in get_tree().get_nodes_in_group("player"):
 		player.life_component.set_life(player.life_component.max_life)
 	
 	%StartTutorial.hide()
-	$CanvasLayer/Control/EnemiesLeft2.show()
-	await get_tree().create_timer(5.0).timeout
-	$CanvasLayer/Control/EnemiesLeft2.hide()
+	$UI/Control/ProtectEggs.show()
+	await get_tree().create_timer(4.0).timeout
+	$UI/Control/ProtectEggs.hide()
 	
+	$WaveSpawner.activate()
 
 
 func _on_button_pressed() -> void:
-	for i in 6:
+	for i in 40:
 		InputManager.remove_user(i)
 	get_tree().reload_current_scene()

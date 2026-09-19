@@ -20,6 +20,8 @@ func _on_enter_state(params: Dictionary = {}):
 	time = duration
 	
 	%RespawnTimeLabel.show()
+	
+	player.is_targetable = false
 
 
 func _physics_process(delta: float) -> void:
@@ -38,3 +40,5 @@ func _on_exit_state():
 	
 	visuals.show()
 	%RespawnTimeLabel.hide()
+	
+	player.is_targetable = true

@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bmaipib8dmfy" path="res://assets/images/dust.png" id="2_wwrj5"]
 [ext_resource type="Script" uid="uid://b5bpmm7c3jbhl" path="res://src/components/vacuum_hurtbox.gd" id="3_vhl0w"]
 [ext_resource type="Script" uid="uid://cyn16ubhn38rx" path="res://addons/shaker/gameplay/area/hitbox.gd" id="4_64i7c"]
-[ext_resource type="Script" uid="uid://j76sj18t8bt2" path="res://addons/shaker/state/entity_state.gd" id="6_vim8y"]
+[ext_resource type="Script" uid="uid://c7acmtcjr4gqx" path="res://src/entities/rock/idle_state.gd" id="6_vim8y"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_sm5ja"]
 radius = 24.020824
@@ -25,6 +25,7 @@ radius = 32.38827
 
 [node name="Rock" unique_id=722895607 instance=ExtResource("1_b6ds3")]
 collision_mask = 2
+deceleration = 2500.0
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=964438931]
 shape = SubResource("CircleShape2D_sm5ja")

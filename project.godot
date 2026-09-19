@@ -51,6 +51,11 @@ folder_colors={
 player="Player"
 nest=""
 spawner=""
+enemy=""
+
+[gui]
+
+theme/custom_font="uid://c1e51rl2wq5o5"
 
 [input]
 

@@ -20,6 +20,9 @@ func _on_enter_state(params: Dictionary = {}):
 	visuals.shake(10.0, duration)
 	
 	time = duration
+	
+	player.is_targetable = false
+	player.is_dead = true
 
 
 func _process(delta: float) -> void:
@@ -32,6 +35,8 @@ func _process(delta: float) -> void:
 
 func _on_exit_state():
 	super()
+	
+	player.is_targetable = true
 
 
 func _physics_process(delta: float) -> void:

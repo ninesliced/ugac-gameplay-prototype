@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://brd5tpwe1rl73" path="res://src/entities/enemy/enemy_vacuumed_state.gd" id="14_yml0g"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cmbxo"]
-radius = 8.0
+radius = 23.021729
 
 [sub_resource type="Curve" id="Curve_jkr0c"]
 _data = [Vector2(0, 1), 0.0, -0.82866544, 0, 0, Vector2(1, 0), -0.88153005, 0.0, 0, 0]
@@ -41,19 +41,20 @@ radius = 27.018513
 [sub_resource type="CircleShape2D" id="CircleShape2D_yml0g"]
 radius = 45.01111
 
-[node name="Enemy" type="CharacterBody2D" unique_id=722895607 node_paths=PackedStringArray("hitbox")]
+[node name="Enemy" type="CharacterBody2D" unique_id=722895607 node_paths=PackedStringArray("hitbox") groups=["enemy"]]
 collision_mask = 2
 script = ExtResource("2_x2urn")
 hitbox = NodePath("Hitbox")
+is_capturable = null
+is_vacuumable = null
 deceleration = 500.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=671228925]
-visible = false
-shape = SubResource("CircleShape2D_cmbxo")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=80993196]
 scale = Vector2(0.7521367, 0.75213677)
 texture = ExtResource("2_jkr0c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=671228925]
+shape = SubResource("CircleShape2D_cmbxo")
 
 [node name="EjectedParticles" type="CPUParticles2D" parent="." unique_id=1184248200]
 emitting = false

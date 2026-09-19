@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	pass
+	super(delta)
 
 
 func _on_life_component_damaged(amount: float) -> void:
