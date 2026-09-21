@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://yjx5bfnvbv4w"]
+
+[ext_resource type="Texture2D" uid="uid://bqa2o6yfgop51" path="res://assets/images/ui/wave_indicator_dot.png" id="1_h3im3"]
+
+[node name="WaveIndicatorSeparatorDot" type="TextureRect" unique_id=1291045373]
+size_flags_vertical = 4
+texture = ExtResource("1_h3im3")
+stretch_mode = 3

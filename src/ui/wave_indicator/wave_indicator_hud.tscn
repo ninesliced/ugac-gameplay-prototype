@@ -1,0 +1,125 @@
+[gd_scene format=3 uid="uid://di55sb0w8gl62"]
+
+[ext_resource type="Script" uid="uid://c86masemih1ks" path="res://src/ui/wave_indicator/wave_indicator_hud.gd" id="1_3jrxs"]
+[ext_resource type="Shader" uid="uid://c6q7o2vsfxx7n" path="res://src/ui/wave_indicator/wave_indicator_hud_background.gdshader" id="2_kai6b"]
+[ext_resource type="Texture2D" uid="uid://c2r5fqkjngquq" path="res://assets/images/ui/wave_indicator_background.png" id="3_4qjnl"]
+[ext_resource type="Shader" uid="uid://i0qhe52xvdlc" path="res://src/ui/wave_indicator/wave_indicator_border.gdshader" id="4_hlvgc"]
+[ext_resource type="Texture2D" uid="uid://bvhsfr1qn84wk" path="res://assets/images/ui/wave_indicator_border.png" id="5_ed8eq"]
+[ext_resource type="Shader" uid="uid://c3bc5gnv6d07e" path="res://src/ui/wave_indicator/wave_indicator_highlight_circle.gdshader" id="6_liypm"]
+[ext_resource type="Texture2D" uid="uid://c33pyvwfalmmq" path="res://assets/images/ui/wave_indicator_highlight_circle.png" id="7_l0jdh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c2ga7"]
+shader = ExtResource("2_kai6b")
+shader_parameter/rotation = 0.115
+shader_parameter/scroll_speed = 0.15
+shader_parameter/scale = 0.75
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8ss25"]
+shader = ExtResource("4_hlvgc")
+shader_parameter/scale = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fo2gp"]
+shader = ExtResource("6_liypm")
+shader_parameter/shadow_color = Color(0, 0, 0, 0.3)
+shader_parameter/shadow_offset = Vector2(0, 0.04)
+shader_parameter/rotate_speed = 0.3
+
+[node name="WaveIndicatorHUD" type="Control" unique_id=1417309792]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+script = ExtResource("1_3jrxs")
+
+[node name="BackgroundPanel" type="PanelContainer" parent="." unique_id=831190760]
+unique_name_in_owner = true
+propagate_maximum_size = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -960.0
+offset_top = -341.5
+offset_right = 960.0
+offset_bottom = -166.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+mouse_filter = 1
+
+[node name="BackgroundBanner" type="TextureRect" parent="BackgroundPanel" unique_id=64507925]
+material = SubResource("ShaderMaterial_c2ga7")
+layout_mode = 2
+texture = ExtResource("3_4qjnl")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="Borders" type="MarginContainer" parent="BackgroundPanel" unique_id=2036939283]
+layout_mode = 2
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="BorderTop" type="TextureRect" parent="BackgroundPanel/Borders" unique_id=1409903636]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_8ss25")
+layout_mode = 2
+size_flags_vertical = 0
+offset_transform_enabled = true
+texture = ExtResource("5_ed8eq")
+stretch_mode = 1
+
+[node name="BorderBottom" type="TextureRect" parent="BackgroundPanel/Borders" unique_id=1872464149]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_8ss25")
+layout_mode = 2
+size_flags_vertical = 8
+offset_transform_enabled = true
+texture = ExtResource("5_ed8eq")
+stretch_mode = 1
+
+[node name="HighlightCircle" type="TextureRect" parent="." unique_id=1815961485]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_fo2gp")
+custom_minimum_size = Vector2(350, 350)
+layout_mode = 0
+offset_left = 784.0
+offset_top = 110.0
+offset_right = 1136.0
+offset_bottom = 462.0
+size_flags_horizontal = 4
+offset_transform_enabled = true
+texture = ExtResource("7_l0jdh")
+stretch_mode = 3
+
+[node name="Numbers" type="HBoxContainer" parent="." unique_id=56452625]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -430.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 2
+offset_transform_enabled = true
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="WaveIndicatorLabel" parent="Numbers" unique_id=257399872 instance_placeholder="res://src/ui/wave_indicator/wave_indicator_label.tscn"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="WaveIndicatorSeparatorDot" parent="Numbers" unique_id=1291045373 instance_placeholder="res://src/ui/wave_indicator/wave_indicator_separator_dot.tscn"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1138285186]
+layout_mode = 0
+offset_top = -254.0
+offset_right = 40.0
+offset_bottom = -214.0

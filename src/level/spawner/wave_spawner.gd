@@ -10,6 +10,8 @@ var current_wave
 var spawners: Array[EnemySpawner] = []
 var active: bool = false
 
+@export var intermission_duration = 5.0
+
 # REMOVEME, to change later to resources or something 
 const waves = [
 	{
@@ -81,14 +83,16 @@ func activate():
 
 
 func start_wave():
+	wave_started.emit()
+	
+	await get_tree().create_timer(intermission_duration).timeout
+	
 	for spawner in spawners:
 		@warning_ignore("integer_division")
 		spawner.limit = int(current_wave["amount"]) / spawners.size()
 		spawner.min_time = current_wave["delay_min"]
 		spawner.max_time = current_wave["delay_max"]
 		spawner.activate()
-	
-	wave_started.emit()
 
 
 func next_wave():

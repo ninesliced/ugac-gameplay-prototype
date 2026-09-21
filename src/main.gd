@@ -19,7 +19,6 @@ func _process(delta: float) -> void:
 	var n = 0
 	for spawner: EnemySpawner in get_tree().get_nodes_in_group("spawner"):
 		n += spawner.limit_count
-	#$UI/Control/EnemiesLeft.text = "Enemies left: %s" % [n]
 
 
 func start_game():
@@ -28,11 +27,6 @@ func start_game():
 	
 	for player: Player in get_tree().get_nodes_in_group("player"):
 		player.life_component.set_life(player.life_component.max_life)
-	
-	%StartTutorial.hide()
-	$UI/Control/ProtectEggs.show()
-	await get_tree().create_timer(4.0).timeout
-	$UI/Control/ProtectEggs.hide()
 	
 	$WaveSpawner.activate()
 

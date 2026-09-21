@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cfl0pyno4kmqi"]
+
+[ext_resource type="Script" uid="uid://bqkhh8cksww51" path="res://src/ui/wave_indicator/wave_indicator_label.gd" id="1_uu5a3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sm5ja"]
+font_size = 97
+shadow_color = Color(0, 0, 0, 0.19607843)
+shadow_offset = Vector2(0, 8)
+
+[node name="WaveIndicatorLabel" type="Label" unique_id=257399872]
+custom_minimum_size = Vector2(80, 0)
+offset_transform_enabled = true
+offset_transform_scale = Vector2(0.5, 0.5)
+text = "1"
+label_settings = SubResource("LabelSettings_sm5ja")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_uu5a3")
