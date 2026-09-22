@@ -5,7 +5,7 @@ var collect_timer: float = 0.0
 
 var nest: Nest
 
-@onready var capturer_component: CapturerComponent = $"../../CapturerComponent"
+@onready var capturer_component: CapturerComponent = %CapturerComponent
 
 func _on_enter_state(params: Dictionary = {}) -> void:
 	nest = params.get("nest", null)

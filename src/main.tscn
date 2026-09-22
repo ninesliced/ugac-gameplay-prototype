@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://bsi6xvuvuaiac" path="res://src/level/spawner/wave_spawner.gd" id="10_d3u4l"]
 [ext_resource type="PackedScene" uid="uid://b6hix4bb07kyl" path="res://src/entities/rock/rock.tscn" id="13_srxbw"]
 [ext_resource type="PackedScene" uid="uid://di55sb0w8gl62" path="res://src/ui/wave_indicator/wave_indicator_hud.tscn" id="19_sta5p"]
+[ext_resource type="PackedScene" uid="uid://hymh7rw1w80d" path="res://src/entities/enemy/egg_stealer/enemy_egg_stealer.tscn" id="20_sif16"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jyhfs"]
 texture = ExtResource("1_sugp2")
@@ -117,7 +118,7 @@ sources/1 = SubResource("TileSetAtlasSource_tefeu")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rqmti"]
 shader = ExtResource("5_okx7f")
-shader_parameter/variant_count = 2.0
+shader_parameter/variant_count = 0.0
 shader_parameter/frame_count = 0.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_43aqp"]
@@ -203,7 +204,7 @@ scale = Vector2(0.39999998, 0.39999998)
 multimesh = SubResource("MultiMesh_sm5ja")
 texture = ExtResource("5_tb146")
 script = ExtResource("7_sta5p")
-weights = Array[float]([10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 3.0, 3.0, 0.5, 10.0, 3.0, 3.0, 3.0, 3.0])
+weights = Array[float]([10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 3.0, 3.0, 1.0, 5.0, 3.0, 3.0, 3.0, 3.0])
 
 [node name="WaveSpawner" type="Node2D" parent="." unique_id=1705413175]
 script = ExtResource("10_d3u4l")
@@ -474,6 +475,15 @@ z_index = 300
 
 [node name="WaveIndicatorHUD" parent="UI" unique_id=1417309792 instance=ExtResource("19_sta5p")]
 visible = false
+
+[node name="EnemyEggStealer" parent="." unique_id=1806438237 instance=ExtResource("20_sif16")]
+position = Vector2(696, 224)
+
+[node name="EnemyEggStealer2" parent="." unique_id=572078023 instance=ExtResource("20_sif16")]
+position = Vector2(1324, 340)
+
+[node name="EnemyEggStealer3" parent="." unique_id=889403651 instance=ExtResource("20_sif16")]
+position = Vector2(671, 824)
 
 [connection signal="wave_started" from="WaveSpawner" to="UI" method="_on_wave_spawner_wave_started"]
 [connection signal="pressed" from="UI/Control/GameOver/Button" to="." method="_on_button_pressed"]

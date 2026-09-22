@@ -15,7 +15,7 @@ void vertex() {
 	vec2 shifted_uv = vec2(UV);
 	shifted_uv.y *= -1.0;
 	
-	shifted_uv.y = (shifted_uv.y + variant) / variant_count;
+	shifted_uv.y = (shifted_uv.y + variant + 1.0) / variant_count;
 	
 	float frame = initial_frame + floor(TIME / frame_duration);
 	frame = mod(frame, frame_count);

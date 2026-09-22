@@ -13,16 +13,14 @@ script = ExtResource("1_kidy7")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1278400254]
 script = ExtResource("2_g1i6l")
-default_state = &"Move"
 
 [node name="Vacuumed" type="Node" parent="StateMachine" unique_id=464960255]
 script = ExtResource("3_4k014")
-state_on_finished = &"Move"
-state_on_captured = &"Captured"
 metadata/_custom_type_script = "uid://hq3hve0msv3h"
 
-[node name="Captured" type="Node" parent="StateMachine" unique_id=193312774]
+[node name="Captured" type="Node" parent="StateMachine" unique_id=1810445854]
 script = ExtResource("4_53dhe")
+metadata/_custom_type_script = "uid://dotb5rramnj33"
 
 [node name="Ejected" type="Node" parent="StateMachine" unique_id=957872202]
 script = ExtResource("5_53dhe")

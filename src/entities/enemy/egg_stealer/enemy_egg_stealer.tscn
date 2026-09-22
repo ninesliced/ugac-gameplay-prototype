@@ -1,0 +1,112 @@
+[gd_scene format=3 uid="uid://hymh7rw1w80d"]
+
+[ext_resource type="PackedScene" uid="uid://dw6ebxyhf7iy0" path="res://src/entities/enemy/enemy.tscn" id="1_0tqlm"]
+[ext_resource type="Script" uid="uid://be2ig028o6gpa" path="res://src/entities/enemy/egg_stealer/enemy_egg_stealer.gd" id="1_16f63"]
+[ext_resource type="Script" uid="uid://c4rw8aakdurjv" path="res://src/components/entity_components/capturer_component.gd" id="3_8jv8c"]
+[ext_resource type="Texture2D" uid="uid://bmaipib8dmfy" path="res://assets/images/dust.png" id="3_guohj"]
+[ext_resource type="Texture2D" uid="uid://djrkpgu4uhtq" path="res://assets/images/enemy_generic.png" id="3_vken6"]
+[ext_resource type="Script" uid="uid://b5bpmm7c3jbhl" path="res://src/components/vacuum_hurtbox.gd" id="3_ycy5p"]
+[ext_resource type="Script" uid="uid://lwa5j0jubmh6" path="res://src/entities/enemy/state/walk_to_nest_state.gd" id="6_k28y0"]
+[ext_resource type="Script" uid="uid://bblvl36o6ljws" path="res://src/entities/enemy/state/steal_egg_state.gd" id="7_8jv8c"]
+[ext_resource type="Script" uid="uid://bpqg0ahdytw3o" path="res://src/entities/enemy/state/walk_to_spawner.gd" id="8_u2wph"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k28y0"]
+radius = 23.021729
+
+[sub_resource type="Curve" id="Curve_t1xfv"]
+_data = [Vector2(0, 1), 0.0, -0.82866544, 0, 0, Vector2(1, 0), -0.88153005, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_5qc57"]
+colors = PackedColorArray(0.62160003, 0.6808, 0.74, 1, 1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t1xfv"]
+radius = 24.020824
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5qc57"]
+radius = 27.018513
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_guohj"]
+radius = 45.01111
+
+[node name="EnemyEggStealer" unique_id=722895607 node_paths=PackedStringArray("hitbox") instance=ExtResource("1_0tqlm")]
+collision_mask = 2
+script = ExtResource("1_16f63")
+hitbox = NodePath("Hitbox")
+deceleration = 500.0
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=964438931]
+shape = SubResource("CircleShape2D_k28y0")
+
+[node name="LifeComponent" parent="." index="1" unique_id=1358917031]
+unique_name_in_owner = true
+max_life = 2.0
+
+[node name="CapturerComponent" type="Node" parent="." index="2" unique_id=1229803053]
+unique_name_in_owner = true
+script = ExtResource("3_8jv8c")
+metadata/_custom_type_script = "uid://c4rw8aakdurjv"
+
+[node name="EjectedParticles" type="CPUParticles2D" parent="." index="3" unique_id=1153789080]
+emitting = false
+amount = 30
+texture = ExtResource("3_guohj")
+lifetime = 0.4
+emission_shape = 1
+emission_sphere_radius = 6.2
+gravity = Vector2(0, 0)
+scale_amount_min = 0.3
+scale_amount_max = 0.5
+scale_amount_curve = SubResource("Curve_t1xfv")
+color_initial_ramp = SubResource("Gradient_5qc57")
+
+[node name="CollisionShape2D" parent="Hitbox" parent_id_path=PackedInt32Array(1909221283) index="0" unique_id=1405724956]
+visible = true
+shape = SubResource("CircleShape2D_t1xfv")
+
+[node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1679904206) index="0" unique_id=1336668880]
+visible = true
+shape = SubResource("CircleShape2D_5qc57")
+
+[node name="VacuumHurtbox" type="Area2D" parent="." index="6" unique_id=1630315067 node_paths=PackedStringArray("vacuumed_state")]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("3_ycy5p")
+vacuumed_state = NodePath("../StateMachine/Vacuumed")
+metadata/_custom_type_script = "uid://b5bpmm7c3jbhl"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VacuumHurtbox" index="0" unique_id=1314483258]
+shape = SubResource("CircleShape2D_guohj")
+debug_color = Color(0.3666348, 0.6161351, 9.62615e-07, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals" parent_id_path=PackedInt32Array(643299667) index="0" unique_id=531697479]
+unique_name_in_owner = true
+scale = Vector2(0.7521367, 0.75213677)
+texture = ExtResource("3_vken6")
+
+[node name="StateMachine" parent="." index="8" unique_id=1278400254]
+default_state = &"WalkToNest"
+
+[node name="WalkToNest" type="Node" parent="StateMachine" index="0" unique_id=877572041]
+script = ExtResource("6_k28y0")
+follow_speed = 150.0
+detect_range = 5000.0
+
+[node name="StealEgg" type="Node" parent="StateMachine" index="1" unique_id=840123477]
+script = ExtResource("7_8jv8c")
+metadata/_custom_type_script = "uid://6vnnk6v0hqq0"
+
+[node name="WalkToSpawner" type="Node" parent="StateMachine" index="2" unique_id=1772787734]
+script = ExtResource("8_u2wph")
+follow_speed = 150.0
+metadata/_custom_type_script = "uid://6vnnk6v0hqq0"
+
+[node name="Vacuumed" parent="StateMachine" index="3" unique_id=464960255]
+state_on_finished = &"WalkToNest"
+
+[node name="Captured" parent="StateMachine" index="4" unique_id=1810445854 node_paths=PackedStringArray("hitbox")]
+hitbox = NodePath("../../Hitbox")
+
+[node name="Ejected" parent="StateMachine" index="5" unique_id=957872202 node_paths=PackedStringArray("particles")]
+particles = NodePath("../../EjectedParticles")
+state_on_finished = &"WalkToNest"

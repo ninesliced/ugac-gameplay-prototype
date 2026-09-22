@@ -1,7 +1,8 @@
 class_name EnemySpawner
 extends Node2D
 
-const ENEMY = preload("uid://b1dkuou1ki3ra")
+#const ENEMY = preload("uid://b1dkuou1ki3ra")
+const ENEMY = preload("uid://hymh7rw1w80d")
 
 @export var min_time = 20.0
 @export var max_time = 35.0

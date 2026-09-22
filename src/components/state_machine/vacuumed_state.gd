@@ -9,7 +9,7 @@ extends EntityState
 
 @export_group("State Transitions & Hitbox")
 @export var state_on_finished: StringName
-@export var state_on_captured: StringName
+@export var state_on_captured: StringName = &"Captured"
 @export var hitbox: Hitbox
 
 var target: Node2D = null
