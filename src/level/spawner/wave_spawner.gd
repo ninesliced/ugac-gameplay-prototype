@@ -64,13 +64,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	var enemy_count: int = 0
-	for spawner in spawners:
-		enemy_count += spawner.limit_count
-	
-	enemy_count += get_tree().get_nodes_in_group("enemy").size()
-	
-	$"../UI/Control/EnemiesLeft".text = "Enemies left: %d" % [enemy_count]
+	var enemy_count = get_tree().get_nodes_in_group("enemy").size()
 	
 	if active and enemy_count == 0:
 		next_wave()

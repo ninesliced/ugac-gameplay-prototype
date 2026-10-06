@@ -16,6 +16,13 @@ func _enter_tree() -> void:
 	collision_layer = 0
 	collision_mask = 0
 	set_collision_layer_value(VACUUM_COLLISION_LAYER, true)
+	
+	if Engine.is_editor_hint() and get_parent() is Entity:
+		var state_machine = get_parent().get_node_or_null("StateMachine")
+		if state_machine:
+			for child in state_machine.get_children():
+				if child is VacuumedState:
+					vacuumed_state = child
 
 
 ## Called by [VacuumRaycast] when touching this Hurtbox. 

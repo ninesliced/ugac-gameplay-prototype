@@ -1,0 +1,74 @@
+[gd_scene format=3 uid="uid://dbhjdxqo0j204"]
+
+[ext_resource type="PackedScene" uid="uid://dw6ebxyhf7iy0" path="res://src/entities/enemy/enemy.tscn" id="1_n656p"]
+[ext_resource type="Script" uid="uid://dsnlx8ixcahrk" path="res://src/entities/enemy/player_chaser/enemy_player_chaser.gd" id="2_dvxpt"]
+[ext_resource type="Script" uid="uid://b6spayscpfchx" path="res://src/components/state_machine/follow_player.gd" id="2_hcepu"]
+[ext_resource type="Script" uid="uid://cpftxe4p44vre" path="res://src/entities/enemy/player_chaser/idle_state.gd" id="2_ukwkv"]
+[ext_resource type="Script" uid="uid://b5bpmm7c3jbhl" path="res://src/components/vacuum_hurtbox.gd" id="3_dvxpt"]
+[ext_resource type="Texture2D" uid="uid://dxbw6ay3quqfr" path="res://assets/images/pot.png" id="4_dvxpt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ukwkv"]
+radius = 33.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cy4tm"]
+radius = 34.234486
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dvxpt"]
+radius = 49.0408
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sm5ja"]
+radius = 64.28063
+
+[node name="EnemyPlayerChaser" unique_id=722895607 instance=ExtResource("1_n656p")]
+script = ExtResource("2_dvxpt")
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=964438931]
+shape = SubResource("CircleShape2D_ukwkv")
+
+[node name="LifeComponent" parent="." index="1" unique_id=1358917031]
+max_life = 2.0
+
+[node name="Hitbox" parent="." index="2" unique_id=1909221283]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" parent="Hitbox" index="0" unique_id=1405724956]
+visible = true
+shape = SubResource("CircleShape2D_cy4tm")
+
+[node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1679904206) index="0" unique_id=1336668880]
+visible = true
+shape = SubResource("CircleShape2D_dvxpt")
+
+[node name="VacuumHurtbox" type="Area2D" parent="." index="4" unique_id=1988635889 node_paths=PackedStringArray("vacuumed_state")]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("3_dvxpt")
+vacuumed_state = NodePath("../StateMachine/Vacuumed")
+metadata/_custom_type_script = "uid://b5bpmm7c3jbhl"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VacuumHurtbox" index="0" unique_id=536152840]
+shape = SubResource("CircleShape2D_sm5ja")
+debug_color = Color(0.30761203, 0.62741065, 3.85046e-07, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals" parent_id_path=PackedInt32Array(643299667) index="0" unique_id=1043060812]
+modulate = Color(1, 0.120000005, 0.91199964, 1)
+scale = Vector2(5.237275, 5.237275)
+texture = ExtResource("4_dvxpt")
+
+[node name="StateMachine" parent="." index="6" unique_id=1278400254]
+default_state = &"Idle"
+
+[node name="Idle" type="Node" parent="StateMachine" index="0" unique_id=733965560]
+script = ExtResource("2_ukwkv")
+metadata/_custom_type_script = "uid://6vnnk6v0hqq0"
+
+[node name="FollowPlayer" type="Node" parent="StateMachine" index="1" unique_id=631839927]
+script = ExtResource("2_hcepu")
+speed = 150.0
+metadata/_custom_type_script = "uid://6vnnk6v0hqq0"
+
+[node name="Vacuumed" parent="StateMachine" index="2" unique_id=464960255]
+state_on_finished = &"Idle"
+
+[node name="Ejected" parent="StateMachine" index="4" unique_id=957872202]
+state_on_finished = &"Idle"

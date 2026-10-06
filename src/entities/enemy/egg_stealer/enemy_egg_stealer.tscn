@@ -21,21 +21,21 @@ point_count = 2
 colors = PackedColorArray(0.62160003, 0.6808, 0.74, 1, 1, 1, 1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_t1xfv"]
-radius = 24.020824
+radius = 29.017237
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5qc57"]
-radius = 27.018513
+radius = 36.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_guohj"]
 radius = 45.01111
 
 [node name="EnemyEggStealer" unique_id=722895607 node_paths=PackedStringArray("hitbox") instance=ExtResource("1_0tqlm")]
-collision_mask = 2
 script = ExtResource("1_16f63")
 hitbox = NodePath("Hitbox")
 deceleration = 500.0
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=964438931]
+z_index = 1
 shape = SubResource("CircleShape2D_k28y0")
 
 [node name="LifeComponent" parent="." index="1" unique_id=1358917031]
@@ -62,10 +62,12 @@ color_initial_ramp = SubResource("Gradient_5qc57")
 
 [node name="CollisionShape2D" parent="Hitbox" parent_id_path=PackedInt32Array(1909221283) index="0" unique_id=1405724956]
 visible = true
+z_index = 1
 shape = SubResource("CircleShape2D_t1xfv")
 
 [node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1679904206) index="0" unique_id=1336668880]
 visible = true
+z_index = 1
 shape = SubResource("CircleShape2D_5qc57")
 
 [node name="VacuumHurtbox" type="Area2D" parent="." index="6" unique_id=1630315067 node_paths=PackedStringArray("vacuumed_state")]
@@ -103,9 +105,6 @@ metadata/_custom_type_script = "uid://6vnnk6v0hqq0"
 
 [node name="Vacuumed" parent="StateMachine" index="3" unique_id=464960255]
 state_on_finished = &"WalkToNest"
-
-[node name="Captured" parent="StateMachine" index="4" unique_id=1810445854 node_paths=PackedStringArray("hitbox")]
-hitbox = NodePath("../../Hitbox")
 
 [node name="Ejected" parent="StateMachine" index="5" unique_id=957872202 node_paths=PackedStringArray("particles")]
 particles = NodePath("../../EjectedParticles")

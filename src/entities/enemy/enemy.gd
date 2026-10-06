@@ -14,10 +14,10 @@ func _ready() -> void:
 
 
 func _on_life_component_died() -> void:
-	die()
+	die.call_deferred()
 
 
-func _on_life_component_damaged(amount: float) -> void:
+func _on_life_component_damaged(amount: float, damager: Node2D) -> void:
 	var old = visuals.modulate
 	visuals.modulate = Color(20.0, 20.0, 20.0, 1.0)
 	await get_tree().create_timer(0.3, false).timeout

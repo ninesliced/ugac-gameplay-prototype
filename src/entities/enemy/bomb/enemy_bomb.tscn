@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://dolki8o5ip3f0"]
+
+[ext_resource type="PackedScene" uid="uid://dw6ebxyhf7iy0" path="res://src/entities/enemy/enemy.tscn" id="1_iarif"]
+[ext_resource type="Script" uid="uid://cjaqt8v76dfws" path="res://src/entities/enemy/bomb/enemy_bomb.gd" id="2_867cd"]
+[ext_resource type="Script" uid="uid://b5bpmm7c3jbhl" path="res://src/components/vacuum_hurtbox.gd" id="2_b0wkk"]
+[ext_resource type="Texture2D" uid="uid://by50ky5yu4ujx" path="res://assets/images/enemy/bomb/enemy_bomb.png" id="2_kgqe2"]
+[ext_resource type="Script" uid="uid://dkul4p6ro1pny" path="res://src/components/state_machine/random_walk_state.gd" id="5_08add"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kgqe2"]
+radius = 32.01562
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b0wkk"]
+radius = 34.058773
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6kwrq"]
+radius = 41.04875
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sm5ja"]
+radius = 78.51752
+
+[node name="EnemyBomb" unique_id=722895607 instance=ExtResource("1_iarif")]
+script = ExtResource("2_867cd")
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=964438931]
+visible = false
+z_index = 1
+shape = SubResource("CircleShape2D_kgqe2")
+
+[node name="LifeComponent" parent="." index="1" unique_id=1358917031]
+max_life = 1.0
+
+[node name="CollisionShape2D" parent="Hitbox" parent_id_path=PackedInt32Array(1909221283) index="0" unique_id=1405724956]
+z_index = 1
+shape = SubResource("CircleShape2D_b0wkk")
+
+[node name="CollisionShape2D" parent="Hurtbox" parent_id_path=PackedInt32Array(1679904206) index="0" unique_id=1336668880]
+z_index = 1
+shape = SubResource("CircleShape2D_6kwrq")
+
+[node name="VacuumHurtbox" type="Area2D" parent="." index="4" unique_id=1621137319 node_paths=PackedStringArray("vacuumed_state")]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("2_b0wkk")
+vacuumed_state = NodePath("../StateMachine/Vacuumed")
+metadata/_custom_type_script = "uid://b5bpmm7c3jbhl"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VacuumHurtbox" index="0" unique_id=998808747]
+visible = false
+shape = SubResource("CircleShape2D_sm5ja")
+debug_color = Color(0.37684596, 0.61436635, 3.85046e-07, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals" parent_id_path=PackedInt32Array(643299667) index="0" unique_id=1750693343]
+scale = Vector2(0.6933333, 0.6933333)
+texture = ExtResource("2_kgqe2")
+
+[node name="StateMachine" parent="." index="6" unique_id=1278400254]
+default_state = &"Idle"
+
+[node name="Idle" type="Node" parent="StateMachine" index="0" unique_id=284819196]
+script = ExtResource("5_08add")
+metadata/_custom_type_script = "uid://6vnnk6v0hqq0"
+
+[node name="Vacuumed" parent="StateMachine" index="1" unique_id=464960255]
+state_on_finished = &"Idle"
+
+[node name="Ejected" parent="StateMachine" index="3" unique_id=957872202]
+state_on_finished = &"Idle"

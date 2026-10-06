@@ -157,12 +157,10 @@ func _run_for_all_nonref_children(f: Callable):
 
 
 func _sync_children():
-	print("Syncing StackedAnimatedSprite children...")
 	_run_for_all_children(func(spr: AnimatedSprite2D):
 		if spr.name == reference_sprite.name:
 			return
 		
-		print("- Syncing " + spr.name)
 		spr.speed_scale = reference_sprite.speed_scale
 		spr.centered = reference_sprite.centered
 		spr.offset = reference_sprite.offset
@@ -203,4 +201,3 @@ func _sync_children():
 		
 		spr.queue_redraw()
 	)
-	print("Syncing StackedAnimatedSprite children done.")

@@ -10,6 +10,9 @@ signal queued_death
 
 var capturer_component: CapturerComponent
 
+var navigation_enabled: bool = false
+var navigation_target: Vector2
+
 func _ready() -> void:
 	super()
 	
@@ -25,3 +28,10 @@ func _physics_process(delta: float) -> void:
 func die() -> void:
 	queue_free()
 	queued_death.emit()
+
+
+func get_navigation_vector() -> Vector2:
+	## TODO replace this with actual navigation 
+	if not navigation_enabled:
+		return Vector2.ZERO
+	return global_position.direction_to(navigation_target)

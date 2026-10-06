@@ -1,9 +1,10 @@
 class_name Player
 extends Actor
 
-signal damaged(amount: float, source: Node)
+signal damaged(amount: float, source: Node2D)
 
 @export var block_inputs := false
+@export var revive_invicible_time: float = 3.0
 
 @export_category("Imports")
 @export var vacuum_raycast: VacuumRaycast
@@ -174,18 +175,22 @@ func _on_hurtbox_hitbox_entered(area: Hitbox) -> void:
 	if not area.damages_players:
 		return
 	
-	damage(area.damage, area.owner)
+	var own = area.owner
+	if not area.owner:
+		own = area
+	damage(area.damage, own)
 
 
 func damage(value: float, damager: Node2D) -> void:
 	var success = life_component.damage(value, damager)
 	if success:
 		state_machine.travel_to("Damaged", {"damager": damager, "damage": value})
-		damaged.emit()
+		damaged.emit(damager)
 
 
 func revive():
 	life_component.set_life(life_component.max_life)
+	life_component.set_cooldown(revive_invicible_time)
 	state_machine.travel_to("Move")
 	
 	is_dead = false

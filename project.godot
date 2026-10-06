@@ -20,6 +20,7 @@ config/icon="uid://dirdm44lds8cl"
 
 MultiplayerInput="*uid://sgpjuwqex1fu"
 InputManager="*uid://cvairblcppl1i"
+Enemies="*uid://lq6ihehlbaog"
 
 [debug]
 

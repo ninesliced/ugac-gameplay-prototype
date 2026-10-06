@@ -1,11 +1,14 @@
 [gd_scene format=3 uid="uid://dw6ebxyhf7iy0"]
 
 [ext_resource type="PackedScene" uid="uid://0oyhaxu6arcd" path="res://src/entities/actor/actor.tscn" id="1_toqcl"]
+[ext_resource type="Script" uid="uid://b3olu8a6tmsjj" path="res://src/entities/enemy/enemy.gd" id="2_yu70o"]
 [ext_resource type="Script" uid="uid://dv3y8d0pcf1ay" path="res://addons/shaker/gameplay/life_component.gd" id="4_e3lpk"]
 [ext_resource type="Script" uid="uid://cyn16ubhn38rx" path="res://addons/shaker/gameplay/area/hitbox.gd" id="8_jkr0c"]
 [ext_resource type="Script" uid="uid://dr7h4c573avu2" path="res://addons/shaker/gameplay/area/hurtbox.gd" id="9_sbss2"]
 
-[node name="Enemy" unique_id=722895607 instance=ExtResource("1_toqcl")]
+[node name="Enemy" unique_id=722895607 groups=["enemy"] instance=ExtResource("1_toqcl")]
+collision_mask = 2
+script = ExtResource("2_yu70o")
 
 [node name="LifeComponent" type="Node" parent="." index="1" unique_id=1358917031]
 script = ExtResource("4_e3lpk")
@@ -31,6 +34,9 @@ debug_color = Color(0.82714826, 0.39493513, 5.7756904e-07, 0.41960785)
 [node name="Visuals" type="Node2D" parent="." index="4" unique_id=643299667]
 
 [node name="Vacuumed" parent="StateMachine" parent_id_path=PackedInt32Array(1278400254) index="0" unique_id=464960255 node_paths=PackedStringArray("hitbox")]
+hitbox = NodePath("../../Hitbox")
+
+[node name="Captured" parent="StateMachine" parent_id_path=PackedInt32Array(1278400254) index="1" unique_id=1810445854 node_paths=PackedStringArray("hitbox")]
 hitbox = NodePath("../../Hitbox")
 
 [node name="Ejected" parent="StateMachine" parent_id_path=PackedInt32Array(1278400254) index="2" unique_id=957872202 node_paths=PackedStringArray("visuals", "hitbox", "life_component")]

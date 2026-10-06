@@ -43,14 +43,10 @@ func _ready() -> void:
 func _on_enter_state(params: Dictionary = {}) -> void:
 	super(params)
 	assert(params.has("direction") and params["direction"] != null, "No direction param")
-	assert(params.has("speed"), "No speed param")
 	
 	direction = params["direction"].normalized()
 	bounces = max_bounces
-	if params["speed"] >= 0.0:
-		speed = params["speed"]
-	else:
-		speed = default_eject_speed
+	speed = default_eject_speed
 	_time = max_time
 	_throw_position = entity.global_position
 	_hitbox_enable_timer = hitbox_enable_delay

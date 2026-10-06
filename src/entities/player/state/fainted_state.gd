@@ -42,6 +42,9 @@ func _process(delta: float) -> void:
 	
 	visuals.sprite_rotation += s * player.velocity.length() * delta * 0.05
 	visuals.flip_h = (player.velocity.x < 0)
+	
+	if get_tree().current_scene.get_fainted_ratio() > 0.99:
+		_finish()
 
 
 func _physics_process(delta: float) -> void:
@@ -73,5 +76,5 @@ func _finish():
 	player.revive()
 
 
-func _on_life_component_damaged(amount: float, damager: Entity):
+func _on_life_component_damaged(amount: float, damager: Node2D):
 	_finish()

@@ -4,6 +4,8 @@ var game_started = false
 
 var spawners = []
 
+var level_size = Rect2(0, 0, 1920, 1080)
+
 func _ready() -> void:
 	spawners.clear()
 	for spawner in get_tree().get_nodes_in_group("spawner"):
@@ -16,9 +18,7 @@ func _input(event: InputEvent) -> void:
 
 
 func _process(delta: float) -> void:
-	var n = 0
-	for spawner: EnemySpawner in get_tree().get_nodes_in_group("spawner"):
-		n += spawner.limit_count
+	pass
 
 
 func start_game():
@@ -35,3 +35,15 @@ func _on_button_pressed() -> void:
 	for i in 40:
 		InputManager.remove_user(i)
 	get_tree().reload_current_scene()
+
+
+func get_number_of_fainted_players():
+	var n = 0
+	for player: Player in get_tree().get_nodes_in_group("player"):
+		if player.is_dead:
+			n += 1
+	return n
+
+
+func get_fainted_ratio():
+	return float(get_number_of_fainted_players()) / float(get_tree().get_nodes_in_group("player").size())

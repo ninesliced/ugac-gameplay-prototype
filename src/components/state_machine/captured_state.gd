@@ -53,8 +53,7 @@ func _physics_process(delta: float) -> void:
 	super(delta)
 
 
-func uncapture(direction: Vector2, speed: float = -1.0):
+func uncapture(direction: Vector2):
 	state_machine.travel_to(state_on_uncapture, {
 		"direction": direction,
-		"speed": speed
 	})

@@ -7,6 +7,14 @@ extends CanvasLayer
 func _ready() -> void:
 	wave_indicator_hud.wave_count = wave_spawner.waves.size()
 	wave_indicator_hud.focus_on(wave_spawner.current_wave_index)
+	
+	wave_spawner.wave_started.connect(_on_wave_spawner_wave_started)
+
+
+func _process(delta: float) -> void:
+	var enemy_count = get_tree().get_nodes_in_group("enemy").size()
+	
+	$"../UI/Control/EnemiesLeft".text = "Enemies left: %d" % [enemy_count]
 
 
 func _on_wave_spawner_wave_started() -> void:

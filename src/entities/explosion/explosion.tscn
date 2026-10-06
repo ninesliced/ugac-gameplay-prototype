@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d24l05xjweni5"]
+
+[ext_resource type="Script" uid="uid://cop2fh3mos6lx" path="res://src/entities/explosion/explosion.gd" id="1_8uko4"]
+[ext_resource type="Texture2D" uid="uid://bcj01nbslpf6y" path="res://assets/images/explosion/explosion_placeholder.png" id="2_hfgh6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_08add"]
+radius = 141.02837
+
+[node name="Explosion" type="Area2D" unique_id=1619674381]
+collision_layer = 0
+collision_mask = 7
+script = ExtResource("1_8uko4")
+damages_enemies = true
+damages_players = true
+metadata/_custom_type_script = "uid://cyn16ubhn38rx"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1925106098]
+shape = SubResource("CircleShape2D_08add")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1001830049]
+texture = ExtResource("2_hfgh6")

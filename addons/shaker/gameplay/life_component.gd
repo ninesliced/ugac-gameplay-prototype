@@ -4,7 +4,7 @@ class_name LifeComponent
 
 signal life_changed(new_value: float)
 signal healed(amount: float)
-signal damaged(amount: float, damager: Entity)
+signal damaged(amount: float, damager: Node2D)
 signal died
 
 ## The maximum amount of life this Component can take.
@@ -43,7 +43,7 @@ func heal(amount: float) -> void:
 	healed.emit(amount)
 
 
-func damage(amount: float, damager: Entity = null, ignore_cooldown = false) -> bool:
+func damage(amount: float, damager: Node2D = null, ignore_cooldown = false) -> bool:
 	if not ignore_cooldown and is_in_cooldown():
 		return false
 	

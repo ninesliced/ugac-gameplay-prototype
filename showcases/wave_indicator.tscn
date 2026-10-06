@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cydqqr4h8e6ho"]
+
+[ext_resource type="Texture2D" uid="uid://bsj7i2rpq47th" path="res://assets/images/transp.png" id="1_rxt1o"]
+[ext_resource type="PackedScene" uid="uid://di55sb0w8gl62" path="res://src/ui/wave_indicator/wave_indicator_hud.tscn" id="2_6bkbt"]
+
+[node name="Control" type="Control" unique_id=1618776551]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect2" type="TextureRect" parent="." unique_id=297564434]
+z_index = -4
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("1_rxt1o")
+stretch_mode = 1
+
+[node name="WaveIndicatorHUD" parent="." unique_id=1417309792 instance=ExtResource("2_6bkbt")]
+layout_mode = 1
+offset_top = 243.0
+offset_bottom = 243.0

@@ -48,7 +48,7 @@ func _on_enter_state(params: Dictionary = {}):
 			tween.tween_property(star, "scale", Vector2.ONE, 0.02)
 			
 			if params.has("damager"):
-				if params["damager"].get_parent() is Entity:
+				if params["damager"].owner is Entity:
 					damager = params["damager"].get_parent()
 					knockback_dir = player.global_position.direction_to(damager.global_position)
 				star.rotation = player.global_position.direction_to(params["damager"].global_position).angle()
