@@ -28,7 +28,8 @@ func start_game():
 	for player: Player in get_tree().get_nodes_in_group("player"):
 		player.life_component.set_life(player.life_component.max_life)
 	
-	$WaveSpawner.activate()
+	$Arena.start()
+	#$WaveSpawner.activate()
 
 
 func _on_button_pressed() -> void:
