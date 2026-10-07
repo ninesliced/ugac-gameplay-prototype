@@ -4,11 +4,11 @@ extends CanvasLayer
 @onready var wave_spawner: WaveSpawner = $"../WaveSpawner"
 @onready var wave_indicator_hud: Control = $WaveIndicatorHUD
 
+@onready var arena: Arena2D = $"../Arena"
+
 func _ready() -> void:
-	wave_indicator_hud.wave_count = wave_spawner.waves.size()
-	wave_indicator_hud.focus_on(wave_spawner.current_wave_index)
-	
-	wave_spawner.wave_started.connect(_on_wave_spawner_wave_started)
+	wave_indicator_hud.wave_count = arena.get_wave_count()
+	arena.wave_started.connect(_on_wave_spawner_wave_started)
 
 
 func _process(delta: float) -> void:
@@ -20,7 +20,7 @@ func _process(delta: float) -> void:
 func _on_wave_spawner_wave_started() -> void:
 	wave_indicator_hud.open()
 	await get_tree().create_timer(1.0).timeout
-	wave_indicator_hud.focus_on(wave_spawner.current_wave_index)
+	wave_indicator_hud.focus_on(arena.get_current_wave_index())
 	await get_tree().create_timer(4.0).timeout
 	wave_indicator_hud.close()
 	

@@ -22,6 +22,7 @@ var focused_label: WaveIndicatorLabel
 var focused_index = 0
 
 func _ready() -> void:
+	await get_tree().process_frame
 	_generate_numbers()
 	
 	focused_label = labels[0]

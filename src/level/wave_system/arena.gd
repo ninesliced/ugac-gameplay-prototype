@@ -6,6 +6,7 @@ signal cleared
 signal wave_cleared
 signal wave_started
 
+var _current_wave_index: int = -1
 var _current_wave: EnemyWaveData = null
 var _remaining_waves: Array[EnemyWaveData] = []
 var _cached_waves: Array[EnemyWaveData] = []
@@ -17,6 +18,7 @@ func _ready() -> void:
 
 func start() -> void:
 	_current_wave = null
+	_current_wave_index = -1
 	_remaining_waves = _cached_waves.duplicate()
 	
 	for wave: EnemyWaveData in _remaining_waves:
@@ -32,9 +34,18 @@ func start_next_wave() -> void:
 		_current_wave = _remaining_waves.pop_front()
 		_current_wave.cleared.connect(_on_wave_cleared, CONNECT_ONE_SHOT)
 		_current_wave.start(get_tree())
+		_current_wave_index += 1
 		wave_started.emit()
 	else:
 		cleared.emit()
+
+
+func get_wave_count() -> int:
+	return _cached_waves.size()
+
+
+func get_current_wave_index() -> int:
+	return _current_wave_index
 
 
 func _parse_children() -> void:

@@ -9,20 +9,19 @@
 [ext_resource type="Texture2D" uid="uid://dvpexiifu13nb" path="res://assets/images/level/grass_elements.png" id="5_tb146"]
 [ext_resource type="Texture2D" uid="uid://pkg0nor1rprk" path="res://assets/images/tileset.png" id="5_tbgi4"]
 [ext_resource type="Texture2D" uid="uid://bt2in7h1wwbjj" path="res://assets/images/ui/input/keyboard-&-mouse_sheet_default.png" id="6_kqbth"]
-[ext_resource type="PackedScene" uid="uid://eljb2gxouxh4" path="res://src/level/spawner/enemy_spawner.tscn" id="6_rlaii"]
 [ext_resource type="Texture2D" uid="uid://c8t3ak6aldxkq" path="res://assets/images/ui/input/xbox-series_sheet_default.png" id="6_uewes"]
 [ext_resource type="Texture2D" uid="uid://bwhwxugra0vvo" path="res://assets/images/ui/input/playstation-series_sheet_default.png" id="7_kqbth"]
 [ext_resource type="PackedScene" uid="uid://c0kheiqjm3el8" path="res://src/entities/nest/nest.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://ful76yvdlyh6" path="res://src/entities/egg/egg.tscn" id="7_rlaii"]
 [ext_resource type="Script" uid="uid://ckaqljq8emlgc" path="res://src/level/grass_multi_mesh_instance.gd" id="7_sta5p"]
 [ext_resource type="PackedScene" uid="uid://cx3yglr6133ww" path="res://src/ui/pause_menu.tscn" id="9_kqbth"]
-[ext_resource type="Script" uid="uid://bsi6xvuvuaiac" path="res://src/level/spawner/wave_spawner.gd" id="10_d3u4l"]
 [ext_resource type="Script" uid="uid://dlrafngq45ttm" path="res://src/level/wave_system/arena.gd" id="13_adv81"]
 [ext_resource type="PackedScene" uid="uid://b6hix4bb07kyl" path="res://src/entities/rock/rock.tscn" id="13_srxbw"]
 [ext_resource type="Script" uid="uid://biwcmues0wi48" path="res://src/level/wave_system/2d_components/enemy_wave_2d.gd" id="14_lovvn"]
 [ext_resource type="Script" uid="uid://dilo2smvxfk8r" path="res://src/level/wave_system/2d_components/enemy_wave_group_2d.gd" id="15_jitvu"]
 [ext_resource type="Script" uid="uid://5apb7db5ui7e" path="res://src/level/wave_system/data_streaming/packed_enemy.gd" id="16_c2usk"]
 [ext_resource type="Script" uid="uid://l7kr4ssv0rtj" path="res://src/level/wave_system/data_streaming/enemy_wave_group_data.gd" id="17_luju6"]
+[ext_resource type="Script" uid="uid://crpcur8s772hj" path="res://src/level/wave_system/data_streaming/enemy_wave_data.gd" id="17_ocmcv"]
 [ext_resource type="PackedScene" uid="uid://di55sb0w8gl62" path="res://src/ui/wave_indicator/wave_indicator_hud.tscn" id="19_sta5p"]
 [ext_resource type="PackedScene" uid="uid://dolki8o5ip3f0" path="res://src/entities/enemy/bomb/enemy_bomb.tscn" id="20_sif16"]
 
@@ -132,18 +131,39 @@ shader_parameter/frame_count = 0.0
 use_custom_data = true
 mesh = SubResource("QuadMesh_43aqp")
 
-[sub_resource type="Resource" id="Resource_pkjww"]
+[sub_resource type="Resource" id="Resource_lovvn"]
+script = ExtResource("17_ocmcv")
+start_delay = 1.0
+metadata/_custom_type_script = "uid://crpcur8s772hj"
+
+[sub_resource type="Resource" id="Resource_jitvu"]
 script = ExtResource("17_luju6")
+spawn_interval = 0.5
 metadata/_custom_type_script = "uid://l7kr4ssv0rtj"
 
-[sub_resource type="Resource" id="Resource_lu5w1"]
+[sub_resource type="Resource" id="Resource_pkjww"]
 script = ExtResource("17_luju6")
-start_time = 8.0
+start_time = 4.0
+spawn_interval = 0.0
 metadata/_custom_type_script = "uid://l7kr4ssv0rtj"
+
+[sub_resource type="Resource" id="Resource_c2usk"]
+script = ExtResource("17_ocmcv")
+start_delay = 1.0
+metadata/_custom_type_script = "uid://crpcur8s772hj"
 
 [sub_resource type="Resource" id="Resource_adv81"]
 script = ExtResource("17_luju6")
-start_time = 16.0
+metadata/_custom_type_script = "uid://l7kr4ssv0rtj"
+
+[sub_resource type="Resource" id="Resource_ocmcv"]
+script = ExtResource("17_ocmcv")
+start_delay = 1.0
+metadata/_custom_type_script = "uid://crpcur8s772hj"
+
+[sub_resource type="Resource" id="Resource_43aqp"]
+script = ExtResource("17_luju6")
+spawn_interval = 0.0
 metadata/_custom_type_script = "uid://l7kr4ssv0rtj"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_srxbw"]
@@ -224,26 +244,6 @@ texture = ExtResource("5_tb146")
 script = ExtResource("7_sta5p")
 weights = Array[float]([10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 3.0, 3.0, 1.0, 5.0, 3.0, 3.0, 3.0, 3.0])
 
-[node name="WaveSpawner" type="Node2D" parent="." unique_id=1705413175]
-script = ExtResource("10_d3u4l")
-metadata/_custom_type_script = "uid://bsi6xvuvuaiac"
-
-[node name="EnemySpawner" parent="WaveSpawner" unique_id=545141128 groups=["spawner"] instance=ExtResource("6_rlaii")]
-position = Vector2(1800, 954)
-limit = 15
-
-[node name="EnemySpawner2" parent="WaveSpawner" unique_id=1447097154 groups=["spawner"] instance=ExtResource("6_rlaii")]
-position = Vector2(104, 997)
-limit = 15
-
-[node name="EnemySpawner3" parent="WaveSpawner" unique_id=1926381900 groups=["spawner"] instance=ExtResource("6_rlaii")]
-position = Vector2(110, 115)
-limit = 15
-
-[node name="EnemySpawner4" parent="WaveSpawner" unique_id=2085871622 groups=["spawner"] instance=ExtResource("6_rlaii")]
-position = Vector2(1807, 113)
-limit = 15
-
 [node name="Nest" parent="." unique_id=722895607 instance=ExtResource("7_o6xl0")]
 position = Vector2(957, 536)
 egg_count = 20
@@ -262,55 +262,76 @@ y_sort_enabled = true
 script = ExtResource("13_adv81")
 
 [node name="Wave" type="Node2D" parent="Arena" unique_id=377965939]
+visible = false
 script = ExtResource("14_lovvn")
+data = SubResource("Resource_lovvn")
 
 [node name="Group" type="Node2D" parent="Arena/Wave" unique_id=704000486]
 script = ExtResource("15_jitvu")
-data = SubResource("Resource_pkjww")
+data = SubResource("Resource_jitvu")
 
 [node name="EnemyEggStealer" parent="Arena/Wave/Group" unique_id=443419370 instance=ExtResource("20_sif16")]
-position = Vector2(1389, 180)
+position = Vector2(982, 132)
 
 [node name="EnemyEggStealer2" parent="Arena/Wave/Group" unique_id=346602349 instance=ExtResource("20_sif16")]
-position = Vector2(1226, 705)
+position = Vector2(1664, 536)
 
 [node name="EnemyEggStealer3" parent="Arena/Wave/Group" unique_id=1788242971 instance=ExtResource("20_sif16")]
-position = Vector2(695, 328)
+position = Vector2(353, 536)
 
-[node name="EnemyEggStealer4" parent="Arena/Wave/Group" unique_id=2137446993 instance=ExtResource("20_sif16")]
-position = Vector2(353, 736)
-
-[node name="Group2" type="Node2D" parent="Arena/Wave" unique_id=762194348]
+[node name="Group2" type="Node2D" parent="Arena/Wave" unique_id=2028812845]
 script = ExtResource("15_jitvu")
-data = SubResource("Resource_lu5w1")
+data = SubResource("Resource_pkjww")
 
-[node name="EnemyEggStealer" parent="Arena/Wave/Group2" unique_id=461962881 instance=ExtResource("20_sif16")]
-position = Vector2(1389, 180)
+[node name="EnemyEggStealer" parent="Arena/Wave/Group2" unique_id=2020914255 instance=ExtResource("20_sif16")]
+position = Vector2(982, 132)
 
-[node name="EnemyEggStealer2" parent="Arena/Wave/Group2" unique_id=949134317 instance=ExtResource("20_sif16")]
-position = Vector2(1226, 705)
+[node name="EnemyEggStealer2" parent="Arena/Wave/Group2" unique_id=1797725476 instance=ExtResource("20_sif16")]
+position = Vector2(1664, 536)
 
-[node name="EnemyEggStealer3" parent="Arena/Wave/Group2" unique_id=296987655 instance=ExtResource("20_sif16")]
-position = Vector2(695, 328)
+[node name="EnemyEggStealer3" parent="Arena/Wave/Group2" unique_id=1324682917 instance=ExtResource("20_sif16")]
+position = Vector2(353, 536)
 
-[node name="EnemyEggStealer4" parent="Arena/Wave/Group2" unique_id=788355929 instance=ExtResource("20_sif16")]
-position = Vector2(353, 736)
+[node name="Wave2" type="Node2D" parent="Arena" unique_id=923193522]
+visible = false
+script = ExtResource("14_lovvn")
+data = SubResource("Resource_c2usk")
 
-[node name="Group3" type="Node2D" parent="Arena/Wave" unique_id=1708316771]
+[node name="Group" type="Node2D" parent="Arena/Wave2" unique_id=271174414]
 script = ExtResource("15_jitvu")
 data = SubResource("Resource_adv81")
 
-[node name="EnemyEggStealer" parent="Arena/Wave/Group3" unique_id=715751687 instance=ExtResource("20_sif16")]
-position = Vector2(1389, 180)
+[node name="EnemyEggStealer" parent="Arena/Wave2/Group" unique_id=839060481 instance=ExtResource("20_sif16")]
+position = Vector2(1576, 211)
 
-[node name="EnemyEggStealer2" parent="Arena/Wave/Group3" unique_id=1523043925 instance=ExtResource("20_sif16")]
-position = Vector2(1226, 705)
+[node name="EnemyEggStealer2" parent="Arena/Wave2/Group" unique_id=349773641 instance=ExtResource("20_sif16")]
+position = Vector2(1583, 838)
 
-[node name="EnemyEggStealer3" parent="Arena/Wave/Group3" unique_id=1426712662 instance=ExtResource("20_sif16")]
-position = Vector2(695, 328)
+[node name="EnemyEggStealer3" parent="Arena/Wave2/Group" unique_id=682190357 instance=ExtResource("20_sif16")]
+position = Vector2(373, 213)
 
-[node name="EnemyEggStealer4" parent="Arena/Wave/Group3" unique_id=1448077819 instance=ExtResource("20_sif16")]
-position = Vector2(353, 736)
+[node name="EnemyEggStealer4" parent="Arena/Wave2/Group" unique_id=976841620 instance=ExtResource("20_sif16")]
+position = Vector2(365, 843)
+
+[node name="Wave3" type="Node2D" parent="Arena" unique_id=1635929735]
+script = ExtResource("14_lovvn")
+data = SubResource("Resource_ocmcv")
+
+[node name="Group" type="Node2D" parent="Arena/Wave3" unique_id=107296907]
+script = ExtResource("15_jitvu")
+data = SubResource("Resource_43aqp")
+
+[node name="EnemyEggStealer" parent="Arena/Wave3/Group" unique_id=303979785 instance=ExtResource("20_sif16")]
+position = Vector2(1551, 503)
+
+[node name="EnemyEggStealer2" parent="Arena/Wave3/Group" unique_id=431179549 instance=ExtResource("20_sif16")]
+position = Vector2(965, 952)
+
+[node name="EnemyEggStealer3" parent="Arena/Wave3/Group" unique_id=527042821 instance=ExtResource("20_sif16")]
+position = Vector2(972, 135)
+
+[node name="EnemyEggStealer4" parent="Arena/Wave3/Group" unique_id=548921803 instance=ExtResource("20_sif16")]
+position = Vector2(347, 541)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=622049334]
 script = ExtResource("5_mlv6i")
@@ -550,5 +571,4 @@ z_index = 300
 [node name="WaveIndicatorHUD" parent="UI" unique_id=1417309792 instance=ExtResource("19_sta5p")]
 visible = false
 
-[connection signal="wave_started" from="WaveSpawner" to="UI" method="_on_wave_spawner_wave_started"]
 [connection signal="pressed" from="UI/Control/GameOver/Button" to="." method="_on_button_pressed"]
