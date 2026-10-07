@@ -71,7 +71,6 @@ func _process(delta: float) -> void:
 
 
 func activate():
-	return
 	active = true
 	set_wave(0)
 	start_wave()

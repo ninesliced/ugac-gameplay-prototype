@@ -13,7 +13,6 @@ var _cached_waves: Array[EnemyWaveData] = []
 
 func _ready() -> void:
 	_parse_children()
-	start()
 
 
 func start() -> void:

@@ -225,7 +225,6 @@ script = ExtResource("7_sta5p")
 weights = Array[float]([10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 10.0, 3.0, 3.0, 1.0, 5.0, 3.0, 3.0, 3.0, 3.0])
 
 [node name="WaveSpawner" type="Node2D" parent="." unique_id=1705413175]
-visible = false
 script = ExtResource("10_d3u4l")
 metadata/_custom_type_script = "uid://bsi6xvuvuaiac"
 
@@ -550,9 +549,6 @@ z_index = 300
 
 [node name="WaveIndicatorHUD" parent="UI" unique_id=1417309792 instance=ExtResource("19_sta5p")]
 visible = false
-
-[node name="EnemyBomb" parent="." unique_id=568639911 instance=ExtResource("20_sif16")]
-position = Vector2(826, 317)
 
 [connection signal="wave_started" from="WaveSpawner" to="UI" method="_on_wave_spawner_wave_started"]
 [connection signal="pressed" from="UI/Control/GameOver/Button" to="." method="_on_button_pressed"]
